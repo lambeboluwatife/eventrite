@@ -1,0 +1,61 @@
+<%- include ('./partials/header') %>
+
+<section class="bg-primary-2 text-light p-0 o-hidden" style="height: 100vh;">
+    <img src="assets/img/event-1.jpg" alt="Image" class="bg-image blend-mode-multiply">
+    <div class="container layer-2">
+      <div class="row py-6 min-vh-80 align-items-center" data-aos="fade-up">
+        <div class="col-lg-9 col-xl-8">
+          <h5>October 18 - 19, 2022</h5>
+          <h1 class="display-1">Leap Con</h1>
+          <p class="lead mb-4">Exhibition Center, Melbourne, Australia</p>
+          <a href="#" class="btn btn-danger btn-lg">Purchase Tickets</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="">
+    <div class="container">
+      <div class="row mb-4">
+        <div class="col">
+          <h3 class="h1">Upcoming Events</h3>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <% if (events == "") { %>
+          <h4 class="text-center">No upcoming events yet</h4>
+        <% } else { %>
+          <% events.forEach((event) => { %>
+            <div class="col-lg-4 col-md-6">
+              <a class="card hover-shadow-sm" href="/events/<%= event._id%>">
+                <img src="/<%= event.image %>" alt="Cover Image" class="card-img-top">
+                <div class="card-body d-flex flex-column">
+                  <div class="d-flex">
+                    <div class="ml-3 text-primary">
+                      <div class="badge badge-primary mb-2"><%= event.location %></div>
+                      <h4 class="mb-2 text-dark"><%= event.name %></h4>
+                      <small class="text-dark"><%= event.date.toDateString() %></small>
+                      <div class="text-small text-muted mt-3">
+                        <img
+                        src="/<%= event.author.image %>"
+                        alt="user"
+                        class="avatar avatar-sm"
+                        />
+                        Hosted By <%= event.author.username %>
+                      </div>
+                      <div class="text-small text-muted mt-3">
+                        Click to read more...
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          <% }) %>
+        <% } %>
+      </div>
+    </div>
+  </section>
+
+<%- include ('./partials/footer') %>
