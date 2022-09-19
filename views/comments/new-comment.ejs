@@ -17,98 +17,87 @@
     <link rel="stylesheet" href="/fontawesome/css/fontawesome.css" />
     <link rel="stylesheet" href="/fontawesome/css/solid.css" />
     <link rel="stylesheet" href="/fontawesome/css/brands.css" />
+    <link href="/assets/css/loaders/loader-typing.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/assets/css/theme-event.css" rel="stylesheet" type="text/css" media="all" />
     <link rel="preload" as="font" href="/assets/fonts/Inter-UI-upright.var.woff2" type="font/woff2" crossorigin="anonymous">
     <link rel="preload" as="font" href="/assets/fonts/Inter-UI.var.woff2" type="font/woff2" crossorigin="anonymous">
-
     <style>
-        .nav {
-            border: none;
-            border-bottom: 2px solid red;
-            background: transparent;
-            outline: none;
-        }
-
-        .drop-button {
+        .button {
+          border: solid 1px;
+          color: #fff;
+          width: 30%;
           border-radius: 30px;
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            justify-content: center;
-            align-items: center;
-            height: 100%;
+        .drop-button {
+            border-radius: 30px;
         }
 
-        input, button, select, textarea {
-            border: solid grey 1px;
-            height: 50px;
-            width: 100%;
+        .ticket {
+          border: solid #fff 1px;
+          background-color: #fff;
+          border-radius: 5px;
+          padding: 15px;
         }
 
-        .cancel {
-          border: solid grey 1px;
-          height: 50px;
-          background: transparent;
-          width: 20%;
+        .ticket-btn {
+          display: inline;
+          float:  right;
         }
 
-        .cancel a {
-          color: darkred;
+        .text-area {
+          border: solid #fff 1px;
+          padding: 15px;
+          background-color: #fff;
+          border-radius: 5px;
         }
-
-        .button {
-          border: solid red 1px;
-          background-color: red;
-          color: #fff;
-          width: 20%;
-          float: right;
-        } 
 
         textarea {
-            height: 150px;
-        }
-
-        input[type='file'] {
-          display: none;
-        }
-
-        .file-upload {
-          border: solid grey 1px;
-          cursor: pointer;
-          height: 50px;
-          width: 100%;
+          width: 70%;
+          margin-left: 20px;
+          border: none;
+          display: inline;
         }
     </style>
   </head>
 
   <body>
-    <div class="navbar-container">
-      <nav class="navbar navbar-expand-lg navbar-dark" data-sticky="top">
-        <div class="container nav">
-          <a class="navbar-brand fade-page text-danger" href="/">
+    <div class="navbar-container ">
+      <nav class="navbar navbar-expand-lg navbar-dark" data-overlay data-sticky="top">
+        <div class="container">
+          <a class="navbar-brand fade-page" href="/">
             Eventrite
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-            <img class="icon navbar-toggler-open" src="/assets/img/icons/interface/menu.svg" alt="menu interface icon" data-inject-svg />
-            <img class="icon navbar-toggler-close" src="/assets/img/icons/interface/cross.svg" alt="cross interface icon" data-inject-svg />
+            <img class="icon navbar-toggler-open" src="assets/img/icons/interface/menu.svg" alt="menu interface icon" data-inject-svg />
+            <img class="icon navbar-toggler-close" src="assets/img/icons/interface/cross.svg" alt="cross interface icon" data-inject-svg />
           </button>
           <div class="collapse navbar-collapse justify-content-end">
            
+            <%  if(!currentUser){ %>
                 <div
+                class="collapse navbar-collapse justify-content-end col flex-fill px-0"
+              >
+                <a href="/users/login" class="btn btn-danger ml-lg-3">Sign In</a>
+              </div>
+                <%  } else { %>
+                  <div
                   class="collapse navbar-collapse justify-content-end col flex-fill px-0"
                 >
                   <div class="dropdown ml-2 show">
-                    <button class="btn btn-danger drop-button dropdown-toggle mb-2" data-toggle="dropdown-grid" type="button" aria-expanded="false" aria-haspopup="true">
-                      <img src="/<%= currentUser.image %>" alt="user" class="avatar avatar-sm">
-                    <span><a class="text-light" href="#"><%= currentUser.username %></a></span>
-                <img class="icon" src="/assets/img/icons/interface/arrow-caret.svg" alt="arrow-caret interface icon" data-inject-svg />
+                    <button class="btn btn-danger drop-button dropdown-toggle" data-toggle="dropdown-grid" type="button" aria-expanded="false" aria-haspopup="true">
+                        <img src="/<%= currentUser.image %>" alt="user" class="avatar avatar-sm">
+                        <span><a class="text-light" href="#"><%= currentUser.username %></a></span>
+                        <img class="icon" src="assets/img/icons/interface/arrow-caret.svg" alt="arrow-caret interface icon" data-inject-svg />
                     </button>
 
                     <div class="dropdown-menu row">
                       <div class="col-auto" data-dropdown-content>
                         <div class="card card-sm card-body shadow">
+                          <a href="/events/host-event" class="dropdown-item">
+                            <i class="fa fa-plus mr-2" aria-hidden="true"></i>
+                            Add Event
+                          </a>
                           <a href="/dashboard" class="dropdown-item">
                             <i class="fa fa-user mr-2" aria-hidden="true"></i>
                             Profile
@@ -122,113 +111,29 @@
                     </div>
                   </div>
                 </div>
+              <%  } %>
+
           </div>
         </div>
       </nav>
-    </div>
 
-    <section class="container">
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <h2 class="mb-0" style="font-family: Arial, Helvetica, sans-serif">ADD EVENT</h2>
-                <form class="mt-2" action="/events" method="POST" enctype="multipart/form-data">
-                  <div class="container mt-0 grid">
-                    <div class="form-group mr-2 ml-2">
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            placeholder="Event Name"
-                            required
-                        />
+        <div class="text-center">
+            <h3>Add Comment</h3>
+                <form action="/events/<%= event._id %>/comments" method="POST" class="mt-2">
+                  <div class="text-area">
+                    <div style="display: inline;">
+                      <img src="/<%= event.author.image %>" alt="user" class="avatar avatar-lg">
                     </div>
-                    <div class="form-group mr-2 ml-2">
-                        <input
-                            type="number"
-                            id="spot"
-                            name="spot"
-                            placeholder="Numbers of spot"
-                            required
-                        />
-                    </div>
-                    <div class="form-group mr-2 ml-2">
-                        <input
-                            type="text"
-                            id="location"
-                            name="location"
-                            placeholder="Enter a location"
-                            required
-                        />
-                    </div>
-                    <div class="form-group mr-2 ml-2">
-                        <select required name="category" id="category">
-                          <option selected disabled>Select Category</option>
-                          <option value="speaker session">Speaker Session</option>
-                          <option value="networking session">Networking Session</option>
-                          <option value="conference">Conference</option>
-                          <option value="Seminar">Seminar</option>
-                          <option value="workshop">Workshop</option>
-                          <option value="sponsorship">Sponsorship</option>
-                          <option value="trade show">Trade Show</option>
-                          <option value="award and competition">Award and Competition</option>
-                          <option value="festival or party">Festival or Party</option>
-                          <option value="webinars">Webinars</option>
-                          <option value="product launch">Product Launch</option>
-                          <option value="corporate meeting">Corporate Meeting</option>
-                        </select>
-                    </div>
-                    <div class="form-group mr-2 ml-2">
-                        <textarea required name="description" id="description" placeholder="Description"></textarea>
-                    </div>
-                    <div class="form-group mr-2 ml-2">
-                        <input required class="mb-1" type="date" name="date" id="date">
-                        <input required class="mb-1" type="time" name="start" id="start">
-                        <input required type="time" name="end" id="end">
-                    </div>
-                    <div class="form-group mr-2 ml-2">
-                        <input
-                            type="numeric"
-                            id="price"
-                            name="price"
-                            placeholder="Price($)"
-                            required
-                        />
-                    </div>
-                    <div class="form-group mr-2 ml-2 mt-2 text-center">
-                      <label for="image" class="file-upload">
-                          <input
-                          type="file"
-                          accept="image/png, image/jpg, image/gif, image/jpeg"
-                          id="image"
-                          class="file"
-                          name="image"
-                          placeholder="Avatar"
-                          value="<%= typeof image != 'undefined' ? image : '' %>"
-                      />
-                      <small class="text-danger mt-2">
-                        <i class="fa fa-upload fa-lg mr-1" aria-hidden="true"></i>
-                        Upload Image
-                      </small>
-                      </label>
-                    </div>
-                </div>
-                <hr class="bg-danger">
-
-                <button class="cancel">
-                  <a href="/dashboard">Cancel</a>
-                </button>
-
-                <button class="button" type="submit">
-                  Add Event
-                </button>
+                    <textarea required name="comment" id="comment" placeholder="Add a comment..."></textarea>
+                    <button class="btn btn-danger ticket-btn mt-3" type="submit">Add</button>
+                  </div>
                 </form>
-            </div>
-            <div class="col-md-2"></div>
         </div>
-    </section>
 
-    <footer class="pb-4 bg-primary-3 text-light" id="footer">
+
+
+
+      <footer class="pb-4 bg-primary-3 text-light" id="footer">
         <div class="container">
           <div class="row mb-5">
             <div class="col-6 col-lg-3 col-xl-2">
@@ -389,6 +294,4 @@
     </body>
     
     </html>
-
-    
     

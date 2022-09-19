@@ -150,8 +150,9 @@
                   <span style="font-size: 25px;">$<%= event.price %></span>
                   <button class="btn btn-danger ticket-btn" type="submit">Book Now</button>
                 </div>
-                <h3 class="mt-3">Comments</h3>
-                <form action="/comments" method="POST" class="mt-2">
+                <!-- <h3 class="mt-3">Comments</h3>
+                <a href="/events/<%= event._id %>/comments/new-comment" class="btn btn-danger">Add Comment</a> -->
+                <!-- <form action="/comments" method="POST" class="mt-2">
                   <div class="text-area">
                     <div style="display: inline;">
                       <img src="/<%= event.author.image %>" alt="user" class="avatar avatar-lg">
@@ -159,7 +160,7 @@
                     <textarea required name="comment" id="comment" placeholder="Add a comment..."></textarea>
                     <button class="btn btn-danger ticket-btn mt-3" type="submit">Add</button>
                   </div>
-                </form>
+                </form> -->
             </div>
             <div class="col-md-4 text-center">
                 <img src="/<%= event.author.image %>" alt="user" class="avatar avatar-xlg">
