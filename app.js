@@ -64,12 +64,12 @@ app.use((req, res, next) => {
 app.use("/", require("./routes/index"));
 app.use("/users", require("./routes/users"));
 app.use("/events", require("./routes/events"));
-app.use("/comments", require("./routes/comments"));
+app.use("/events/:id/comments", require("./routes/comments"));
 
 app.all('*', (req, res) => {
   res.status(404).render('404');
 })
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, console.log(`Event Server Started at port ${PORT}`));

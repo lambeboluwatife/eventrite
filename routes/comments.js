@@ -4,14 +4,14 @@ const { ensureAuthenticated } = require("../config/auth");
 const Event = require("../models/Event");
 const Comment = require("../models/Comment");
 
-// Comments New
-// router.get("/new", middleware.isLoggedIn, (req, res) => {
-//   // find campground by id
-//   Campground.findById(req.params.id, (err, campground) => {
+// New Comments
+// router.get("/new-comment", ensureAuthenticated, (req, res) => {
+//   // find event by id
+//   Event.findById(req.params.id, (err, event) => {
 //     if (err) {
 //       console.log(err);
 //     } else {
-//       res.render("comments/new", { campground: campground });
+//       res.render("comments/new-comment", { event: event });
 //     }
 //   });
 // });
@@ -38,13 +38,12 @@ router.post("/", ensureAuthenticated, (req, res) => {
           req.flash("error", "Something went wrong");
           console.log(err);
         } else {
-            console.log(req.params.id)
-        //   // save comment
-        //   comment.save();
-        //   event.comments.push(comment);
-        //   event.save();
+          // save comment
+          comment.save();
+          event.comments.push(comment);
+          event.save();
           req.flash("success", "Successfully added comment");
-          res.redirect(req.get('referer'));
+          res.redirect("/events/" + event._id);
         }
       });
     }

@@ -21,116 +21,7 @@
     <link href="assets/css/theme-event.css" rel="stylesheet" type="text/css" media="all" />
     <link rel="preload" as="font" href="assets/fonts/Inter-UI-upright.var.woff2" type="font/woff2" crossorigin="anonymous">
     <link rel="preload" as="font" href="assets/fonts/Inter-UI.var.woff2" type="font/woff2" crossorigin="anonymous">
-
-    <style>
-        .nav {
-            border: none;
-            border-bottom: 2px solid red;
-            background: transparent;
-            outline: none;
-        }
-
-        .active {
-            border: none;
-            border-right: 2px solid darkred;
-            background: transparent;
-            outline: none;
-        }
-
-        .active .fa {
-          color: darkred;
-        }
-
-        .contents {
-            font-size: x-large;
-            cursor: pointer;
-            font-weight: bolder;
-            color: #000;
-        }
-
-        .events {
-            display: none;
-        }
-
-        .settings {
-            display: none;
-        }
-
-        .drop-button {
-          border-radius: 30px;
-        }
-
-        .grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 20px;
-          justify-content: center;
-          align-items: center;
-          height: 100%;
-        }
-
-        .grid-4 {
-          grid-template-columns: repeat(4, 1fr);
-        }
-
-        .img-event {
-          border: 2px solid none;
-          border-radius: 5%;
-        }
-
-        .img-area {
-          text-align: center;
-          color: #fff;
-          position: relative;
-          overflow: hidden;
-        }
-
-        .img-area .img-event {
-          width: 100%;
-          height: auto;
-        }
-
-        .img-text,
-        .img-area:after {
-          width: 100%;
-          position: absolute;
-          left: 0;
-        }
-
-        .img-area:after {
-          content: "";
-          height: 100%;
-          top: 0;
-          transition: 0.5s;
-        }
-
-        .img-area:hover:after {
-          background: linear-gradient(
-            to bottom,
-            rgba(199, 0, 57, 0.01) 0,
-            rgba(199, 0, 57, 0.25) 25%,
-            rgba(199, 0, 57, 0.75) 75%,
-            rgba(199, 0, 57, 0.95) 100%
-          );
-          border-radius: 5%;
-        }
-
-        .img-text {
-          padding: 20px;
-          bottom: 0;
-          z-index: 1;
-          transform: translateY(145px);
-          transition: all 0.5s cubic-bezier(0.13, 0.62, 0.81, 0.91) 0s;
-        }
-
-        .img-text h3 {
-          font-family: big john;
-        }
-
-        .img-area:hover .img-text {
-          transform: translateY(0);
-        }
-    </style>
+    <link rel="stylesheet" href="css/dashboard.css">
   </head>
 
   <body>
@@ -208,16 +99,25 @@
                     <h3>No Hosted Event</h3>
                   <% } else { %>
                     <% events.forEach((event) => { %>
-                      <div class="img-area">
-                        <img class="img-event"
+                      <div class="event-item">
+                        <img class="item-image"
                           src="/<%= event.image %>"
                           alt="Event cover image"
                         />
                         <div class="img-text">
-                          <small><%= event.name %></small>
-                          <small><%= event.date.toDateString() %></small>
-                          <small><%= event.location %></small>
+                          <h5><%= event.name %></h5>
+                          <small class="mt-3"><%= event.description %></small>
+                          <span><%= event.date.toDateString() %></span>
+                          <div>
+                            <a href="/events/<%= event._id %>/edit-event">
+                              <button class="button bg-warning edit-button">Edit</button>
+                            </a>
+                            <a href="">
+                              <button class="button bg-danger delete-button">Delete</button>
+                            </a>
+                          </div>
                         </div>
+                          <a class="bg-danger text-light details" href="/events/<%= event._id%>">Details</a>
                       </div>
                     <% }) %>
                   <% } %>
@@ -296,6 +196,9 @@
     <a href="#" class="btn back-to-top btn-primary btn-round" data-smooth-scroll data-aos="fade-up" data-aos-offset="2000" data-aos-mirror="true" data-aos-once="false">
       <img class="icon" src="/assets/img/icons/theme/navigation/arrow-up.svg" alt="arrow-up icon" data-inject-svg />
     </a>
+
+    <script src="/js/dashboard.js"></script>
+
     <!-- Required vendor scripts (Do not remove) -->
     <script type="text/javascript" src="/assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="/assets/js/popper.min.js"></script>

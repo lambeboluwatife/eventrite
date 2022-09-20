@@ -147,38 +147,70 @@ router.get("/:id", (req, res) => {
 
 
 // EDIT EVENT ROUTE
-router.get("/:id/edit", ensureAuthenticated, (req, res) => {
+router.get("/:id/edit-event", ensureAuthenticated, (req, res) => {
   Event.findById(req.params.id, (err, foundEvent) => {
-    res.render("events/edit", { campground: foundEvent });
+    res.render("events/edit-event", { event: foundEvent });
   });
 });
 
 // UPDATE EVENT ROUTE
-// router.put("/:id", ensureAuthenticated, (req, res) => {
-//   // find and update the correct event
-//   Event.findByIdAndUpdate(
-//     req.params.id,
-//     req.body.campground,
-//     (err, updatedCampground) => {
-//       if (err) {
-//         res.redirect("/campgrounds");
-//       } else {
-//         console.log(req.body);
-//         console.log(req.body.campground);
-//         res.redirect("/campgrounds/" + req.params.id);
-//       }
-//     }
-//   );
-//   // redirect somewhere(show page)
-// });
+router.put("/:id", upload.single("image"), (req, res) => {
+  let id = req.params.id;
+  let new_image = "";
+
+  if (req.file) {
+    new_image = req.file.filename;
+    try {
+      fs.unlinkSync("./uploads/" + req.body.old_image);
+    } catch (err) {
+      console.log(err);
+    }
+  } else {
+    new_image = req.body.old_image;
+  }
+
+  Event.findByIdAndUpdate(
+    req.params.id,
+    {
+      name: req.body.name,
+      spot: req.body.spot,
+      location: req.body.location,
+      category: req.body.category,
+      description: req.body.description,
+      date: req.body.date,
+      start: req.body.start,
+      end: req.body.end,
+      price: req.body.price,
+      image: new_image,
+    },
+    (err, updatedEvent) => {
+      if (err) {
+        req.flash("error_msg", "An error occurred, couldn't update");
+        res.status(500).redirect("/dashboard");
+      } else {
+        req.flash("success_msg", "Event Updated");
+        res.status(200).redirect("/dashboard");
+      }
+    }
+  );
+});
 
 // DESTROY EVENT ROUTE
-router.delete("/:id", ensureAuthenticated, (req, res) => {
-  Event.findByIdAndRemove(req.params.id, (err) => {
+router.delete("/:id", (req, res) => {
+  Group.findByIdAndRemove(req.params.id, (err, result) => {
+    if (result.image != "") {
+      try {
+        fs.unlinkSync("./uploads/" + result.image);
+      } catch {
+        console.log(err);
+      }
+    }
     if (err) {
-      res.redirect("/events");
+      req.flash("error_msg", "An error occurred, couldn't delete");
+      res.status(500).redirect("/dashboard");
     } else {
-      res.redirect("/events");
+      req.flash("success_msg", "Event Deleted");
+      res.status(200).redirect("/dashboard");
     }
   });
 });
