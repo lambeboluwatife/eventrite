@@ -3,7 +3,7 @@
 
   <head>
     <meta charset="utf-8">
-    <title>Eventrite</title>
+    <title>Eventrite | User Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta
       name="description"
@@ -14,14 +14,14 @@
       content="web app, application, technology, events, conferences, JS, BOOTSTRAP, seminars, application"
     />
     <meta name="author" content="Lambe Boluwatife" />
-    <link rel="stylesheet" href="fontawesome/css/fontawesome.css" />
-    <link rel="stylesheet" href="fontawesome/css/solid.css" />
-    <link rel="stylesheet" href="fontawesome/css/brands.css" />
-    <link href="assets/css/loaders/loader-typing.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="assets/css/theme-event.css" rel="stylesheet" type="text/css" media="all" />
-    <link rel="preload" as="font" href="assets/fonts/Inter-UI-upright.var.woff2" type="font/woff2" crossorigin="anonymous">
-    <link rel="preload" as="font" href="assets/fonts/Inter-UI.var.woff2" type="font/woff2" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="/fontawesome/css/fontawesome.css" />
+    <link rel="stylesheet" href="/fontawesome/css/solid.css" />
+    <link rel="stylesheet" href="/fontawesome/css/brands.css" />
+    <link href="/assets/css/loaders/loader-typing.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/assets/css/theme-event.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="preload" as="font" href="/assets/fonts/Inter-UI-upright.var.woff2" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="/assets/fonts/Inter-UI.var.woff2" type="font/woff2" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/dashboard.css">
   </head>
 
   <body>
@@ -32,8 +32,8 @@
             Eventrite
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-            <img class="icon navbar-toggler-open" src="assets/img/icons/interface/menu.svg" alt="menu interface icon" data-inject-svg />
-            <img class="icon navbar-toggler-close" src="assets/img/icons/interface/cross.svg" alt="cross interface icon" data-inject-svg />
+            <img class="icon navbar-toggler-open" src="/assets/img/icons/interface/menu.svg" alt="menu interface icon" data-inject-svg />
+            <img class="icon navbar-toggler-close" src="/assets/img/icons/interface/cross.svg" alt="cross interface icon" data-inject-svg />
           </button>
           <div class="collapse navbar-collapse justify-content-end">
                 <div
@@ -43,7 +43,7 @@
                     <button class="btn btn-danger drop-button dropdown-toggle mb-2" data-toggle="dropdown-grid" type="button" aria-expanded="false" aria-haspopup="true">
                       <img src="/<%= currentUser.image %>" alt="user" class="avatar avatar-sm">
                       <span><a class="text-light" href="#"><%= currentUser.username %></a></span>
-                      <img class="icon" src="assets/img/icons/interface/arrow-caret.svg" alt="arrow-caret interface icon" data-inject-svg />
+                      <img class="icon" src="/assets/img/icons/interface/arrow-caret.svg" alt="arrow-caret interface icon" data-inject-svg />
                     </button>
 
                     <div class="dropdown-menu row">
@@ -112,12 +112,32 @@
                             <a href="/events/<%= event._id %>/edit-event">
                               <button class="button bg-warning edit-button">Edit</button>
                             </a>
-                            <a href="">
-                              <button class="button bg-danger delete-button">Delete</button>
-                            </a>
+                            <button class="button bg-danger delete-button">
+                              <a href="#myModal">Delete</a>
+                            </button>
                           </div>
                         </div>
                           <a class="bg-danger text-light details" href="/events/<%= event._id%>">Details</a>
+                      </div>
+                      <div id="myModal" class="modal">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <span class="close">
+                              <a href="#close">×</a>
+                            </span>
+                            <h2>Are you sure you want to delete?</h2>
+                          </div>
+                          <div class="modal-body">
+                            <form action="/events/<%= event.id %>?_method=DELETE"
+                              method="POST"
+                            >
+                              <button class="confirm-delete">Yes</button>
+                            </form>
+                            <button class="confirm-delete">
+                              <a href="#close">No</a>
+                            </button>
+                          </div>
+                        </div>
                       </div>
                     <% }) %>
                   <% } %>
@@ -132,6 +152,8 @@
             </div>
         </div>
     </section>
+
+
     <footer class="pb-4 bg-primary-3 text-light" id="footer">
       <div class="container">
         

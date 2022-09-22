@@ -197,7 +197,7 @@ router.put("/:id", upload.single("image"), (req, res) => {
 
 // DESTROY EVENT ROUTE
 router.delete("/:id", (req, res) => {
-  Group.findByIdAndRemove(req.params.id, (err, result) => {
+  Event.findByIdAndRemove(req.params.id, (err, result) => {
     if (result.image != "") {
       try {
         fs.unlinkSync("./uploads/" + result.image);
