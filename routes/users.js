@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
+const nodemailer = require("nodemailer")
 const path = require("path");
 const multer = require("multer");
 
@@ -111,6 +112,38 @@ router.post("/register", upload, (req, res) => {
             newUser
               .save()
               .then((user) => {
+                 // Email output
+                 const output = `
+                  <h3>Welcome note from Eventrite</h3>
+                  <h6>Hello ${user.username}</h6>
+                  <p>You are getting this mail because you created an account with us here at Eventrite.</p>
+                  <p>Our main objective is to make events easier to host and reach its targeted audiences and help in publicity.</p>
+                  <br>
+                  <h6>We sincerely hope you enjoy our services.</h6>
+                  <h6>We welcome you again and we are happy to have you from everyone at Evenrite.</h6>
+                `;
+                // nodemailer
+                const transporter = nodemailer.createTransport({
+                  service: "hotmail",
+                  auth: {
+                    user: "eventrite@outlook.com",
+                    pass: "Boluwatife1165"
+                  }
+                })
+
+                const mailOptions = {
+                  from: '"Boluwatife from Eventrite" <eventrite@outlook.com>',
+                  to: user.email,
+                  subject: 'Welcome note from Eventrite',
+                  html: output,
+                }
+
+                transporter.sendMail(mailOptions, (err, info) => {
+                  if (err) {
+                    return console.log(err);
+                  }
+                  console.log(`Sent: ${info.response}`);
+                })
                 req.flash(
                   "success_msg",
                   "You are now registered and can log in"
