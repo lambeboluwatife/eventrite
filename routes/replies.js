@@ -1,37 +1,36 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
 const { ensureAuthenticated } = require("../config/auth");
-const Event = require("../models/Event");
 const Comment = require("../models/Comment");
+const Reply = require("../models/Reply");
 
-// Comments Create
+// Replies Create
 router.post("/", ensureAuthenticated, (req, res) => {
-  Event.findById(req.params.id, (err, event) => {
+  Comment.findById(req.params.id, (err, comment) => {
     if (err) {
       console.log(err);
-      res.redirect("/events");
     } else {
-        const comment = req.body.comment;
+        const reply = req.body.reply;
         const author = {
             id: req.user._id,
-            username: req.user.username,
-            name: req.user.name
+            username: req.user.username
         }
-        const newComment = new Comment({
-            comment,
+        const commentId = comment._id
+        const newReply = new Reply({
+            reply,
+            commentId,
             author
         })
-      Comment.create(newComment, (err, comment) => {
+        Reply.create(newReply, (err, reply) => {
         if (err) {
           req.flash("error", "Something went wrong");
           console.log(err);
         } else {
-          // save comment
+          // save reply
+          reply.save();
+          comment.replies.push(reply);
           comment.save();
-          event.comments.push(comment);
-          event.save();
-          req.flash("success", "Successfully added comment");
-          res.redirect("/events/" + event._id);
+          res.redirect("back");
         }
       });
     }

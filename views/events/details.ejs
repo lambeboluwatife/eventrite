@@ -17,48 +17,11 @@
     <link rel="stylesheet" href="/fontawesome/css/fontawesome.css" />
     <link rel="stylesheet" href="/fontawesome/css/solid.css" />
     <link rel="stylesheet" href="/fontawesome/css/brands.css" />
+    <link rel="stylesheet" href="/css/details.css">
     <link href="/assets/css/loaders/loader-typing.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/assets/css/theme-event.css" rel="stylesheet" type="text/css" media="all" />
     <link rel="preload" as="font" href="/assets/fonts/Inter-UI-upright.var.woff2" type="font/woff2" crossorigin="anonymous">
     <link rel="preload" as="font" href="/assets/fonts/Inter-UI.var.woff2" type="font/woff2" crossorigin="anonymous">
-    <style>
-        .button {
-          border: solid 1px;
-          color: #fff;
-          width: 30%;
-          border-radius: 30px;
-        }
-
-        .drop-button {
-            border-radius: 30px;
-        }
-
-        .ticket {
-          border: solid #fff 1px;
-          background-color: #fff;
-          border-radius: 5px;
-          padding: 15px;
-        }
-
-        .ticket-btn {
-          display: inline;
-          float:  right;
-        }
-
-        .text-area {
-          border: solid #fff 1px;
-          padding: 15px;
-          background-color: #fff;
-          border-radius: 5px;
-        }
-
-        textarea {
-          width: 70%;
-          margin-left: 20px;
-          border: none;
-          display: inline;
-        }
-    </style>
   </head>
 
   <body>
@@ -175,6 +138,27 @@
                         <strong><%= comment.author.username %></strong>
                         <span class="pull-right"><%= comment.date.toDateString() %></span>
                         <p><%= comment.comment %></p>
+                        <div class="container reply">
+                          <% if (currentUser) { %>
+                            <form action="/events/<%= event._id %>/comments/<%= comment._id %>/replies" method="POST" class="mt-2">
+                              <div class="text-area">
+                                <textarea required name="reply" id="reply" placeholder="reply"></textarea>
+                                <button class="btn btn-danger ticket-btn mt-3" type="submit">Reply</button>
+                              </div>
+                            </form>
+                          <% } %>
+                        </div>
+                        <% comment.replies.forEach((reply) => { %>
+                          <div class="container replies">
+                            <div class="row">
+                              <div class="col-md-12">
+                                <strong><%= reply.author.username %></strong>
+                                <span class="pull-right"><%= reply.date.toDateString() %></span>
+                                <p><%= reply.reply %></p>
+                              </div>
+                            </div>
+                          </div>
+                        <% }) %>
                         <!-- <% if (currentUser && comment.author.id.equals(currentUser._id)) {
                         %>
                         <a
@@ -195,6 +179,7 @@
                           />
                         </form>
                         <% } %> -->
+                       
                       </div>
                     </div>
                     <% })%>
@@ -320,6 +305,8 @@
 <a href="#" class="btn back-to-top btn-primary btn-round" data-smooth-scroll data-aos="fade-up" data-aos-offset="2000" data-aos-mirror="true" data-aos-once="false">
   <img class="icon" src="/assets/img/icons/theme/navigation/arrow-up.svg" alt="arrow-up icon" data-inject-svg />
 </a>
+
+<script src="/js/details.js"></script>
 <!-- Required vendor scripts (Do not remove) -->
 <script type="text/javascript" src="/assets/js/jquery.min.js"></script>
 <script type="text/javascript" src="/assets/js/popper.min.js"></script>

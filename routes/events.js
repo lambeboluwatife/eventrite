@@ -120,7 +120,12 @@ router.get('/', (req, res) => {
 // SHOW - Show more info about an event
 router.get("/:id", (req, res) => {
   Event.findById(req.params.id)
-    .populate("comments")
+    .populate({
+      path: "comments",
+      populate: {
+        path: "replies"
+      }
+    })
     .exec((err, foundEvent) => {
       if (err) {
         res.redirect("back");

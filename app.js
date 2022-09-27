@@ -65,6 +65,7 @@ app.use("/", require("./routes/index"));
 app.use("/users", require("./routes/users"));
 app.use("/events", require("./routes/events"));
 app.use("/events/:id/comments", require("./routes/comments"));
+app.use("/events/:id/comments/:id/replies", require("./routes/replies"));
 
 app.all('*', (req, res) => {
   res.status(404).render('404');
