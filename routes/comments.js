@@ -71,16 +71,16 @@ router.post("/", ensureAuthenticated, (req, res) => {
 //   );
 // });
 
-// // Comment Destroy
-// router.delete("/:comment_id", middleware.checkCommentOwnership, (req, res) => {
-//   Comment.findByIdAndRemove(req.params.comment_id, err => {
-//     if (err) {
-//       res.redirect("back");
-//     } else {
-//       req.flash("success", "Comment deleted");
-//       res.redirect("/campgrounds/" + req.params.id);
-//     }
-//   });
-// });
+// Comment Destroy
+router.delete("/:comment_id", ensureAuthenticated, (req, res) => {
+  Comment.findByIdAndRemove(req.params.comment_id, err => {
+    if (err) {
+      res.redirect("back");
+    } else {
+      req.flash("success", "Comment deleted");
+      res.redirect("/events/" + req.params.id);
+    }
+  });
+});
 
 module.exports = router;

@@ -83,7 +83,7 @@
 <section class="bg-primary text-light p-0 o-hidden" style="height: 100vh;">
     <img src="/<%= event.image %>" alt="Image" class="bg-image blend-mode-multiply">
     <div class="container layer-2">
-      <div class="row py-6 min-vh-80 align-items-center" data-aos="fade-up">
+      <div class="row details py-6 min-vh-80 align-items-center" data-aos="fade-up">
         <div class="col-lg-9 col-xl-8 mt-6 mb-0">
           <h5><%= event.date.toDateString() %></h5>
           <h1 class="display-1"><%= event.name %></h1>
@@ -96,7 +96,7 @@
     </div>
 </section>
 <section style="background-color: lightgrey;">
-    <div class="container">
+    <div class="container other-details">
         <div class="row">
             <div class="col-md-8">
                 <h3 class="h1">Information</h3>
@@ -111,9 +111,9 @@
                 </h5>
                 <div class="text-muted ticket">
                  <% if (event.price == "free") { %>
-                  <span style="font-size: 25px;">This event is <%= event.price %></span>
+                  <span>This event is <%= event.price %></span>
                  <% } else { %>
-                  <span style="font-size: 25px;">$<%= event.price %></span>
+                  <span>$<%= event.price %></span>
                   <button class="btn btn-danger ticket-btn" type="submit">Book Now</button>
                  <% } %>
                 </div>
@@ -123,11 +123,12 @@
                 <% if (currentUser) { %>
                   <form action="/events/<%= event._id %>/comments" method="POST" class="mt-2">
                     <div class="text-area">
-                      <div style="display: inline;">
+                      <div class="avatar-img" style="display: inline;">
                         <img src="/<%= currentUser.image %>" alt="user" class="avatar avatar-lg">
+                        <img src="/<%= currentUser.image %>" alt="user" class="avatar avatar-small">
                       </div>
                       <textarea required name="comment" id="comment" placeholder="Add a comment..."></textarea>
-                      <button class="btn btn-danger ticket-btn mt-3" type="submit">Add</button>
+                      <button class="btn btn-danger comment-btn ticket-btn mt-3" type="submit">Add</button>
                     </div>
                   </form>
                 <% } %>
@@ -141,9 +142,9 @@
                         <div class="container reply">
                           <% if (currentUser) { %>
                             <form action="/events/<%= event._id %>/comments/<%= comment._id %>/replies" method="POST" class="mt-2">
-                              <div class="text-area">
-                                <textarea required name="reply" id="reply" placeholder="reply"></textarea>
-                                <button class="btn btn-danger ticket-btn mt-3" type="submit">Reply</button>
+                              <div class="text-area reply-area">
+                                <textarea class="reply-textarea" required name="reply" id="reply" placeholder="reply"></textarea>
+                                <button class="btn btn-danger reply-btn ticket-btn mt-3" type="submit">Reply</button>
                               </div>
                             </form>
                           <% } %>
@@ -159,26 +160,21 @@
                             </div>
                           </div>
                         <% }) %>
-                        <!-- <% if (currentUser && comment.author.id.equals(currentUser._id)) {
+                        <% if (currentUser && comment.author.id.equals(currentUser._id)) {
                         %>
-                        <a
-                          class="btn btn-xs btn-warning"
-                          href="/events/<%= event._id %>/comments/<%= comment._id %>/edit"
-                        >
-                          Edit
-                        </a>
+                        <br>
                         <form
                           id="delete-form"
                           action="/events/<%= event._id %>/comments/<%= comment._id %>?_method=DELETE"
                           method="POST"
                         >
                           <input
-                            class="btn btn-xs btn-danger"
+                            class="btn btn-danger"
                             type="submit"
                             value="Delete"
                           />
                         </form>
-                        <% } %> -->
+                        <% } %>
                        
                       </div>
                     </div>
