@@ -1,0 +1,95 @@
+.button {
+  border: solid 1px;
+  color: #fff;
+  width: 30%;
+  border-radius: 30px;
+}
+
+.drop-button {
+    border-radius: 30px;
+}
+
+.avatar-small {
+  display: none;
+}
+
+.ticket {
+  border: solid #fff 1px;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 15px;
+}
+
+.ticket span {
+  font-size: 25px;
+}
+
+.ticket-btn {
+  display: inline;
+  float:  right;
+}
+
+.text-area {
+  border: solid #fff 1px;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+textarea {
+  width: 70%;
+  margin-left: 20px;
+  border: none;
+  display: inline;
+}
+
+#myInput {
+  display: none;
+}
+
+@media (max-width: 500px) {
+  .details h5 {
+      font-size: 15px;
+  }
+
+  .details h1 {
+      font-size: 60px;
+  }
+
+  .details p {
+      font-size: 13px;
+  }
+
+  .other-details p, .other-details h5 {
+    font-size: 15px;
+  }
+
+  .ticket span {
+    font-size: 15px;
+  }
+
+  .avatar-lg {
+    display: none;
+  }
+
+  .text-area {
+    padding: 5px;
+  }
+
+  .avatar-small {
+    display: inline;
+    margin-bottom: 10px;
+  }
+
+  textarea {
+    width: 50%;
+  }
+
+  .reply-textarea {
+    width: 70%;
+  }
+
+  .reply-area {
+    padding: 10px;
+  }
+}
