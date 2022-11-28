@@ -1,0 +1,109 @@
+/* Global styles that affects all components */
+html {
+	font-size: 62.5%; /*  set base font-size: 10px = 1rem */
+}
+
+body {
+	font-size: 1.6rem; /*  set default font-size back to 16px */
+	overflow-x: hidden;
+	box-sizing: border-box;
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+	margin: 0;
+}
+
+/* fix collapsing margins */
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+	margin: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	/* colors */
+	/* ### Primary */
+	--primary-color: hsl(10, 86%, 58%);
+	--very-light-grey: hsl(0, 20%, 93%);
+	--light-grey: hsl(0, 0%, 80%);
+	--dark-grey: hsl(0, 2%, 21%);
+	--white-color: hsl(0, 0%, 100%);
+	--black-color: hsl(0, 100%, 2%);
+	--cyan: hsl(186, 34%, 60%);
+
+	/* // ### Neutral */
+
+	--dark-brown: hsl(25, 47%, 15%);
+	--medium-brown: hsl(28, 10%, 53%);
+	--cream: hsl(27, 66%, 92%);
+	--very-pale-orange: hsl(33, 100%, 98%);
+	--dark-blue: rgb(2, 27, 44);
+
+	/* sizes */
+	--tiny: 2rem;
+	--small: 4rem;
+	--medium: 6rem;
+	--big: 8rem;
+	--large: 10rem;
+}
+
+/* set background color of highlighted text */
+::selection {
+	background-color: var(--primary-color);
+}
+
+a,
+a:active {
+	text-decoration: none;
+	color: var(--cyan);
+}
+
+/* Utilities */
+
+.btn {
+	width: fit-content;
+	padding: 0.5rem 1rem;
+	font-size: 2rem;
+	text-transform: capitalize;
+	cursor: pointer;
+	border: unset;
+	/* color: var(--dark-grey); */
+	background-color: transparent;
+}
+
+.btn__primary {
+	font-size: 2rem;
+	background-color: var(--primary-color);
+	color: var(--white-color);
+	padding: 1rem 2rem;
+	border-radius: 0.5rem;
+	border: 2px solid transparent;
+	transition: all 500ms;
+}
+
+.btn__primary:hover,
+.btn__primary:active {
+	color: var(--primary-color);
+	background-color: var(--white-color);
+	border-color: var(--primary-color);
+}
+
+.btn__tertiary {
+	color: var(--cyan);
+	padding: 0;
+	margin: var(--small);
+	transition: all 0.2s;
+	border: 2px solid transparent;
+}
+
+.btn__tertiary:hover,
+.btn__tertiary:active {
+	color: var(--medium-brown);
+	border-bottom-color: var(--primary-color);
+}
+
+.hidden {
+	display: none;
+}
