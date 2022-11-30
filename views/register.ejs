@@ -33,6 +33,7 @@
 					<input
 						type="text"
 						id="name"
+						name="name"
 						class="signup__form--name form__input"
 						placeholder="Full Name"
 						value="<%= typeof name != 'undefined' ? name : '' %>"
@@ -40,6 +41,7 @@
 					<input
 						type="email"
 						id="email"
+						name="email"
 						class="signup__form--email form__input"
 						placeholder="Email"
 						value="<%= typeof email != 'undefined' ? email : '' %>"
@@ -47,6 +49,7 @@
 					<input
 						type="text"
 						id="username"
+						name="username"
 						class="signup__form--username form__input"
 						placeholder="Username"
 						value="<%= typeof username != 'undefined' ? username : '' %>"
@@ -56,6 +59,7 @@
 							type="file"
 							accept="image/png, image/jpg, image/gif, image/jpeg"
 							id="image"
+							name="image"
 							class="file-upload"
 							name="image"
 							placeholder="Avatar"
@@ -70,6 +74,7 @@
 					<input
 						type="password"
 						id="password"
+						name="password"
 						class="signup__form--password form__input"
 						placeholder="Password"
 						value="<%= typeof password!= 'undefined' ? password : '' %>"
@@ -81,6 +86,7 @@
 					<input
 						type="password"
 						id="password2"
+						name="password2"
 						class="signup__form--password form__input"
 						placeholder="Confirm Password"
 						value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
