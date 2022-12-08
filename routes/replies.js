@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
+const moment = require("moment")
 const { ensureAuthenticated } = require("../config/auth");
 const Comment = require("../models/Comment");
 const Reply = require("../models/Reply");
@@ -11,6 +12,8 @@ router.post("/", ensureAuthenticated, (req, res) => {
       console.log(err);
     } else {
         const reply = req.body.reply;
+        const date = moment().format('MMM D, YYYY');
+        const time = moment().format("LT")
         const author = {
             id: req.user._id,
             username: req.user.username
@@ -19,7 +22,9 @@ router.post("/", ensureAuthenticated, (req, res) => {
         const newReply = new Reply({
             reply,
             commentId,
-            author
+            author,
+            date,
+            time
         })
         Reply.create(newReply, (err, reply) => {
         if (err) {

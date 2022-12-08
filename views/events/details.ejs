@@ -32,10 +32,28 @@
           <a class="navbar-brand fade-page" href="/">
             Eventrite
           </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-            <img class="icon navbar-toggler-open" src="assets/img/icons/interface/menu.svg" alt="menu interface icon" data-inject-svg />
-            <img class="icon navbar-toggler-close" src="assets/img/icons/interface/cross.svg" alt="cross interface icon" data-inject-svg />
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target=".navbar-collapse"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <img
+              class="icon navbar-toggler-open"
+              src="/assets/img/icons/interface/menu.svg"
+              alt="menu interface icon"
+              data-inject-svg
+            />
+            <img
+              class="icon navbar-toggler-close"
+              src="/assets/img/icons/interface/cross.svg"
+              alt="cross interface icon"
+              data-inject-svg
+            />
           </button>
+
           <div class="collapse navbar-collapse justify-content-end">
            
             <%  if(!currentUser){ %>
@@ -137,29 +155,29 @@
                   <% event.comments.forEach((comment) => { %>
                     <div class="row">
                       <div class="col-md-12">
-                        <strong><%= comment.author.username %></strong>
-                        <span class="pull-right"><%= comment.date.toDateString() %></span>
+                        <strong class="text-primary"><%= comment.author.username %></strong>
+                        <span class="pull-right"><%= comment.date %> @ <%= comment.time %></span>
                         <p><%= comment.comment %></p>
-                        <div class="container reply">
-                          <% if (currentUser) { %>
-                            <form action="/events/<%= event._id %>/comments/<%= comment._id %>/replies" method="POST" class="mt-2">
-                              <div class="text-area reply-area">
-                                <textarea class="reply-textarea" required name="reply" id="reply" placeholder="reply"></textarea>
-                                <button class="btn btn-danger reply-btn ticket-btn mt-3" type="submit">Reply</button>
-                              </div>
-                            </form>
-                          <% } %>
-                        </div>
-                        <% comment.replies.forEach((reply) => { %>
-                          <div class="container replies">
-                            <div class="row">
-                              <div class="col-md-12">
-                                <strong><%= reply.author.username %></strong>
-                                <span class="pull-right"><%= reply.date.toDateString() %></span>
-                                <p><%= reply.reply %></p>
+                          <div class="container reply">
+                            <% if (currentUser) { %>
+                              <form action="/events/<%= event._id %>/comments/<%= comment._id %>/replies" method="POST" class="mt-2">
+                                <div class="text-area reply-area">
+                                  <textarea class="reply-textarea" required name="reply" id="reply" placeholder="reply"></textarea>
+                                  <button class="btn btn-danger reply-btn ticket-btn mt-3" type="submit">Reply</button>
+                                </div>
+                              </form>
+                            <% } %>
+                          </div>
+                          <% comment.replies.forEach((reply) => { %>
+                            <div class="container replies">
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <strong class="text-primary-2"><%= reply.author.username %></strong>
+                                  <span class="pull-right"><%= reply.date %> @ <%= reply.time %></span>
+                                  <p><%= reply.reply %></p>
+                                </div>
                               </div>
                             </div>
-                          </div>
                         <% }) %>
                         <% if (currentUser && comment.author.id.equals(currentUser._id)) {
                         %>
@@ -182,6 +200,7 @@
                     <% })%>
                 </div>
             </div>
+            
             <div class="col-md-4 text-center">
                 <img src="/<%= event.author.image %>" alt="user" class="avatar avatar-xlg">
                 <div>
@@ -243,7 +262,7 @@
                     <button onclick="copyLink()" class="btn copy-link btn-primary">
                       Copy Link
                     </button>
-                    <p class="copied"><strong>Link Copied</strong></p>
+                    <p class="copied"><strong>Link Copied To Clipboard</strong></p>
             </div>
         </div>
         <hr>

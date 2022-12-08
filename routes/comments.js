@@ -1,4 +1,5 @@
 const express = require("express");
+const moment = require("moment")
 const router = express.Router({ mergeParams: true });
 const { ensureAuthenticated } = require("../config/auth");
 const Event = require("../models/Event");
@@ -12,6 +13,8 @@ router.post("/", ensureAuthenticated, (req, res) => {
       res.redirect("/events");
     } else {
         const comment = req.body.comment;
+        const date = moment().format('MMM D, YYYY');
+        const time = moment().format("LT")
         const author = {
             id: req.user._id,
             username: req.user.username,
@@ -19,7 +22,9 @@ router.post("/", ensureAuthenticated, (req, res) => {
         }
         const newComment = new Comment({
             comment,
-            author
+            author,
+            date,
+            time
         })
       Comment.create(newComment, (err, comment) => {
         if (err) {

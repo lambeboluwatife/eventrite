@@ -1,51 +1,81 @@
 <%- include ('./partials/header') %>
 
-<section class="home">
-	<div class="container hero">
-		<h5 class="hero__date">October 18 - 19, 2022</h5>
-		<h1 class="hero__title">Leap Con</h1>
-		<p class="hero__description">Exhibition Center, Melbourne, Australia</p>
-		<a href="#" class="btn btn__primary">Purchase Tickets</a>
-	</div>
-</section>
+<section class="bg-primary-2 text-light p-0 o-hidden" style="height: 100vh;">
+    <img src="assets/img/event-1.jpg" alt="Image" class="bg-image blend-mode-multiply">
+    <div class="container layer-2">
+      <div class="row py-6 min-vh-80 align-items-center" data-aos="fade-up">
+        <div class="header col-lg-9 col-xl-8">
+          <h5>October 18 - 19, 2022</h5>
+          <h1 class="display-1">Leap Con</h1>
+          <p class="lead mb-4">Exhibition Center, Melbourne, Australia</p>
+          <a href="#" class="btn btn-danger">Purchase Tickets</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section class="events__section">
-	<h3 class="events__heading">Upcoming Events</h3>
+  <section class="">
+    <div class="container text-center">
+      <div class="row mb-4">
+        <div class="col">
+          <h3 class="h1">Upcoming Events</h3>
+        </div>
+      </div>
 
-	<div class="events__container">
-		<% if (events == "") { %>
-		<h4 class="events__empty">No upcoming events yet!</h4>
-		<% } else { %> <% events.forEach((event) => { %>
-		<div class="col-lg-4 col-md-6">
-			<a class="card hover-shadow-sm" href="/events/<%= event._id%>">
-				<img src="/<%= event.image %>" alt="Cover Image" class="card-img-top" />
-				<div class="card-body d-flex flex-column">
-					<div class="d-flex">
-						<div class="ml-3 text-primary">
-							<div class="badge badge-primary mb-2"><%= event.location %></div>
-							<h4 class="mb-2 text-dark"><%= event.name %></h4>
-							<small class="text-dark"><%= event.date.toDateString() %></small>
-							<div class="text-small text-muted mt-3">
-								<img
-									src="/<%= event.author.image %>"
-									alt="user"
-									class="avatar avatar-sm"
-								/>
-								Hosted By <%= event.author.username %>
-							</div>
-							<div class="text-small text-muted mt-3">
-								Click to read more...
-							</div>
-						</div>
-					</div>
-				</div>
-			</a>
-		</div>
-		<% }) %> <% } %>
-	</div>
-	<a href="/events" class="btn btn__tertiary events__link"
-		>Other Events <span class="events__arrow">&rarr;</span>
-	</a>
-</section>
+      <div class="row justify-content-center">
+        <% if (events == "") { %>
+          <h4 class="text-center">No upcoming events yet</h4>
+        <% } else { %>
+          <% events.forEach((event) => { %>
+            <div class="col-lg-4 col-md-6">
+              <!-- <a href="/events/<%= event._id%>">
+                <div class="item">
+                  <img src="/<%= event.image %>" alt="Cover Image" class="item-image">
+                  <h5 class="item-title"><strong><%= event.name %></strong></h5>
+                  <p class="item-date"><%= event.date.toDateString() %></p>
+                  <p class="item-location"><%= event.location %></p>
+                  <div class="text-small text-muted mt-3">
+                    <img
+                    src="/<%= event.author.image %>"
+                    alt="user"
+                    class="avatar avatar-sm"
+                    />
+                    Hosted By <%= event.author.username %>
+                  </div>
+                  <div class="text-small text-muted mt-3">
+                    Click to read more...
+                  </div>
+                </div>
+              </a> -->
+              <a class="card hover-shadow-sm" href="/events/<%= event._id%>">
+                <img src="/<%= event.image %>" alt="Cover Image" class="card-img-top">
+                <div class="card-body d-flex flex-column">
+                  <div class="d-flex">
+                    <div class="ml-3 text-primary">
+                      <div class="badge badge-primary mb-2"><%= event.location %></div>
+                      <h4 class="mb-2 text-dark"><%= event.name %></h4>
+                      <small class="text-dark"><%= event.date.toDateString() %></small>
+                      <div class="text-small text-muted mt-3">
+                        <img
+                        src="/<%= event.author.image %>"
+                        alt="user"
+                        class="avatar avatar-sm"
+                        />
+                        Hosted By <%= event.author.username %>
+                      </div>
+                      <div class="text-small text-muted mt-3">
+                        Click to read more...
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          <% }) %>
+        <% } %>
+      </div>
+      <a href="/events" class="btn btn-danger">Other Events</a>
+    </div>
+  </section>
 
 <%- include ('./partials/footer') %>
