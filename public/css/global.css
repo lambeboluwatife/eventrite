@@ -12,13 +12,11 @@ body {
 }
 
 /* fix collapsing margins */
-h1,
-h2,
-h3,
-h4,
-h5,
-p {
+*,
+*::before,
+*::after {
 	margin: 0;
+	padding: 0;
 	box-sizing: border-box;
 }
 
@@ -57,7 +55,7 @@ p {
 a,
 a:active {
 	text-decoration: none;
-	color: var(--cyan);
+	color: var(--primary-color);
 }
 
 /* Utilities */
@@ -69,7 +67,6 @@ a:active {
 	text-transform: capitalize;
 	cursor: pointer;
 	border: unset;
-	/* color: var(--dark-grey); */
 	background-color: transparent;
 }
 
@@ -79,8 +76,9 @@ a:active {
 	color: var(--white-color);
 	padding: 1rem 2rem;
 	border-radius: 0.5rem;
+	cursor: pointer;
 	border: 2px solid transparent;
-	transition: all 500ms;
+	transition: all 200ms;
 }
 
 .btn__primary:hover,
