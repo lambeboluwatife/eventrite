@@ -1,12 +1,15 @@
+/* import global styles (containing general CSS settings) */
 @import './global.css';
 
+/* container */
 .login {
 	min-height: 100vh;
 	height: 100%;
-	background-image: url('../assets/img/event_bg.jpg');
+	background-image: url('../assets/img/bg-img.jpg');
 	background-color: hsla(10, 86%, 58%, 0.8);
 	background-blend-mode: screen;
 	background-size: cover;
+	background-position: 0 70%;
 	background-repeat: no-repeat;
 	padding: 0 var(--small);
 }
@@ -18,6 +21,7 @@
 	margin: var(--small) auto;
 }
 
+/* main form container */
 .login__container {
 	width: 80%;
 	min-height: 100vh;
@@ -30,6 +34,7 @@
 	position: relative;
 }
 
+/* form */
 .login__form {
 	display: flex;
 	flex-direction: column;
@@ -42,6 +47,7 @@
 	margin: var(--tiny) 0;
 }
 
+/* form input buttons */
 .login__form--email,
 .login__form--password {
 	font-size: 1.6rem;
@@ -58,16 +64,20 @@
 	outline: solid var(--cyan) 1px;
 }
 
+/* submit button */
 .login__form--submit {
 	font-size: 1.8rem;
+	width: 100%;
 	padding: 1rem var(--tiny);
 	margin-block: var(--tiny);
 }
 
+/* link to signup page */
 .login__form--signup {
 	margin-bottom: var(--small);
 }
 
+/* dividing line after the submit button */
 .login__form--signup::before {
 	content: '';
 	display: block;
@@ -91,11 +101,25 @@
 
 	.login__form--submit {
 		font-size: 2rem;
-		padding: 1.5rem var(--small);
 		margin-top: var(--small);
 	}
 
 	.login__form--signup::before {
 		margin-top: var(--small);
+	}
+}
+
+/* > 1440px */
+@media screen and (min-width: 90em) {
+	/* move the content to the center of the screen on very large viewports */
+	.login {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.login__container {
+		border-radius: 1rem;
+		min-height: max-content;
 	}
 }
