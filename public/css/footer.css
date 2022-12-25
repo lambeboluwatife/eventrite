@@ -5,6 +5,7 @@
 	background-color: var(--dark-blue);
 	position: relative;
 	margin-top: var(--medium);
+	margin-bottom: 0;
 }
 
 .footer__container {

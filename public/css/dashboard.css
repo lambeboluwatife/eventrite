@@ -1,6 +1,130 @@
-.navbar-container {
-	background-color: aquamarine;
+/* import global styles (containing general CSS settings) */
+@import './global.css';
+@import './footer.css';
+/*  */
+
+body {
+	min-height: 100vh !important;
+	padding: 0;
+	margin: 0;
 }
+
+.header {
+	padding: var(--tiny);
+	margin-bottom: var(--tiny);
+	border-bottom: 0.2rem solid var(--primary-color);
+}
+
+.navbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+}
+
+.navbar__brand {
+	color: var(--primary-color);
+	font-size: 2.5rem;
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.navbar__content {
+	margin-left: auto;
+}
+
+.navbar__toggler {
+	background-color: var(--primary-color);
+	color: var(--white-color);
+	border-radius: var(--small);
+	font-size: 1.8rem;
+	padding: 1rem 1.5rem;
+	border: unset;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.navbar__toggler .avatar {
+	width: 3rem;
+	margin-right: 1rem;
+}
+
+.username {
+	display: inline-block;
+	margin-right: var(--tiny);
+}
+
+.navbar__toggler .icon {
+	filter: invert(100%) sepia(0%) saturate(7499%) hue-rotate(138deg)
+		brightness(96%) contrast(104%);
+}
+
+.icon {
+	width: 2rem;
+	aspect-ratio: 1/1;
+	filter: invert(40%) sepia(31%) saturate(2813%) hue-rotate(339deg)
+		brightness(99%) contrast(91%);
+}
+
+.navbar__main {
+	font-size: 1.8rem;
+	background-color: var(--white-color);
+	box-shadow: -2px 0.6rem 1rem 0 rgba(0, 0, 0, 0.25);
+	border-radius: 0.5rem;
+	padding: var(--tiny);
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	right: 0;
+	top: 7rem;
+	z-index: 50;
+}
+
+.user-actions {
+	display: flex;
+	flex-direction: column;
+	margin-top: var(--tiny);
+}
+
+.user-actions__link {
+	color: var(--dark-grey);
+	display: inline-block;
+	margin-bottom: 1rem;
+}
+
+.user-actions__link i {
+	display: inline-block;
+	margin-right: 1rem;
+}
+
+.avatar {
+	width: var(--medium);
+	aspect-ratio: 1/1;
+	border-radius: 50%;
+}
+
+.dashboard {
+	display: flex;
+	height: 100%;
+}
+
+.dashboard__nav {
+	/* display: flex; */
+	width: 50%;
+}
+
+.dashboard__item {
+	margin: var(--tiny) var(--tiny) 0 var(--tiny);
+	padding-right: var(--big);
+}
+
+footer {
+	position: absolute;
+	margin-bottom: 0;
+	bottom: 0;
+}
+
+/* previous */
 
 .nav {
 	border: none;
@@ -21,7 +145,7 @@
 }
 
 .contents {
-	font-size: x-large;
+	font-size: large;
 	cursor: pointer;
 	font-weight: bolder;
 	color: #000;
@@ -63,8 +187,8 @@
 }
 
 .item-image {
-	height: 100%;
-	width: 100%;
+	height: auto;
+	width: 5rem;
 	object-fit: cover;
 }
 
