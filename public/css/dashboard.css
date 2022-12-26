@@ -11,7 +11,7 @@ body {
 
 .header {
 	padding: var(--tiny);
-	margin-bottom: var(--tiny);
+	margin-bottom: var(--medium);
 	border-bottom: 0.2rem solid var(--primary-color);
 }
 
@@ -109,7 +109,6 @@ body {
 }
 
 .dashboard__nav {
-	/* display: flex; */
 	width: 50%;
 }
 
@@ -118,10 +117,12 @@ body {
 	padding-right: var(--big);
 }
 
-footer {
-	position: absolute;
-	margin-bottom: 0;
-	bottom: 0;
+.dashboard__name {
+	font-size: 2rem;
+}
+
+.dashboard__username {
+	margin-block: 1rem;
 }
 
 /* previous */
@@ -354,5 +355,10 @@ button a {
 		margin-left: 50%;
 		margin-right: 50%;
 		transform: translate(-50%);
+	}
+	/*  */
+
+	.dashboard__nav {
+		width: 30%;
 	}
 }
