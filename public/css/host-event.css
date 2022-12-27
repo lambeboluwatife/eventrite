@@ -1,14 +1,19 @@
 /* import global styles (containing general CSS settings) */
 @import './global.css';
 @import './footer.css';
-/*  */
 
+/* header */
 .header {
 	padding: var(--tiny);
 	margin-bottom: var(--tiny);
+	background-color: var(--white-color);
+	position: fixed;
+	top: 0;
+	width: 100%;
 	border-bottom: 0.2rem solid var(--primary-color);
 }
 
+/* navigation */
 .navbar {
 	display: flex;
 	justify-content: space-between;
@@ -97,58 +102,63 @@
 	border-radius: 50%;
 }
 
-/* previous styles */
-/* unsure */
-
-.nav {
-	border: none;
-	border-bottom: 2px solid red;
-	background: transparent;
-	outline: none;
+/* Form Container Div */
+.form__container {
+	width: 50%;
+	margin-block: 20rem var(--medium);
+	margin-inline: auto;
 }
 
-.drop-button {
-	border-radius: 30px;
-}
-
-.grid {
+/* Form Input Container */
+.form__input--container {
+	margin-block: var(--tiny);
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	justify-content: center;
-	align-items: center;
-	height: 100%;
+	gap: 1rem var(--tiny);
+	grid-auto-rows: 5rem;
 }
 
-input,
-button,
-select,
-textarea {
-	border: solid grey 1px;
-	height: 50px;
+/* Form Inputs */
+.form__input {
 	width: 100%;
+	display: flex;
+	padding: 1rem;
+	border-radius: 0.5rem;
+	border: solid grey 1px;
+}
+
+.form__input:focus {
+	outline-color: var(--medium-brown);
+	caret-color: var(--primary-color);
+}
+
+/* Form Action Buttons Container */
+.form__btn--container {
+	margin-block: var(--small);
+	padding-top: var(--tiny);
+	border-top: 2px solid var(--primary-color);
+}
+
+/* Form Action Buttons  */
+.form__btn {
+	border-radius: 0.5rem;
 }
 
 .cancel {
 	border: solid grey 1px;
-	height: 50px;
-	background: transparent;
-	width: 20%;
-}
-
-.cancel a {
-	color: darkred;
+	padding-block: 1rem;
 }
 
 .button {
-	border: solid red 1px;
-	background-color: red;
+	border: solid var(--primary-color) 1px;
+	background-color: var(--primary-color);
 	color: #fff;
-	width: 20%;
 	float: right;
 }
 
 textarea {
-	height: 150px;
+	resize: none;
+	grid-row: 3/6;
 }
 
 input[type='file'] {
@@ -156,8 +166,20 @@ input[type='file'] {
 }
 
 .file-upload {
-	border: solid grey 1px;
 	cursor: pointer;
-	height: 50px;
-	width: 100%;
+}
+
+/* Tablets and under */
+@media (max-width: 768px) {
+	/* Form Container Div */
+	.form__container {
+		width: 80%;
+	}
+
+	/* Form Input Container */
+	.form__input--container {
+		margin-block: var(--tiny);
+		grid-template-columns: 1fr;
+		gap: var(--tiny) 0;
+	}
 }

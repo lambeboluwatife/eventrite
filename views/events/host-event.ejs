@@ -10,7 +10,7 @@
 		/>
 		<meta
 			name="keywords"
-			content="web app, application, technology, events, conferences, JS, BOOTSTRAP, seminars, application"
+			content="web app, application, technology, events, conferences, JS, CSS, seminars, application"
 		/>
 		<meta name="author" content="Lambe Boluwatife" />
 		<link rel="stylesheet" href="/fontawesome/css/fontawesome.css" />
@@ -30,109 +30,29 @@
 	</head>
 
 	<body>
+		<!-- Header -->
 		<header class="header">
-			<!-- <nav class="navbar navbar-expand-lg navbar-dark" data-sticky="top">
-				<div class="container nav">
-					<a class="navbar-brand fade-page text-danger" href="/"> Eventrite </a>
-					<button
-						class="navbar-toggler"
-						type="button"
-						data-toggle="collapse"
-						data-target=".navbar-collapse"
-						aria-expanded="false"
-						aria-label="Toggle navigation"
-					>
-						<img
-							class="icon navbar-toggler-open"
-							src="/assets/img/icons/interface/menu.svg"
-							alt="menu interface icon"
-							data-inject-svg
-						/>
-						<img
-							class="icon navbar-toggler-close"
-							src="/assets/img/icons/interface/cross.svg"
-							alt="cross interface icon"
-							data-inject-svg
-						/>
-					</button>
-					<div class="collapse navbar-collapse justify-content-end">
-						<div
-							class="collapse navbar-collapse justify-content-end col flex-fill px-0"
-						>
-							<div class="dropdown ml-2 show">
-								<button
-									class="btn btn-danger drop-button dropdown-toggle mb-2"
-									data-toggle="dropdown-grid"
-									type="button"
-									aria-expanded="false"
-									aria-haspopup="true"
-								>
-									<img
-										src="/<%= currentUser.image %>"
-										alt="user"
-										class="avatar avatar-sm"
-									/>
-									<span
-										><a class="text-light" href="#"
-											><%= currentUser.username %></a
-										></span
-									>
-									<img
-										class="icon"
-										src="/assets/img/icons/interface/arrow-caret.svg"
-										alt="arrow-caret interface icon"
-										data-inject-svg
-									/>
-								</button>
-
-								<div class="dropdown-menu row">
-									<div class="col-auto" data-dropdown-content>
-										<div class="card card-sm card-body shadow">
-											<a href="/dashboard" class="dropdown-item">
-												<i class="fa fa-user mr-2" aria-hidden="true"></i>
-												Profile
-											</a>
-											<a href="/users/logout" class="dropdown-item">
-												<i class="fa fa-unlock-alt mr-2" aria-hidden="true"></i>
-												log Out
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</nav> -->
-			<!--  -->
 			<nav class="navbar" data-sticky="top">
 				<a class="navbar__brand" href="/"> Eventrite </a>
 				<div class="navbar__content">
-					<button
-						class="navbar__toggler"
-						type="button"
-						aria-label="Toggle navigation"
-						type="button"
-						aria-expanded="false"
-						aria-haspopup="true"
-					>
+					<!-- user nav toggle -->
+					<button class="navbar__toggler" type="button">
+						<!-- user image -->
 						<img
 							src="/<%= currentUser.image %>"
-							alt="user"
+							alt="user image"
 							class="avatar avatar-sm"
 						/>
-						<span
-							><a class="username" href="#"
-								><%= currentUser.username %></a
-							></span
-						>
+						<!-- Username -->
+						<span class="username"><%= currentUser.username %></span>
+						<!-- Arrow down caret -->
 						<img
 							class="icon"
 							src="/assets/icons/caret-down.svg"
-							alt="arrow-caret interface icon"
-							data-inject-svg
+							alt="arrow-caret"
 						/>
 					</button>
+					<!-- Nav Items -->
 					<div class="navbar__main hidden">
 						<a href="/dashboard" class="user-actions__link">
 							<i class="fa fa-user mr-2" aria-hidden="true"></i>
@@ -145,134 +65,133 @@
 					</div>
 				</div>
 			</nav>
-			<!--  -->
 		</header>
-
-		<section class="container">
-			<div class="row">
-				<div class="col-md-2"></div>
-				<div class="col-md-8">
-					<h2 class="mb-0" style="font-family: Arial, Helvetica, sans-serif">
-						ADD EVENT
-					</h2>
-					<form
-						class="mt-2"
-						action="/events"
-						method="POST"
-						enctype="multipart/form-data"
+		<!-- Event Form Container  -->
+		<section class="form__container">
+			<h2 class="form__heading">ADD EVENT</h2>
+			<!-- Event Form -->
+			<form
+				class="form mt-2"
+				action="/events"
+				method="POST"
+				enctype="multipart/form-data"
+			>
+				<!-- Form Inputs Container -->
+				<div class="form__input--container mt-0 grid">
+					<input
+						type="text"
+						class="form__input"
+						id="name"
+						name="name"
+						placeholder="Event Name"
+						required
+					/>
+					<input
+						type="number"
+						id="spot"
+						class="form__input"
+						name="spot"
+						placeholder="Numbers of spot"
+						required
+					/>
+					<input
+						type="text"
+						id="location"
+						class="form__input"
+						name="location"
+						placeholder="Enter a location"
+						required
+					/>
+					<select
+						required
+						name="category"
+						title="select event category"
+						class="form__input"
+						id="category"
 					>
-						<div class="container mt-0 grid">
-							<div class="form-group mr-2 ml-2">
-								<input
-									type="text"
-									id="name"
-									name="name"
-									placeholder="Event Name"
-									required
-								/>
-							</div>
-							<div class="form-group mr-2 ml-2">
-								<input
-									type="number"
-									id="spot"
-									name="spot"
-									placeholder="Numbers of spot"
-									required
-								/>
-							</div>
-							<div class="form-group mr-2 ml-2">
-								<input
-									type="text"
-									id="location"
-									name="location"
-									placeholder="Enter a location"
-									required
-								/>
-							</div>
-
-							<div class="form-group mr-2 ml-2">
-								<select required name="category" id="category">
-									<option selected disabled>Select Category</option>
-									<option value="speaker session">Speaker Session</option>
-									<option value="networking session">Networking Session</option>
-									<option value="conference">Conference</option>
-									<option value="Seminar">Seminar</option>
-									<option value="workshop">Workshop</option>
-									<option value="sponsorship">Sponsorship</option>
-									<option value="trade show">Trade Show</option>
-									<option value="award and competition">
-										Award and Competition
-									</option>
-									<option value="festival or party">Festival or Party</option>
-									<option value="webinars">Webinars</option>
-									<option value="product launch">Product Launch</option>
-									<option value="corporate meeting">Corporate Meeting</option>
-								</select>
-							</div>
-							<div class="form-group mr-2 ml-2">
-								<textarea
-									required
-									name="description"
-									id="description"
-									placeholder="Description"
-								></textarea>
-							</div>
-							<div class="form-group mr-2 ml-2">
-								<input
-									required
-									class="mb-1"
-									type="date"
-									name="date"
-									id="date"
-								/>
-								<input
-									required
-									class="mb-1"
-									type="time"
-									name="start"
-									id="start"
-								/>
-								<input required type="time" name="end" id="end" />
-							</div>
-							<div class="form-group mr-2 ml-2">
-								<input
-									type="numeric"
-									id="price"
-									name="price"
-									placeholder="Price($)"
-									required
-								/>
-							</div>
-							<div class="form-group mr-2 ml-2 mt-2 text-center">
-								<label for="image" class="file-upload">
-									<input
-										type="file"
-										accept="image/png, image/jpg, image/gif, image/jpeg"
-										id="image"
-										class="file"
-										name="image"
-										placeholder="Avatar"
-										value="<%= typeof image != 'undefined' ? image : '' %>"
-									/>
-									<small class="text-danger mt-2">
-										<i class="fa fa-upload fa-lg mr-1" aria-hidden="true"></i>
-										Upload Image
-									</small>
-								</label>
-							</div>
-						</div>
-						<hr class="bg-danger" />
-
-						<button class="cancel">
-							<a href="/dashboard">Cancel</a>
-						</button>
-
-						<button class="button" type="submit">Add Event</button>
-					</form>
+						<option selected disabled>Select Category</option>
+						<option value="speaker session">Speaker Session</option>
+						<option value="networking session">Networking Session</option>
+						<option value="conference">Conference</option>
+						<option value="Seminar">Seminar</option>
+						<option value="workshop">Workshop</option>
+						<option value="sponsorship">Sponsorship</option>
+						<option value="trade show">Trade Show</option>
+						<option value="award and competition">Award and Competition</option>
+						<option value="festival or party">Festival or Party</option>
+						<option value="webinars">Webinars</option>
+						<option value="product launch">Product Launch</option>
+						<option value="corporate meeting">Corporate Meeting</option>
+					</select>
+					<textarea
+						required
+						name="description"
+						id="description"
+						class="form__input"
+						title="enter event details"
+						placeholder="Description"
+					></textarea>
+					<input
+						required
+						type="date"
+						name="date"
+						title="enter date"
+						class="form__input"
+						id="date"
+					/>
+					<input
+						required
+						type="time"
+						name="start"
+						title="enter start time"
+						class="form__input"
+						id="start"
+					/>
+					<input
+						required
+						type="time"
+						name="end"
+						title="enter end time"
+						id="end"
+						class="form__input"
+					/>
+					<input
+						type="numeric"
+						id="price"
+						class="form__input"
+						name="price"
+						placeholder="Price($)"
+						required
+					/>
+					<label for="image" class="file-upload form__input">
+						<input
+							type="file"
+							accept="image/png, image/jpg, image/gif, image/jpeg"
+							id="image"
+							class="file"
+							name="image"
+							placeholder="Avatar"
+							value="<%= typeof image != 'undefined' ? image : '' %>"
+						/>
+						<small class="text-danger mt-2">
+							<i class="fa fa-upload fa-lg mr-1" aria-hidden="true"></i>
+							Upload Image
+						</small>
+					</label>
 				</div>
-				<div class="col-md-2"></div>
-			</div>
+				<!-- Form Action Buttons -->
+				<div class="form__btn--container">
+					<button class="cancel btn form__btn">
+						<a href="/dashboard">Cancel</a>
+					</button>
+
+					<button class="button btn__primary form__btn" type="submit">
+						Add Event
+					</button>
+				</div>
+			</form>
 		</section>
+		<!-- Footer -->
 		<footer class="footer" id="footer">
 			<div class="footer__container">
 				<article class="footer__section">
@@ -351,84 +270,7 @@
 				/>
 			</a>
 		</footer>
-
-		<!-- <footer class="pb-4 bg-primary-3 text-light" id="footer">
-			<div class="container">
-				<div class="row justify-content-center mb-2">
-					<div class="col-auto">
-						<ul class="nav">
-							<li class="nav-item">
-								<a href="#" class="nav-link">
-									<img
-										class="icon"
-										src="/assets/img/icons/social/instagram.svg"
-										alt="instagram social icon"
-										data-inject-svg
-									/>
-								</a>
-							</li>
-							<li class="nav-item">
-								<a href="#" class="nav-link">
-									<img
-										class="icon"
-										src="/assets/img/icons/social/twitter.svg"
-										alt="twitter social icon"
-										data-inject-svg
-									/>
-								</a>
-							</li>
-							<li class="nav-item">
-								<a href="#" class="nav-link">
-									<img
-										class="icon"
-										src="/assets/img/icons/social/youtube.svg"
-										alt="youtube social icon"
-										data-inject-svg
-									/>
-								</a>
-							</li>
-							<li class="nav-item">
-								<a href="#" class="nav-link">
-									<img
-										class="icon"
-										src="/assets/img/icons/social/medium.svg"
-										alt="medium social icon"
-										data-inject-svg
-									/>
-								</a>
-							</li>
-							<li class="nav-item">
-								<a href="#" class="nav-link">
-									<img
-										class="icon"
-										src="/assets/img/icons/social/facebook.svg"
-										alt="facebook social icon"
-										data-inject-svg
-									/>
-								</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</footer>
-		<a
-			href="#"
-			class="btn back-to-top btn-primary btn-round"
-			data-smooth-scroll
-			data-aos="fade-up"
-			data-aos-offset="2000"
-			data-aos-mirror="true"
-			data-aos-once="false"
-		>
-			<img
-				class="icon"
-				src="/assets/icons/arrow-up-solid.svg"
-				alt="arrow-up icon"
-				data-inject-svg
-			/>
-		</a> -->
-
+		<!-- JS -->
 		<!-- Removes page load animation when window is finished loading -->
 		<script type="text/javascript">
 			window.addEventListener('load', function () {
