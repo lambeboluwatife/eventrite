@@ -9,6 +9,7 @@
 	background-color: var(--white-color);
 	position: fixed;
 	top: 0;
+	z-index: 100;
 	width: 100%;
 	border-bottom: 0.2rem solid var(--primary-color);
 }

@@ -22,136 +22,66 @@
 			href="https://image.shutterstock.com/image-vector/letter-e-logo-icon-design-260nw-251214550.jpg"
 			type="image/x-icon"
 		/>
-		<link
-			href="assets/css/loaders/loader-typing.css"
-			rel="stylesheet"
-			type="text/css"
-			media="all"
-		/>
-		<link
-			href="assets/css/theme-event.css"
-			rel="stylesheet"
-			type="text/css"
-			media="all"
-		/>
-		<link
-			rel="preload"
-			as="font"
-			href="assets/fonts/Inter-UI-upright.var.woff2"
-			type="font/woff2"
-			crossorigin="anonymous"
-		/>
-		<link
-			rel="preload"
-			as="font"
-			href="assets/fonts/Inter-UI.var.woff2"
-			type="font/woff2"
-			crossorigin="anonymous"
-		/>
+		
 		<link rel="stylesheet" href="/css/header.css" />
-		<link rel="stylesheet" href="/css/footer.css" />
 
-		<!-- global stylesheet -->
-		<link rel="stylesheet" href="/css/global.css" />
 	</head>
 
 	<body>
 		<header class="header navbar__container">
 			<nav class="navbar">
 				<a class="navbar__brand" href="index.html"> Eventrite </a>
-				<div class="navbar__content">
-					<button
-						class="navbar__toggler"
-						type="button"
-						aria-label="Toggle navigation"
-					>
+				<% if(!currentUser){ %>
+				<button class="btn__primary navbar__btn">
+					<a href="/users/login" class="navbar__btn--link">Sign In</a>
+				</button>
+
+				<% } else { %>
+
+					<!-- user nav toggle -->
+					<button class="navbar__toggler" type="button">
+						<!-- user image -->
 						<img
-							class="icon navbar__toggler--open"
-							src="assets/img/icons/menu_button.svg"
-							alt="menu"
+							src="/<%= currentUser.image %>"
+							alt="user image"
+							class="avatar avatar-sm"
 						/>
+						<!-- Username -->
+						<span class="username"><%= currentUser.username %></span>
+						<!-- Arrow down caret -->
 						<img
-							class="icon navbar__toggler--close hidden"
-							src="assets/img/icons/close_button.svg"
-							alt="close menu"
+							class="icon"
+							src="/assets/icons/caret-down.svg"
+							alt="arrow-caret"
 						/>
 					</button>
+					<!-- Nav Items -->
 					<div class="navbar__main hidden">
-						<% if(!currentUser){ %>
-						<div class="navbar-collapse">
-							<a href="/users/login" class="btn btn__tertiary">Sign In</a>
-						</div>
-						<% } else { %>
-						<div class="collapse navbar-collapse">
-							<div class="dropdown ml-2 show">
-								<button
-									class="btn btn-danger drop-button dropdown-toggle"
-									type="button"
-								>
-									<img
-										src="/<%= currentUser.image %>"
-										alt="user"
-										class="avatar avatar-sm"
-									/>
-									<span
-										><a class="text-light" href="#"
-											><%= currentUser.username %></a
-										></span
-									>
-									<img
-										class="icon"
-										src="assets/img/icons/interface/arrow-caret.svg"
-										alt="arrow-caret"
-									/>
-								</button>
-
-								<div class="dropdown-menu row">
-									<div class="col-auto">
-										<div class="card card-sm card-body shadow">
-											<a href="/events/host-event" class="dropdown-item">
-												<i class="fa fa-plus mr-2" aria-hidden="true"></i>
-												Add Event
-											</a>
-											<a href="/dashboard" class="dropdown-item">
-												<i class="fa fa-user mr-2" aria-hidden="true"></i>
-												Profile
-											</a>
-											<a href="/users/logout" class="dropdown-item">
-												<i class="fa fa-unlock-alt mr-2" aria-hidden="true"></i>
-												log Out
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<% } %>
-					</div>
-				</div>
+						<a href="/events/host-event" class="user-actions__link">
+							<i class="fa fa-plus mr-2" aria-hidden="true"></i>
+							Add Event
+						</a>
+						<a href="/dashboard" class="user-actions__link">
+							<i class="fa fa-user mr-2" aria-hidden="true"></i>
+							Profile
+						</a>
+						<a href="/users/logout" class="user-actions__link">
+							<i class="fa fa-unlock-alt mr-2" aria-hidden="true"></i>
+							log Out
+						</a>
+					
+				<% } %>
 			</nav>
+			
 		</header>
 
 		<script>
-			// toggle navbar
-			// TODO make this DRY and clean
-			document
-				.querySelector('.navbar__toggler--open')
-				.addEventListener('click', (e) => {
-					e.target.classList.toggle('hidden');
-					document
-						.querySelector('.navbar__toggler--close')
-						.classList.toggle('hidden');
-					document.querySelector('.navbar__main').classList.toggle('hidden');
-				});
-
-			document
-				.querySelector('.navbar__toggler--close')
-				.addEventListener('click', (e) => {
-					e.target.classList.toggle('hidden');
-					document
-						.querySelector('.navbar__toggler--open')
-						.classList.toggle('hidden');
-					document.querySelector('.navbar__main').classList.toggle('hidden');
+			
+			// Navigation Toggle
+			document.querySelector('.navbar__toggler')
+				.addEventListener('click', () => {
+					document.querySelector('.navbar__main')
+					.classList.toggle('hidden');	
 				});
 		</script>
 	</body>
