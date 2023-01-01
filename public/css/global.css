@@ -70,6 +70,7 @@ a:active {
 	cursor: pointer;
 	border: unset;
 	background-color: transparent;
+	transition: all 0.2s;
 }
 
 .btn__primary {
@@ -80,7 +81,7 @@ a:active {
 	border-radius: 0.5rem;
 	cursor: pointer;
 	border: 2px solid transparent;
-	transition: all 200ms;
+	transition: all 0.2s;
 }
 
 .btn__primary:hover,
@@ -102,6 +103,12 @@ a:active {
 .btn__tertiary:active {
 	color: var(--medium-brown);
 	border-bottom-color: var(--primary-color);
+}
+
+.btn:active,
+.btn__primary:active,
+.btn__tertiary:active {
+	transform: translateY(1rem);
 }
 
 .hidden {
