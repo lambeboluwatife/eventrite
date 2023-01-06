@@ -291,6 +291,7 @@ body {
 	position: relative;
 	background-color: var(--white-color);
 	margin: auto;
+	text-align: center;
 	padding: var(--tiny);
 	border-radius: 1rem;
 	width: 30%;
@@ -324,12 +325,13 @@ body {
 .modal__text {
 	color: var(--primary-color);
 	font-size: 2rem;
-	margin-block: var(--tiny);
+	margin-block: var(--small);
 }
 
 .modal__buttons {
 	display: flex;
 	justify-content: space-around;
+	margin-top: var(--tiny);
 }
 
 .confirm-delete {
