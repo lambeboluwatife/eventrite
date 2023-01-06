@@ -154,6 +154,7 @@ body {
 
 .events {
 	display: none;
+	position: relative;
 }
 
 .settings {
@@ -178,75 +179,80 @@ body {
 }
 
 .event-item {
-	height: 12.5em;
-	width: 17.5em;
+	min-height: 12.5em;
+	width: 30rem;
 	background: #000;
 	color: #fff;
-	text-align: center;
+	text-align: left;
 	position: relative;
 	cursor: pointer;
 }
 
-.item-image {
-	height: auto;
-	width: 5rem;
-	object-fit: cover;
+.event__image {
+	position: absolute;
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	filter: saturate(150%);
+	left: 0;
+	z-index: 0;
 }
 
-.event-item:hover .item-image {
+.event__content {
+	background-color: hsl(204, 91%, 9%, 0.8);
+	position: relative;
+	height: 100%;
+	display: block;
+	padding: var(--tiny);
+	z-index: 2;
+}
+
+.event-item:hover .item__image {
 	opacity: 0.7;
 }
 
-.img-text h5 {
-	position: absolute;
-	top: 0.8rem;
-	left: 0.5rem;
-	color: #fff;
-	margin-right: 1rem;
+.event__content--title,
+.event__content--date {
+	display: inline-block;
+	margin-bottom: var(--tiny);
+	color: var(--primary-color);
 }
 
-.img-text small {
-	position: absolute;
-	top: 3rem;
-	left: 0.5rem;
+.event__content--date {
+	font-size: 1.2rem;
+}
+
+.event__content--title {
+	font-size: 2rem;
+	margin: 0.5rem;
+}
+
+.event__content--description {
 	color: #fff;
-	margin-right: 1rem;
-	text-align: justify;
+	font-size: 1.6rem;
+	font-weight: normal;
 	line-height: 1;
+	display: inline-block;
+	/* Display only 3 lines of the text */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
 }
 
-.img-text span {
-	position: absolute;
-	bottom: 1px;
-	left: 0.5rem;
-	color: #fff;
-	margin-right: 1rem;
-}
-
-.button {
-	width: 5rem;
-	height: 3rem;
-	margin-bottom: 0.5rem;
-	color: #fff;
-	border-radius: 0.2rem;
-	border: none;
-}
-
-.delete-button {
-	width: 6rem;
-	text-align: center;
-}
-
-.img-text div {
-	position: absolute;
-	bottom: 1px;
-	right: 5px;
-	margin-right: 5px;
+.btn__primary,
+.btn__secondary {
+	padding: 0.5rem 1rem;
+	font-size: 1.8rem;
+	margin-left: 1rem;
+	margin-top: var(--tiny);
 }
 
 .details {
-	height: 3rem;
-	display: block;
+	display: inline;
+	color: var(--primary-color);
+	margin: 0;
 }
 
 #myModal {
@@ -257,35 +263,28 @@ body {
 	display: block;
 }
 
-#myBtn a,
-#myModal a {
-	text-decoration: none;
-	color: #fff;
-}
-
 #close {
 	display: none;
 }
 
 .modal {
 	position: fixed;
-	z-index: 1;
+	z-index: 50;
 	padding-top: 10rem;
 	left: 0;
 	top: 0;
 	width: 100%;
 	height: 100%;
 	overflow: auto;
-	background-color: rgb(0, 0, 0);
 	background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
 	position: relative;
-	background-color: #fefefe;
+	background-color: var(--white-color);
 	margin: auto;
-	padding: 0;
-	border: 1px solid #888;
+	padding: var(--tiny);
+	border-radius: 1rem;
 	width: 30%;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	-webkit-animation-name: animatetop;
@@ -294,42 +293,48 @@ body {
 	animation-duration: 0.4s;
 }
 
+.modal a {
+	color: inherit;
+}
+
 /* The Close Button */
 .close {
-	color: white;
-	float: right;
+	position: absolute;
+	right: var(--tiny);
+	margin-bottom: var(--tiny);
+	color: var(--dark-grey);
 	font-size: 2.8rem;
 	font-weight: bold;
 }
 
 .close:hover,
 .close:focus {
-	color: #000;
-	text-decoration: none;
+	color: var(--dark-brown);
 	cursor: pointer;
 }
 
-.modal-header {
-	background-color: #670000;
-	color: white;
+.modal__text {
+	color: var(--primary-color);
+	font-size: 2rem;
+	margin-block: var(--tiny);
 }
 
-.modal-header,
-.modal-body {
-	padding: 0.2rem 1.6rem;
+.modal__buttons {
+	display: flex;
+	justify-content: space-around;
 }
 
 .confirm-delete {
-	border: 2px solid #670000;
-	padding: 0.5rem;
-	background-color: #670000;
-	color: #fff;
-	margin: 1rem;
+	display: inline-block;
+	padding: 1rem var(--tiny);
 }
 
-button a {
-	text-decoration: none;
-	color: #fff;
+.confirm-delete:hover {
+	color: var(--dark-brown);
+}
+
+.modal .btn__secondary {
+	color: var(--dark-grey);
 }
 
 /* Tablets and under */

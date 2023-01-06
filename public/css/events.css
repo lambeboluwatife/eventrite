@@ -1,5 +1,22 @@
+/* header */
+.header {
+	padding: var(--tiny);
+	margin-bottom: var(--tiny);
+	background-color: var(--white-color);
+	position: fixed;
+	top: 0;
+	z-index: 100;
+	width: 100%;
+	border-bottom: 0.2rem solid var(--primary-color);
+}
+
+.navbar__brand {
+	color: var(--primary-color);
+}
+
 .events {
 	padding: var(--tiny);
+	margin-top: 20rem;
 }
 
 .events__categories {
@@ -7,18 +24,22 @@
 }
 
 .events__heading {
-	font-size: 2.5rem;
+	font-size: 3rem;
 	font-weight: 400;
-	margin-right: var(--tiny);
+	margin-bottom: var(--small);
 }
 
 .events__filter--label {
-	margin-right: 2rem;
+	margin-bottom: var(--tiny);
 	color: var(--dark-brown);
 }
 
 .category {
 	color: var(--cyan);
+}
+
+.category:hover {
+	color: var(--primary-color);
 }
 
 .events__empty {

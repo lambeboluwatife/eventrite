@@ -20,7 +20,7 @@
 </head>
 
 <body>
-  <div class="header navbar__container">
+  <!-- <div class="header navbar__container">
     <nav class="navbar">
       <a class="navbar__brand" href="/">
         Eventrite
@@ -82,11 +82,58 @@
         </div>
       </div>
   </div>
+</nav> -->
+<!-- </div> -->
+<!-- </div> -->
   <!-- </div> -->
-  <!-- </div> -->
-  </nav>
-  <!-- </div> -->
+<!-- new here -->
+<header class="header navbar__container">
+  <nav class="navbar">
+    <a class="navbar__brand" href="index.html"> Eventrite </a>
+    <% if(!currentUser){ %>
+    <button class="btn__primary navbar__btn">
+      <a href="/users/login" class="navbar__btn--link">Sign In</a>
+    </button>
 
+    <% } else { %>
+
+      <!-- user nav toggle -->
+      <button class="navbar__toggler" type="button">
+        <!-- user image -->
+        <img
+          src="/<%= currentUser.image %>"
+          alt="user image"
+          class="avatar avatar-sm"
+        />
+        <!-- Username -->
+        <span class="username"><%= currentUser.username %></span>
+        <!-- Arrow down caret -->
+        <img
+          class="icon"
+          src="/assets/icons/caret-down.svg"
+          alt="arrow-caret"
+        />
+      </button>
+      <!-- Nav Items -->
+      <div class="navbar__main hidden">
+        <a href="/events/host-event" class="user-actions__link">
+          <i class="fa fa-plus mr-2" aria-hidden="true"></i>
+          Add Event
+        </a>
+        <a href="/dashboard" class="user-actions__link">
+          <i class="fa fa-user mr-2" aria-hidden="true"></i>
+          Profile
+        </a>
+        <a href="/users/logout" class="user-actions__link">
+          <i class="fa fa-unlock-alt mr-2" aria-hidden="true"></i>
+          log Out
+        </a>
+      
+    <% } %>
+  </nav>
+  
+</header>
+  <!-- new end here -->
   <div class="events container">
     <div class="events__categories">
 
@@ -424,28 +471,12 @@
   <script src="/js/events.js"></script>
   
   <script>
-    
-    // toggle navbar
-    // TODO make this DRY and clean
-    document
-      .querySelector('.navbar__toggler--open')
-      .addEventListener('click', (e) => {
-        e.target.classList.toggle('hidden');
-        document
-          .querySelector('.navbar__toggler--close')
-          .classList.toggle('hidden');
-        document.querySelector('.navbar__main').classList.toggle('hidden');
-      });
-
-    document
-      .querySelector('.navbar__toggler--close')
-      .addEventListener('click', (e) => {
-        e.target.classList.toggle('hidden');
-        document
-          .querySelector('.navbar__toggler--open')
-          .classList.toggle('hidden');
-        document.querySelector('.navbar__main').classList.toggle('hidden');
-      });
+    // Navigation Toggle
+			document.querySelector('.navbar__toggler')
+				.addEventListener('click', () => {
+					document.querySelector('.navbar__main')
+					.classList.toggle('hidden');	
+				});
 
   </script>
 </body>
