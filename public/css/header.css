@@ -5,7 +5,6 @@
 	padding: var(--tiny);
 	margin-bottom: var(--tiny);
 	background-color: transparent;
-	position: sticky;
 	z-index: 100;
 	width: 100%;
 }
@@ -20,7 +19,8 @@
 
 .navbar__brand {
 	color: var(--white-color);
-	font-size: 2.5rem;
+	font-size: 3rem;
+	margin-left: var(--tiny);
 	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
