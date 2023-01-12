@@ -9,43 +9,54 @@
 	</div>
 </section>
 
-<section class="events__section">
-	<h3 class="events__heading">Upcoming Events</h3>
-
-	<div class="events__container">
-		<% if (events == "") { %>
-		<h4 class="events__empty">No upcoming events yet!</h4>
+<h3 class="aside__heading">Upcoming Events</h3>
+<section class="aside">
+	<% if (events == "") { %>
+	<h4 class="events__empty">No upcoming events yet!</h4>
+	<div class="col-lg-4 col-md-6">
 		<% } else { %> <% events.forEach((event) => { %>
-		<div class="col-lg-4 col-md-6">
+		<div class="aside__event">
 			<a class="card hover-shadow-sm" href="/events/<%= event._id%>">
-				<img src="/<%= event.image %>" alt="Cover Image" class="card-img-top" />
-				<div class="card-body d-flex flex-column">
+				<img
+					src="/<%= event.image %>"
+					alt="Cover Image"
+					class="card-img-top aside__event--image"
+				/>
+				<div class="card-body d-flex flex-column aside__event--txt">
 					<div class="d-flex">
 						<div class="ml-3 text-primary">
-							<div class="badge badge-primary mb-2"><%= event.location %></div>
-							<h4 class="mb-2 text-dark"><%= event.name %></h4>
-							<small class="text-dark"><%= event.date.toDateString() %></small>
-							<div class="text-small text-muted mt-3">
+							<div class="badge badge-primary mb-2 aside__location">
+								<%= event.location %>
+							</div>
+							<h4 class="mb-2 text-dark aside__event-name">
+								<%= event.name %>
+							</h4>
+							<small class="text-dark aside__date"
+								><%= event.date.toDateString() %></small
+							>
+							<div class="text-small text-muted mt-3 aside__host">
 								<img
 									src="/<%= event.author.image %>"
 									alt="user"
 									class="avatar avatar-sm"
 								/>
-								Hosted By <%= event.author.username %>
+								<span class="aside__username">
+									Hosted By <%= event.author.username %>
+								</span>
 							</div>
-							<div class="text-small text-muted mt-3">
-								Click to read more...
-							</div>
+							<!-- <div class="text-small text-muted mt-3">
+										Click to read more...
+									</div> -->
 						</div>
 					</div>
 				</div>
 			</a>
 		</div>
-		<% }) %> <% } %>
 	</div>
-	<a href="/events" class="btn btn__tertiary events__link"
-		>Other Events <span class="events__arrow">&rarr;</span>
-	</a>
+	<% }) %> <% } %>
 </section>
+<a href="/events" class="btn btn__tertiary events__link"
+	>Other Events <span class="events__arrow">&rarr;</span>
+</a>
 
 <%- include ('./partials/footer') %>
