@@ -19,8 +19,8 @@
 
 	<body>
 		<section class="signup header">
-			<h3 class="navbar__brand">Eventrite</h3>
 			<div class="signup__container">
+				<h3 class="navbar__brand">Eventrite</h3>
 				<h1 class="signup__heading">Create Account</h1>
 				<span>We are happy to have you</span>
 				<%- include ('partials/messages') %>
@@ -79,7 +79,7 @@
 						placeholder="Password"
 						value="<%= typeof password!= 'undefined' ? password : '' %>"
 					/>
-					<small class="signup__form--label"
+					<small class="signup__form--label psw-label"
 						>Must be at least 6 characters</small
 					>
 
@@ -94,12 +94,11 @@
 					<button class="signup__form--submit btn__primary" type="submit">
 						CREATE
 					</button>
-
-					<p class="signup__form--login">
-						Already have an account?
-						<a class="text-danger" href="/users/login">Login</a>
-					</p>
 				</form>
+				<p class="signup__form--login">
+					Already have an account?
+					<a class="text-danger" href="/users/login">Login</a>
+				</p>
 			</div>
 		</section>
 	</body>

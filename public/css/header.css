@@ -1,32 +1,65 @@
+@import './global.css';
+
+/* header */
 .header {
-	padding: 2rem;
+	padding: var(--tiny);
+	margin-bottom: var(--tiny);
+	background-color: transparent;
+	z-index: 100;
+	width: 100%;
 }
 
+/* navigation */
 .navbar {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	position: relative;
 }
 
 .navbar__brand {
-	color: var(--primary-color);
-	font-size: 2rem;
+	color: var(--white-color);
+	font-size: 3rem;
+	margin-left: var(--tiny);
 	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-.navbar__toggler {
-	border-color: var(--light-grey);
-	background-color: transparent;
-	border-radius: 0.5rem;
 }
 
 .navbar__content {
 	margin-left: auto;
 }
 
+.navbar__toggler {
+	background-color: var(--primary-color);
+	color: var(--white-color);
+	border-radius: var(--small);
+	font-size: 1.8rem;
+	padding: 1rem 1.5rem;
+	border: unset;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.navbar__toggler .avatar {
+	width: 3rem;
+	margin-right: 1rem;
+}
+
+.username {
+	display: inline-block;
+	margin-right: var(--tiny);
+}
+
+/* Change Color of Icon to White */
+.navbar__toggler .icon {
+	filter: invert(100%) sepia(0%) saturate(7499%) hue-rotate(138deg)
+		brightness(96%) contrast(104%);
+}
+
 .icon {
 	width: 2rem;
 	aspect-ratio: 1/1;
+	/* Red Color */
 	filter: invert(40%) sepia(31%) saturate(2813%) hue-rotate(339deg)
 		brightness(99%) contrast(91%);
 }
@@ -34,14 +67,51 @@
 .navbar__main {
 	font-size: 1.8rem;
 	background-color: var(--white-color);
-	color: var(--light-grey);
 	box-shadow: -2px 0.6rem 1rem 0 rgba(0, 0, 0, 0.25);
 	border-radius: 0.5rem;
 	padding: var(--tiny);
+	padding-bottom: 0;
 	display: flex;
 	flex-direction: column;
 	position: absolute;
-	right: -2rem;
-	top: var(--small);
+	right: 0;
+	top: 7rem;
 	z-index: 50;
+}
+
+.navbar__btn--link {
+	color: var(--white-color);
+}
+
+.navbar__btn:hover .navbar__btn--link {
+	color: var(--primary-color);
+}
+
+.user-actions {
+	display: flex;
+	flex-direction: column;
+	margin-top: var(--tiny);
+}
+
+.user-actions__link {
+	color: var(--dark-grey);
+	display: inline-block;
+	margin-bottom: var(--tiny);
+}
+
+.user-actions__link i {
+	display: inline-block;
+	margin-right: 1rem;
+}
+
+/* Change Link Color to Primary on Hover */
+.user-actions__link:hover {
+	filter: invert(40%) sepia(31%) saturate(2813%) hue-rotate(339deg)
+		brightness(99%) contrast(91%);
+}
+
+.avatar {
+	width: var(--medium);
+	aspect-ratio: 1/1;
+	border-radius: 50%;
 }

@@ -1,411 +1,330 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Eventrite | <%= event.name %></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="<%= event.description %>" />
+		<meta
+			name="keywords"
+			content="web app, application, technology, events, conferences, JS, BOOTSTRAP, seminars, application"
+		/>
+		<meta name="author" content="Lambe Boluwatife" />
+		<link rel="stylesheet" href="/fontawesome/css/fontawesome.css" />
+		<link rel="stylesheet" href="/fontawesome/css/solid.css" />
+		<link rel="stylesheet" href="/fontawesome/css/brands.css" />
+		<link rel="stylesheet" href="/css/details.css" />
+		<link
+			rel="shortcut icon"
+			href="https://image.shutterstock.com/image-vector/letter-e-logo-icon-design-260nw-251214550.jpg"
+			type="image/x-icon"
+		/>
+	</head>
 
-  <head>
-    <meta charset="utf-8">
-    <title>Eventrite | <%= event.name %></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta
-      name="description"
-      content="<%= event.description %>"
-    />
-    <meta
-      name="keywords"
-      content="web app, application, technology, events, conferences, JS, BOOTSTRAP, seminars, application"
-    />
-    <meta name="author" content="Lambe Boluwatife" />
-    <link rel="stylesheet" href="/fontawesome/css/fontawesome.css" />
-    <link rel="stylesheet" href="/fontawesome/css/solid.css" />
-    <link rel="stylesheet" href="/fontawesome/css/brands.css" />
-    <link rel="stylesheet" href="/css/details.css">
-    <link rel="shortcut icon" href="https://image.shutterstock.com/image-vector/letter-e-logo-icon-design-260nw-251214550.jpg" type="image/x-icon">
-    <link href="/assets/css/loaders/loader-typing.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="/assets/css/theme-event.css" rel="stylesheet" type="text/css" media="all" />
-    <link rel="preload" as="font" href="/assets/fonts/Inter-UI-upright.var.woff2" type="font/woff2" crossorigin="anonymous">
-    <link rel="preload" as="font" href="/assets/fonts/Inter-UI.var.woff2" type="font/woff2" crossorigin="anonymous">
-  </head>
+	<body class="details-page">
+		<%- include ('../partials/header') %>
 
-  <body>
-    <div class="navbar-container ">
-      <nav class="navbar navbar-expand-lg navbar-dark" data-overlay data-sticky="top">
-        <div class="container">
-          <a class="navbar-brand fade-page" href="/">
-            Eventrite
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-            <img class="icon navbar-toggler-open" src="assets/img/icons/interface/menu.svg" alt="menu interface icon" data-inject-svg />
-            <img class="icon navbar-toggler-close" src="assets/img/icons/interface/cross.svg" alt="cross interface icon" data-inject-svg />
-          </button>
-          <div class="collapse navbar-collapse justify-content-end">
-           
-            <%  if(!currentUser){ %>
-                <div
-                class="collapse navbar-collapse justify-content-end col flex-fill px-0"
-                >
-                <a href="/users/login" class="btn btn-danger ml-lg-3">Sign In</a>
-              </div>
-                <%  } else { %>
-                  <div
-                  class="collapse navbar-collapse justify-content-end col flex-fill px-0"
-                >
-                  <div class="dropdown ml-2 show">
-                    <button class="btn btn-danger drop-button dropdown-toggle" data-toggle="dropdown-grid" type="button" aria-expanded="false" aria-haspopup="true">
-                        <img src="/<%= currentUser.image %>" alt="user" class="avatar avatar-sm">
-                        <span><a class="text-light" href="#"><%= currentUser.username %></a></span>
-                        <img class="icon" src="assets/img/icons/interface/arrow-caret.svg" alt="arrow-caret interface icon" data-inject-svg />
-                    </button>
+		<section class="details-intro o-hidden">
+			<img
+				src="/<%= event.image %>"
+				alt="Image"
+				class="bg-image details-intro__image"
+			/>
+			<div class="container layer-2 details-intro__content">
+				<div
+					class="row details py-6 min-vh-80 align-items-center"
+					data-aos="fade-up"
+				>
+					<div class="col-lg-9 col-xl-8 mt-6 mb-0">
+						<h5 class="details-intro__content--date">
+							<%= event.date.toDateString() %>
+						</h5>
+						<h1 class="display-1 details-intro__content--title">
+							<%= event.name %>
+						</h1>
+						<p class="lead mb-4">
+							<i class="fa fa-map-marker-alt mr-2"></i>
+							<%= event.location %>
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="event-info">
+			<div class="container other-details">
+				<div class="event-info__content row">
+					<div class="event-info__text">
+						<h3 class="event-info__text--title">Description</h3>
+						<p class="event-info__text--detail"><%= event.description %></p>
+						<h5 class="event-info__text--date">
+							<strong>
+								<i class="fa fa-calendar mr-2" aria-hidden="true"></i>
+								<%= event.date.toDateString() %>
+								<i class="fa fa-clock mr-2 ml-2"></i>
+								<%= event.start %> - <%= event.end %>
+							</strong>
+						</h5>
+						<div class="text-muted event-payment">
+							<div class="ticket">
+								<% if (event.price == "free" || event.price == "Free" ||
+								event.price == "FREE") { %>
+								<span>This event is <%= event.price %></span>
+								<% } else { %>
+								<span>$<%= event.price %></span>
+								<% } %>
+							</div>
+							<button class="btn__primary ticket-btn" type="submit">
+								Book Now
+							</button>
+						</div>
+						<% if (event.comments != "") { %>
+						<h3 class="comment__heading">Comments</h3>
+						<% } %> <% if (currentUser) { %>
+						<form
+							action="/events/<%= event._id %>/comments"
+							method="POST"
+							class="mt-2 comment__form"
+						>
+							<div class="comment-area">
+								<!-- <div class="comment-bg"> -->
+								<div class="avatar-img">
+									<img
+										src="/<%= currentUser.image %>"
+										alt="user"
+										class="user-avatar avatar-lg"
+									/>
+									<img
+										src="/<%= currentUser.image %>"
+										alt="user"
+										class="user-avatar avatar-small"
+									/>
+								</div>
+								<textarea
+									required
+									name="comment"
+									id="comment"
+									title="Add a comment"
+									class="comment-input"
+									placeholder="Add a comment..."
+								></textarea>
+								<!-- </div> -->
 
-                    <div class="dropdown-menu row">
-                      <div class="col-auto" data-dropdown-content>
-                        <div class="card card-sm card-body shadow">
-                          <a href="/events/host-event" class="dropdown-item">
-                            <i class="fa fa-plus mr-2" aria-hidden="true"></i>
-                            Add Event
-                          </a>
-                          <a href="/dashboard" class="dropdown-item">
-                            <i class="fa fa-user mr-2" aria-hidden="true"></i>
-                            Profile
-                          </a>
-                          <a href="/users/logout" class="dropdown-item">
-                            <i class="fa fa-unlock-alt mr-2" aria-hidden="true"></i>
-                            log Out
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              <%  } %>
+								<button class="btn btn__primary comment-btn" type="submit">
+									Add
+								</button>
+							</div>
+						</form>
+						<% } %>
+						<div class="mt-2">
+							<% event.comments.forEach((comment) => { %>
+							<div class="row">
+								<div class="comment-container col-md-12">
+									<strong class="comment__username"
+										><%= comment.author.username %></strong
+									>
+									<span class="pull-right"
+										><%= comment.date.toDateString() %></span
+									>
+									<p class="comment__text"><%= comment.comment %></p>
+									<div class="container reply">
+										<% if (currentUser) { %>
+										<form
+											action="/events/<%= event._id %>/comments/<%= comment._id %>/replies"
+											method="POST"
+											class="mt-2 delete-comment"
+										>
+											<!-- comment delete -->
+											<form
+												id="delete-form"
+												class="delete-comment"
+												action="/events/<%= event._id %>/comments/<%= comment._id %>?_method=DELETE"
+												method="POST"
+											>
+												<input
+													class="btn delete-btn"
+													type="submit"
+													value="Delete"
+												/>
+											</form>
+											<div class="text-area reply-container">
+												<textarea
+													class="reply__input"
+													required
+													name="reply"
+													id="reply"
+													title="Type a reply"
+													placeholder="reply"
+												></textarea>
+												<button
+													class="btn btn__tertiary btn-danger reply-btn ticket-btn mt-3"
+													type="submit"
+												>
+													Reply
+												</button>
+											</div>
+										</form>
+										<% } %>
+									</div>
+									<% comment.replies.forEach((reply) => { %>
+									<div class="container replies">
+										<div class="row">
+											<div class="col-md-12">
+												<strong class="comment__username"
+													><%= reply.author.username %></strong
+												>
+												<span class="pull-right"
+													><%= reply.date.toDateString() %></span
+												>
+												<p><%= reply.reply %></p>
+											</div>
+										</div>
+									</div>
+									<% }) %> <% if (currentUser &&
+									comment.author.id.equals(currentUser._id)) { %>
+									<!-- <br /> -->
 
-          </div>
-        </div>
-      </nav>
-
-<section class="bg-primary text-light p-0 o-hidden" style="height: 100vh;">
-    <img src="/<%= event.image %>" alt="Image" class="bg-image blend-mode-multiply">
-    <div class="container layer-2">
-      <div class="row details py-6 min-vh-80 align-items-center" data-aos="fade-up">
-        <div class="col-lg-9 col-xl-8 mt-6 mb-0">
-          <h5><%= event.date.toDateString() %></h5>
-          <h1 class="display-1"><%= event.name %></h1>
-          <p class="lead mb-4">
-            <i class="fa fa-map-marker-alt mr-2"></i>
-            <%= event.location %>
-        </p>
-        </div>
-      </div>
-    </div>
-</section>
-<section style="background-color: lightgrey;">
-    <div class="container other-details">
-        <div class="row">
-            <div class="col-md-8">
-                <h3 class="h1">Description</h3>
-                <p class="lead" style="text-align: justify;"><%= event.description %></p>
-                <h5 class="text-danger">
-                    <strong>
-                        <i class="fa fa-calendar mr-2"aria-hidden="true"></i>
-                        <%= event.date.toDateString() %>
-                        <i class="fa fa-clock mr-2 ml-2"></i>
-                        <%= event.start %> - <%= event.end %>
-                    </strong>
-                </h5>
-                <div class="text-muted ticket">
-                 <% if (event.price == "free") { %>
-                  <span>This event is <%= event.price %></span>
-                 <% } else { %>
-                  <span>$<%= event.price %></span>
-                  <button class="btn btn-danger ticket-btn" type="submit">Book Now</button>
-                 <% } %>
-                </div>
-                <% if (event.comments != "") { %>
-                  <h3 class="mt-3">Comments</h3>
-                <% } %>
-                <% if (currentUser) { %>
-                  <form action="/events/<%= event._id %>/comments" method="POST" class="mt-2">
-                    <div class="text-area">
-                      <div class="avatar-img" style="display: inline;">
-                        <img src="/<%= currentUser.image %>" alt="user" class="avatar avatar-lg">
-                        <img src="/<%= currentUser.image %>" alt="user" class="avatar avatar-small">
-                      </div>
-                      <textarea required name="comment" id="comment" placeholder="Add a comment..."></textarea>
-                      <button class="btn btn-danger comment-btn ticket-btn mt-3" type="submit">Add</button>
-                    </div>
-                  </form>
-                <% } %>
-                <div class="mt-2">
-                  <% event.comments.forEach((comment) => { %>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <strong><%= comment.author.username %></strong>
-                        <span class="pull-right"><%= comment.date.toDateString() %></span>
-                        <p><%= comment.comment %></p>
-                        <div class="container reply">
-                          <% if (currentUser) { %>
-                            <form action="/events/<%= event._id %>/comments/<%= comment._id %>/replies" method="POST" class="mt-2">
-                              <div class="text-area reply-area">
-                                <textarea class="reply-textarea" required name="reply" id="reply" placeholder="reply"></textarea>
-                                <button class="btn btn-danger reply-btn ticket-btn mt-3" type="submit">Reply</button>
-                              </div>
-                            </form>
-                          <% } %>
-                        </div>
-                        <% comment.replies.forEach((reply) => { %>
-                          <div class="container replies">
-                            <div class="row">
-                              <div class="col-md-12">
-                                <strong><%= reply.author.username %></strong>
-                                <span class="pull-right"><%= reply.date.toDateString() %></span>
-                                <p><%= reply.reply %></p>
-                              </div>
-                            </div>
-                          </div>
-                        <% }) %>
-                        <% if (currentUser && comment.author.id.equals(currentUser._id)) {
-                        %>
-                        <br>
-                        <form
-                          id="delete-form"
-                          action="/events/<%= event._id %>/comments/<%= comment._id %>?_method=DELETE"
-                          method="POST"
-                        >
-                          <input
-                            class="btn btn-danger"
-                            type="submit"
-                            value="Delete"
-                          />
-                        </form>
-                        <% } %>
-                       
-                      </div>
-                    </div>
-                    <% })%>
-                </div>
-            </div>
-            <div class="col-md-4 text-center">
-                <img src="/<%= event.author.image %>" alt="user" class="avatar avatar-xlg">
-                <div>
-                    <button class="button bg-danger">HOST</button>
-                    <% if (currentUser && event.author.id.equals(currentUser._id)) { %>
-                        <h6><strong>You</strong></h6>
-                    <% } else { %>
-                        <h6><strong><%= event.author.username %></strong></h6>
-                    <% } %>
-                </div>
-                <span><strong>Share on socials:</strong></span>
-                <div class="row justify-content-center mb-2">
-                  <div class="col-auto">
-                    <ul class="nav">
-                      <li class="nav-item">
-                        <a class="nav-link twitter" target="_blank">
-                          <img
-                            class="icon"
-                            src="/assets/img/icons/social/twitter.svg"
-                            alt="twitter social icon"
-                            data-inject-svg
-                          />
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link facebook" target="_blank">
-                          <img
-                            class="icon"
-                            src="/assets/img/icons/social/facebook.svg"
-                            alt="facebook social icon"
-                            data-inject-svg
-                          />
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link linkedin" target="_blank">
-                          <img
-                            class="icon"
-                            src="/assets/img/icons/social/linkedin.svg"
-                            alt="linkedin social icon"
-                            data-inject-svg
-                          />
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link whatsapp" target="_blank" data-action="share/whatsapp/share">
-                          <img
-                            class="icon"
-                            src="/assets/img/icons/social/whatsapp.svg"
-                            alt="whatsapp social icon"
-                            data-inject-svg
-                          />
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <input type="text" value="" id="myInput">
-                    <button onclick="copyLink()" class="btn copy-link btn-primary">
-                      Copy Link
-                    </button>
-                    <p class="copied"><strong>Link Copied</strong></p>
-            </div>
-        </div>
-        <hr>
-        <div class="mt-3">
-          <h3>Other Events</h3>
-          <div class="row">
-            <% if (events == "") { %>
-              <h4 class="text-center">No other events</h4>
-            <% } else { %>
-              <% 
-                const newEvents = events.filter((removeEvent) => removeEvent.id !== event.id);
-              %>
-              <% newEvents.forEach((event) => { %>
-                <div class="col-lg-4 col-md-6">
-                  <a class="card hover-shadow-sm" href="/events/<%= event._id%>">
-                    <img src="/<%= event.image %>" alt="Cover Image" class="card-img-top">
-                    <div class="card-body d-flex flex-column">
-                      <div class="d-flex">
-                        <div class="ml-3 text-primary">
-                          <div class="badge badge-primary mb-2"><%= event.location %></div>
-                          <h4 class="mb-2 text-dark"><%= event.name %></h4>
-                          <small class="text-dark"><%= event.date.toDateString() %></small>
-                          <div class="text-small text-muted mt-3">
-                            <img
-                            src="/<%= event.author.image %>"
-                            alt="user"
-                            class="avatar avatar-sm"
-                            />
-                            Hosted By <%= event.author.username %>
-                          </div>
-                          <div class="text-small text-muted mt-3">
-                            Click to read more...
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              <% }) %>
-            <% } %>
-          </div>
-        </div>
-    </div>
-</section>
-
-
-<footer class="pb-4 bg-primary-3 text-light" id="footer">
-  <div class="container">
-    
-    <div class="row justify-content-center mb-2">
-      <div class="col-auto">
-        <ul class="nav">
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <img
-                class="icon"
-                src="/assets/img/icons/social/instagram.svg"
-                alt="instagram social icon"
-                data-inject-svg
-              />
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <img
-                class="icon"
-                src="/assets/img/icons/social/twitter.svg"
-                alt="twitter social icon"
-                data-inject-svg
-              />
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <img
-                class="icon"
-                src="/assets/img/icons/social/youtube.svg"
-                alt="youtube social icon"
-                data-inject-svg
-              />
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <img
-                class="icon"
-                src="/assets/img/icons/social/medium.svg"
-                alt="medium social icon"
-                data-inject-svg
-              />
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <img
-                class="icon"
-                src="/assets/img/icons/social/facebook.svg"
-                alt="facebook social icon"
-                data-inject-svg
-              />
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</footer>
-<a href="#" class="btn back-to-top btn-primary btn-round" data-smooth-scroll data-aos="fade-up" data-aos-offset="2000" data-aos-mirror="true" data-aos-once="false">
-  <img class="icon" src="/assets/img/icons/theme/navigation/arrow-up.svg" alt="arrow-up icon" data-inject-svg />
-</a>
-
-<script src="/js/details.js"></script>
-<!-- Required vendor scripts (Do not remove) -->
-<script type="text/javascript" src="/assets/js/jquery.min.js"></script>
-<script type="text/javascript" src="/assets/js/popper.min.js"></script>
-<script type="text/javascript" src="/assets/js/bootstrap.js"></script>
-
-<!-- Optional Vendor Scripts (Remove the plugin script here and comment initializer script out of index.js if site does not use that feature) -->
-
-<!-- AOS (Animate On Scroll - animates elements into view while scrolling down) -->
-<script type="text/javascript" src="/assets/js/aos.js"></script>
-<!-- Clipboard (copies content from browser into OS clipboard) -->
-<script type="text/javascript" src="/assets/js/clipboard.min.js"></script>
-<!-- Fancybox (handles image and video lightbox and galleries) -->
-<script type="text/javascript" src="/assets/js/jquery.fancybox.min.js"></script>
-<!-- Flatpickr (calendar/date/time picker UI) -->
-<script type="text/javascript" src="/assets/js/flatpickr.min.js"></script>
-<!-- Flickity (handles touch enabled carousels and sliders) -->
-<script type="text/javascript" src="/assets/js/flickity.pkgd.min.js"></script>
-<!-- Ion rangeSlider (flexible and pretty range slider elements) -->
-<script type="text/javascript" src="/assets/js/ion.rangeSlider.min.js"></script>
-<!-- Isotope (masonry layouts and filtering) -->
-<script type="text/javascript" src="/assets/js/isotope.pkgd.min.js"></script>
-<!-- jarallax (parallax effect and video backgrounds) -->
-<script type="text/javascript" src="/assets/js/jarallax.min.js"></script>
-<script type="text/javascript" src="/assets/js/jarallax-video.min.js"></script>
-<script type="text/javascript" src="/assets/js/jarallax-element.min.js"></script>
-<!-- jQuery Countdown (displays countdown text to a specified date) -->
-<script type="text/javascript" src="/assets/js/jquery.countdown.min.js"></script>
-<!-- jQuery smartWizard facilitates steppable wizard content -->
-<script type="text/javascript" src="/assets/js/jquery.smartWizard.min.js"></script>
-<!-- Plyr (unified player for Video, Audio, Vimeo and Youtube) -->
-<script type="text/javascript" src="/assets/js/plyr.polyfilled.min.js"></script>
-<!-- Prism (displays formatted code boxes) -->
-<script type="text/javascript" src="/assets/js/prism.js"></script>
-<!-- ScrollMonitor (manages events for elements scrolling in and out of view) -->
-<script type="text/javascript" src="/assets/js/scrollMonitor.js"></script>
-<!-- Smooth scroll (animation to links in-page)-->
-<script type="text/javascript" src="/assets/js/smooth-scroll.polyfills.min.js"></script>
-<!-- SVGInjector (replaces img tags with SVG code to allow easy inclusion of SVGs with the benefit of inheriting colors and styles)-->
-<script type="text/javascript" src="/assets/js/svg-injector.umd.production.js"></script>
-<!-- TwitterFetcher (displays a feed of tweets from a specified account)-->
-<script type="text/javascript" src="/assets/js/twitterFetcher_min.js"></script>
-<!-- Typed text (animated typing effect)-->
-<script type="text/javascript" src="/assets/js/typed.min.js"></script>
-<!-- Required theme scripts (Do not remove) -->
-<script type="text/javascript" src="/assets/js/theme.js"></script>
-<!-- Removes page load animation when window is finished loading -->
-<script type="text/javascript">
-  window.addEventListener("load", function () {    document.querySelector('body').classList.add('loaded');  });
-</script>
-
-</body>
-
+									<% } %>
+								</div>
+							</div>
+							<% })%>
+						</div>
+					</div>
+					<div class="col-md-4 event-info__host">
+						<img
+							src="/<%= event.author.image %>"
+							alt="user"
+							class="avatar event-info__host--avatar"
+						/>
+						<div>
+							<button class="button event-info__host--btn bg-danger">
+								HOST
+							</button>
+							<% if (currentUser && event.author.id.equals(currentUser._id)) {
+							%>
+							<h6 class="event-info__host--name"><strong>You</strong></h6>
+							<% } else { %>
+							<h6 class="event-info__host--name">
+								<strong><%= event.author.username %></strong>
+							</h6>
+							<% } %>
+						</div>
+						<span><strong>Share on socials:</strong></span>
+						<div class="row justify-content-center mb-2">
+							<div class="col-auto">
+								<ul class="social-nav">
+									<li class="nav-item">
+										<a class="nav-link twitter" target="_blank">
+											<img
+												class="icon"
+												src="/assets/icons/twitter.svg"
+												alt="twitter"
+												title="Share on Twiter"
+											/>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link facebook" target="_blank">
+											<img
+												class="icon"
+												src="/assets/icons/facebook.svg"
+												alt="facebook"
+												title="Share on Facebook"
+											/>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link linkedin" target="_blank">
+											<img
+												class="icon"
+												src="/assets/icons/linkedin.svg"
+												alt="linkedin"
+												title="share on linkedin"
+											/>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a
+											class="nav-link whatsapp"
+											target="_blank"
+											data-action="share/whatsapp/share"
+										>
+											<!-- TODO change this icon to whatsapp -->
+											<img
+												class="icon"
+												src="/assets/icons/instagram.svg"
+												alt="whatsapp"
+												title="share on WhatsApp"
+											/>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<input type="text" value="" id="myInput" />
+						<button onclick="copyLink()" class="btn copy-link btn__secondary">
+							Copy Link
+						</button>
+						<p class="copied"><strong>Link Copied</strong></p>
+					</div>
+				</div>
+				<hr />
+				<div class="mt-3">
+					<h3 class="aside__heading">Other Events</h3>
+					<div class="row aside">
+						<% if (events == "") { %>
+						<h4 class="text-center">No other events</h4>
+						<% } else { %> <% const newEvents = events.filter((removeEvent) =>
+						removeEvent.id !== event.id); %> <% newEvents.forEach((event) => {
+						%>
+						<div class="col-lg-4 col-md-6 aside__event">
+							<a class="card hover-shadow-sm" href="/events/<%= event._id%>">
+								<img
+									src="/<%= event.image %>"
+									alt="Cover Image"
+									class="card-img-top aside__event--image"
+								/>
+								<div class="card-body aside__event--txt">
+									<div class="d-flex">
+										<div class="ml-3 text-primary">
+											<div class="badge badge-primary mb-2 aside__location">
+												<%= event.location %>
+											</div>
+											<h4 class="mb-2 text-dark aside__event-name">
+												<%= event.name %>
+											</h4>
+											<small class="text-dark aside__date"
+												><%= event.date.toDateString() %></small
+											>
+											<div class="text-small text-muted mt-3 aside__host">
+												<img
+													src="/<%= event.author.image %>"
+													alt="user"
+													class="avatar avatar-sm"
+												/>
+												<span class="aside__username">
+													Hosted By <%= event.author.username %>
+												</span>
+											</div>
+											<p class="aside__price"><%= event.price %></p>
+											<!-- <div class="text-small text-muted mt-3">
+												Click to read more...
+											</div> -->
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<% }) %> <% } %>
+					</div>
+				</div>
+			</div>
+		</section>
+		<%- include ('../partials/footer') %>
+		<script src="/js/details.js"></script>
+		<script type="text/javascript">
+			window.addEventListener('load', function () {
+				document.querySelector('body').classList.add('loaded');
+			});
+		</script>
+	</body>
 </html>

@@ -1,16 +1,19 @@
 .home {
 	color: var(--white-color);
-	background-image: linear-gradient(
-			to right,
-			rgba(54, 52, 52, 0.5),
-			rgba(240, 85, 55, 0.25)
-		),
-		url('../assets/img/event_bg.jpg');
-	background-repeat: no-repeat;
+	min-height: 100vh;
+	background-image: url('../assets/img/bg-img.jpg');
+	background-color: hsla(10, 92%, 50%, 0.8);
+	background-blend-mode: multiply;
 	background-size: cover;
-	background-position: 0 0;
-	padding: var(--medium) var(--small);
+	background-position: center;
+	background-repeat: no-repeat;
+	padding: 0 var(--small);
 	position: relative;
+}
+
+.hero {
+	margin-top: var(--large);
+	margin-left: var(--big);
 }
 
 .hero__date {
@@ -30,7 +33,8 @@
 }
 
 .hero__title {
-	line-height: 1;
+	font-size: 8rem;
+	line-height: 1.5;
 	margin-top: auto;
 }
 
@@ -71,23 +75,76 @@
 	margin: var(--medium) auto;
 }
 
+/* other events (aside) section */
+.aside {
+	margin: var(--medium);
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+	gap: var(--tiny);
+	justify-content: center;
+	align-items: center;
+}
+
+.aside__heading {
+	font-size: 2.5rem;
+	margin-top: var(--medium);
+	margin-left: var(--medium);
+}
+
+.aside__event {
+	display: flex;
+	flex-direction: column;
+	box-shadow: 0 0 0.15rem var(--dark-grey);
+}
+
+.aside__event:hover {
+	box-shadow: 0 0 0.5rem var(--dark-grey);
+	scale: 1.01;
+}
+
+.aside__event--image {
+	object-fit: fill;
+	width: 100%;
+	height: 20rem;
+}
+
+.aside__event--txt {
+	padding: var(--tiny);
+	color: var(--dark-grey);
+}
+
+.aside__event-name {
+	font-size: 2rem;
+}
+
+.aside__date {
+	color: var(--primary-color);
+	margin-bottom: 1rem;
+}
+
+.aside__host {
+	display: none;
+}
+
+.aside__host .avatar {
+	width: var(--small);
+	margin: 1rem;
+}
+
+.aside__location,
+.aside__event-name {
+	margin-bottom: 1rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+}
+
 /* media queries */
-/* > 700px */
-@media (min-width: 43.25em) {
-	.home {
-		display: flex;
-		justify-content: flex-start;
-		align-items: center;
-		background-image: linear-gradient(
-				to right,
-				rgba(54, 52, 52, 0.7),
-				rgba(240, 85, 55, 0.45)
-			),
-			url('../assets/img/event_bg-desktop.jpg');
-		min-height: 50vh;
-		max-height: 75vh;
-	}
+/* < 700px */
+@media (max-width: 43.25em) {
 	.hero {
-		margin: var(--medium);
+		margin-left: var(--tiny);
 	}
 }

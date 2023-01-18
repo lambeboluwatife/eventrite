@@ -1,0 +1,186 @@
+/* import global styles (containing general CSS settings) */
+@import './global.css';
+@import './footer.css';
+
+/* header */
+.header {
+	padding: var(--tiny);
+	margin-bottom: var(--tiny);
+	background-color: var(--white-color);
+	position: fixed;
+	top: 0;
+	z-index: 100;
+	width: 100%;
+	border-bottom: 0.2rem solid var(--primary-color);
+}
+
+/* navigation */
+.navbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+}
+
+.navbar__brand {
+	color: var(--primary-color);
+	font-size: 2.5rem;
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.navbar__content {
+	margin-left: auto;
+}
+
+.navbar__toggler {
+	background-color: var(--primary-color);
+	color: var(--white-color);
+	border-radius: var(--small);
+	font-size: 1.8rem;
+	padding: 1rem 1.5rem;
+	border: unset;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.navbar__toggler .avatar {
+	width: 3rem;
+	margin-right: 1rem;
+}
+
+.username {
+	display: inline-block;
+	margin-right: var(--tiny);
+}
+
+.navbar__toggler .icon {
+	filter: invert(100%) sepia(0%) saturate(7499%) hue-rotate(138deg)
+		brightness(96%) contrast(104%);
+}
+
+.icon {
+	width: 2rem;
+	aspect-ratio: 1/1;
+	filter: invert(40%) sepia(31%) saturate(2813%) hue-rotate(339deg)
+		brightness(99%) contrast(91%);
+}
+
+.navbar__main {
+	font-size: 1.8rem;
+	background-color: var(--white-color);
+	box-shadow: -2px 0.6rem 1rem 0 rgba(0, 0, 0, 0.25);
+	border-radius: 0.5rem;
+	padding: var(--tiny);
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	right: 0;
+	top: 7rem;
+	z-index: 50;
+}
+
+.user-actions {
+	display: flex;
+	flex-direction: column;
+	margin-top: var(--tiny);
+}
+
+.user-actions__link {
+	color: var(--dark-grey);
+	display: inline-block;
+	margin-bottom: 1rem;
+}
+
+.user-actions__link i {
+	display: inline-block;
+	margin-right: 1rem;
+}
+
+.avatar {
+	width: var(--medium);
+	aspect-ratio: 1/1;
+	border-radius: 50%;
+}
+
+/* Form Container Div */
+.form__container {
+	width: 50%;
+	margin-block: 20rem var(--medium);
+	margin-inline: auto;
+}
+
+/* Form Input Container */
+.form__input--container {
+	margin-block: var(--tiny);
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 1rem var(--tiny);
+	grid-auto-rows: 5rem;
+}
+
+/* Form Inputs */
+.form__input {
+	width: 100%;
+	display: flex;
+	padding: 1rem;
+	border-radius: 0.5rem;
+	border: solid grey 1px;
+}
+
+.form__input:focus {
+	outline-color: var(--medium-brown);
+	caret-color: var(--primary-color);
+}
+
+/* Form Action Buttons Container */
+.form__btn--container {
+	margin-block: var(--small);
+	padding-top: var(--tiny);
+	border-top: 2px solid var(--primary-color);
+}
+
+/* Form Action Buttons  */
+.form__btn {
+	border-radius: 0.5rem;
+}
+
+.cancel {
+	border: solid grey 1px;
+	padding-block: 1rem;
+}
+
+.button {
+	border: solid var(--primary-color) 1px;
+	background-color: var(--primary-color);
+	color: #fff;
+	float: right;
+}
+
+textarea {
+	resize: none;
+	grid-row: 3/6;
+}
+
+input[type='file'] {
+	display: none;
+}
+
+.file-upload {
+	cursor: pointer;
+}
+
+/* Tablets and under */
+@media (max-width: 768px) {
+	/* Form Container Div */
+	.form__container {
+		width: 80%;
+	}
+
+	/* Form Input Container */
+	.form__input--container {
+		margin-block: var(--tiny);
+		grid-template-columns: 1fr;
+		gap: var(--tiny) 0;
+	}
+}

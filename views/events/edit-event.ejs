@@ -1,350 +1,214 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Eventrite | Edit <%= event.name %></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="description"
+			content="Host and create events online from Conferences, Hackathons, Conventions, Exhibitions, Seminars, Festivals, Trade Fair, etc."
+		/>
+		<meta
+			name="keywords"
+			content="web app, application, technology, events, conferences, JS, BOOTSTRAP, seminars, application"
+		/>
+		<meta name="author" content="Lambe Boluwatife" />
+		<link rel="stylesheet" href="/fontawesome/css/fontawesome.css" />
+		<link rel="stylesheet" href="/fontawesome/css/solid.css" />
+		<link rel="stylesheet" href="/fontawesome/css/brands.css" />
 
-  <head>
-    <meta charset="utf-8">
-    <title>Eventrite | Edit <%= event.name %></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta
-      name="description"
-      content="Host and create events online from Conferences, Hackathons, Conventions, Exhibitions, Seminars, Festivals, Trade Fair, etc."
-    />
-    <meta
-      name="keywords"
-      content="web app, application, technology, events, conferences, JS, BOOTSTRAP, seminars, application"
-    />
-    <meta name="author" content="Lambe Boluwatife" />
-    <link rel="stylesheet" href="/fontawesome/css/fontawesome.css" />
-    <link rel="stylesheet" href="/fontawesome/css/solid.css" />
-    <link rel="stylesheet" href="/fontawesome/css/brands.css" />
-    <link href="/assets/css/theme-event.css" rel="stylesheet" type="text/css" media="all" />
-    <link rel="preload" as="font" href="/assets/fonts/Inter-UI-upright.var.woff2" type="font/woff2" crossorigin="anonymous">
-    <link rel="preload" as="font" href="/assets/fonts/Inter-UI.var.woff2" type="font/woff2" crossorigin="anonymous">
-    <link rel="shortcut icon" href="https://image.shutterstock.com/image-vector/letter-e-logo-icon-design-260nw-251214550.jpg" type="image/x-icon">
-    <style>
-        .nav {
-            border: none;
-            border-bottom: 2px solid red;
-            background: transparent;
-            outline: none;
-        }
+		<link
+			rel="shortcut icon"
+			href="https://image.shutterstock.com/image-vector/letter-e-logo-icon-design-260nw-251214550.jpg"
+			type="image/x-icon"
+		/>
 
-        .drop-button {
-          border-radius: 30px;
-        }
+		<link
+			href="/css/host-event.css"
+			rel="stylesheet"
+			type="text/css"
+			media="all"
+		/>
+	</head>
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-        }
+	<body>
+		<!-- Header -->
+		<header class="header">
+			<nav class="navbar" data-sticky="top">
+				<a class="navbar__brand" href="/"> Eventrite </a>
+				<div class="navbar__content">
+					<!-- user nav toggle -->
+					<button class="navbar__toggler" type="button">
+						<!-- user image -->
+						<img
+							src="/<%= currentUser.image %>"
+							alt="user image"
+							class="avatar avatar-sm"
+						/>
+						<!-- Username -->
+						<span class="username"><%= currentUser.username %></span>
+						<!-- Arrow down caret -->
+						<img
+							class="icon"
+							src="/assets/icons/caret-down.svg"
+							alt="arrow-caret"
+						/>
+					</button>
+					<!-- Nav Items -->
+					<div class="navbar__main hidden">
+						<a href="/dashboard" class="user-actions__link">
+							<i class="fa fa-user mr-2" aria-hidden="true"></i>
+							Profile
+						</a>
+						<a href="/users/logout" class="user-actions__link">
+							<i class="fa fa-unlock-alt mr-2" aria-hidden="true"></i>
+							log Out
+						</a>
+					</div>
+				</div>
+			</nav>
+		</header>
+		<section class="form__container">
+			<h2 class="form__heading">EDIT <%= event.name.toUpperCase() %></h2>
+			<!-- Event Form -->
+			<form
+				class="form mt-2"
+				action="/events/<%= event._id %>?_method=PUT"
+				method="POST"
+				enctype="multipart/form-data"
+			>
+				<!-- Form Inputs Container -->
+				<div class="form__input--container mt-0 grid">
+					<input
+						type="text"
+						class="form__input"
+						id="name"
+						name="name"
+						value="<%= event.name %>"
+						required
+					/>
+					<input
+						type="number"
+						id="spot"
+						class="form__input"
+						name="spot"
+						value="<%= event.spot %>"
+						required
+					/>
+					<input
+						type="text"
+						id="location"
+						class="form__input"
+						name="location"
+						value="<%= event.location %>"
+						required
+					/>
+					<select
+						required
+						name="category"
+						title="select event category"
+						class="form__input"
+						id="category"
+					>
+						<option selected value="<%= event.category %>">
+							<%= event.category %>
+						</option>
+						<option selected disabled>Select Category</option>
+						<option value="speaker session">Speaker Session</option>
+						<option value="networking session">Networking Session</option>
+						<option value="conference">Conference</option>
+						<option value="Seminar">Seminar</option>
+						<option value="workshop">Workshop</option>
+						<option value="sponsorship">Sponsorship</option>
+						<option value="trade show">Trade Show</option>
+						<option value="award and competition">Award and Competition</option>
+						<option value="festival or party">Festival or Party</option>
+						<option value="webinars">Webinars</option>
+						<option value="product launch">Product Launch</option>
+						<option value="corporate meeting">Corporate Meeting</option>
+					</select>
+					<textarea
+						required
+						name="description"
+						id="description"
+						class="form__input"
+						title="enter event details"
+					>
+<%= event.description %></textarea
+					>
+					<input
+						required
+						type="date"
+						name="date"
+						value="<%= event.date %>"
+						title="enter date"
+						class="form__input"
+						id="date"
+					/>
+					<input
+						required
+						type="time"
+						name="start"
+						value="<%= event.start %>"
+						title="enter start time"
+						class="form__input"
+						id="start"
+					/>
+					<input
+						required
+						type="time"
+						name="end"
+						title="enter end time for event"
+						value="<%= event.end %>"
+						id="end"
+						class="form__input"
+					/>
+					<input
+						type="numeric"
+						id="price"
+						class="form__input"
+						name="price"
+						value="<%= event.price %>"
+						required
+					/>
+					<label for="image" class="file-upload form__input">
+						<input
+							type="file"
+							accept="image/png, image/jpg, image/gif, image/jpeg"
+							id="image"
+							class="file"
+							name="image"
+							placeholder="Avatar"
+							value="<%= typeof image != 'undefined' ? image : '' %>"
+						/>
+						<small class="text-danger mt-2">
+							<i class="fa fa-upload fa-lg mr-1" aria-hidden="true"></i>
+							Upload Image
+						</small>
+					</label>
+				</div>
+				<!-- Form Action Buttons -->
+				<div class="form__btn--container">
+					<button class="cancel btn form__btn">
+						<a href="/dashboard">Cancel</a>
+					</button>
 
-        input, button, select, textarea {
-            border: solid grey 1px;
-            height: 50px;
-            width: 100%;
-        }
+					<button class="button btn__primary form__btn" type="submit">
+						Update Event
+					</button>
+				</div>
+			</form>
+		</section>
 
-        .cancel {
-          border: solid grey 1px;
-          height: 50px;
-          background: transparent;
-          width: 20%;
-        }
-
-        .cancel a {
-          color: darkred;
-        }
-
-        .button {
-          border: solid red 1px;
-          background-color: red;
-          color: #fff;
-          width: 20%;
-          float: right;
-        } 
-
-        textarea {
-            height: 150px;
-        }
-
-        input[type='file'] {
-          display: none;
-        }
-
-        .file-upload {
-          border: solid grey 1px;
-          cursor: pointer;
-          height: 50px;
-          width: 100%;
-        }
-    </style>
-  </head>
-
-  <body>
-    <div class="navbar-container">
-      <nav class="navbar navbar-expand-lg navbar-dark" data-sticky="top">
-        <div class="container nav">
-          <a class="navbar-brand fade-page text-danger" href="/">
-            Eventrite
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-            <img class="icon navbar-toggler-open" src="/assets/img/icons/interface/menu.svg" alt="menu interface icon" data-inject-svg />
-            <img class="icon navbar-toggler-close" src="/assets/img/icons/interface/cross.svg" alt="cross interface icon" data-inject-svg />
-          </button>
-          <div class="collapse navbar-collapse justify-content-end">
-           
-                <div
-                  class="collapse navbar-collapse justify-content-end col flex-fill px-0"
-                >
-                  <div class="dropdown ml-2 show">
-                    <button class="btn btn-danger drop-button dropdown-toggle mb-2" data-toggle="dropdown-grid" type="button" aria-expanded="false" aria-haspopup="true">
-                      <img src="/<%= currentUser.image %>" alt="user" class="avatar avatar-sm">
-                    <span><a class="text-light" href="#"><%= currentUser.username %></a></span>
-                <img class="icon" src="/assets/img/icons/interface/arrow-caret.svg" alt="arrow-caret interface icon" data-inject-svg />
-                    </button>
-
-                    <div class="dropdown-menu row">
-                      <div class="col-auto" data-dropdown-content>
-                        <div class="card card-sm card-body shadow">
-                          <a href="/dashboard" class="dropdown-item">
-                            <i class="fa fa-user mr-2" aria-hidden="true"></i>
-                            Profile
-                          </a>
-                          <a href="/users/logout" class="dropdown-item">
-                            <i class="fa fa-unlock-alt mr-2" aria-hidden="true"></i>
-                            log Out
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-          </div>
-        </div>
-      </nav>
-    </div>
-
-    <section class="container">
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <h2 class="mb-0" style="font-family: Arial, Helvetica, sans-serif">EDIT <%= event.name.toUpperCase() %></h2>
-                <form class="mt-2" action="/events/<%= event._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
-                  <div class="container mt-0 grid">
-                    <div class="form-group mr-2 ml-2">
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            value="<%= event.name %>"
-                        />
-                    </div>
-                    <div class="form-group mr-2 ml-2">
-                        <input
-                            type="number"
-                            id="spot"
-                            name="spot"
-                            value="<%= event.spot %>"
-                        />
-                    </div>
-                    <div class="form-group mr-2 ml-2">
-                        <input
-                            type="text"
-                            id="location"
-                            name="location"
-                            value="<%= event.location %>"
-                        />
-                    </div>
-                    <div class="form-group mr-2 ml-2">
-                        <select required name="category" id="category">
-                          <option selected value="<%= event.category %>"><%= event.category %></option>
-                          <option value="speaker session">Speaker Session</option>
-                          <option value="networking session">Networking Session</option>
-                          <option value="conference">Conference</option>
-                          <option value="Seminar">Seminar</option>
-                          <option value="workshop">Workshop</option>
-                          <option value="sponsorship">Sponsorship</option>
-                          <option value="trade show">Trade Show</option>
-                          <option value="award and competition">Award and Competition</option>
-                          <option value="festival or party">Festival or Party</option>
-                          <option value="webinars">Webinars</option>
-                          <option value="product launch">Product Launch</option>
-                          <option value="corporate meeting">Corporate Meeting</option>
-                        </select>
-                    </div>
-                    <div class="form-group mr-2 ml-2">
-                        <textarea name="description" id="description">
-                            <%= event.description %>
-                        </textarea>
-                    </div>
-                    <div class="form-group mr-2 ml-2">
-                        <input required class="mb-1" type="date" name="date" id="date">
-                        <input value="<%= event.start %>" class="mb-1" type="time" name="start" id="start">
-                        <input value="<%= event.end %>" type="time" name="end" id="end">
-                    </div>
-                    <div class="form-group mr-2 ml-2">
-                        <input
-                            type="numeric"
-                            id="price"
-                            name="price"
-                            value="<%= event.price %>"
-                        />
-                    </div>
-                    <div class="form-group mr-2 ml-2 mt-2 text-center">
-                      <label for="image" class="file-upload">
-                          <input
-                          type="file"
-                          accept="image/png, image/jpg, image/gif, image/jpeg"
-                          id="image"
-                          class="file"
-                          name="image"
-                          value="<%= typeof image != 'undefined' ? image : '' %>"
-                      />
-                      <small class="text-danger mt-2">
-                        <i class="fa fa-upload fa-lg mr-1" aria-hidden="true"></i>
-                        Upload Image
-                      </small>
-                      </label>
-                      <input 
-                        type="hidden"
-                        name="old_image"
-                        value="<%= event.image %>"
-                        />
-                    </div>
-                </div>
-                <hr class="bg-danger">
-
-                <button class="cancel">
-                  <a href="/dashboard">Cancel</a>
-                </button>
-
-                <button class="button" type="submit">
-                  Edit Event
-                </button>
-                </form>
-            </div>
-            <div class="col-md-2"></div>
-        </div>
-    </section>
-
-    <footer class="pb-4 bg-primary-3 text-light" id="footer">
-      <div class="container">
-        
-        <div class="row justify-content-center mb-2">
-          <div class="col-auto">
-            <ul class="nav">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <img
-                    class="icon"
-                    src="/assets/img/icons/social/instagram.svg"
-                    alt="instagram social icon"
-                    data-inject-svg
-                  />
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <img
-                    class="icon"
-                    src="/assets/img/icons/social/twitter.svg"
-                    alt="twitter social icon"
-                    data-inject-svg
-                  />
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <img
-                    class="icon"
-                    src="/assets/img/icons/social/youtube.svg"
-                    alt="youtube social icon"
-                    data-inject-svg
-                  />
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <img
-                    class="icon"
-                    src="/assets/img/icons/social/medium.svg"
-                    alt="medium social icon"
-                    data-inject-svg
-                  />
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <img
-                    class="icon"
-                    src="/assets/img/icons/social/facebook.svg"
-                    alt="facebook social icon"
-                    data-inject-svg
-                  />
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <a href="#" class="btn back-to-top btn-primary btn-round" data-smooth-scroll data-aos="fade-up" data-aos-offset="2000" data-aos-mirror="true" data-aos-once="false">
-      <img class="icon" src="/assets/img/icons/theme/navigation/arrow-up.svg" alt="arrow-up icon" data-inject-svg />
-    </a>
-    <!-- Required vendor scripts (Do not remove) -->
-    <script type="text/javascript" src="/assets/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/assets/js/popper.min.js"></script>
-    <script type="text/javascript" src="/assets/js/bootstrap.js"></script>
-  
-    <!-- Optional Vendor Scripts (Remove the plugin script here and comment initializer script out of index.js if site does not use that feature) -->
-  
-    <!-- AOS (Animate On Scroll - animates elements into view while scrolling down) -->
-    <script type="text/javascript" src="/assets/js/aos.js"></script>
-    <!-- Clipboard (copies content from browser into OS clipboard) -->
-    <script type="text/javascript" src="/assets/js/clipboard.min.js"></script>
-    <!-- Fancybox (handles image and video lightbox and galleries) -->
-    <script type="text/javascript" src="/assets/js/jquery.fancybox.min.js"></script>
-    <!-- Flatpickr (calendar/date/time picker UI) -->
-    <script type="text/javascript" src="/assets/js/flatpickr.min.js"></script>
-    <!-- Flickity (handles touch enabled carousels and sliders) -->
-    <script type="text/javascript" src="/assets/js/flickity.pkgd.min.js"></script>
-    <!-- Ion rangeSlider (flexible and pretty range slider elements) -->
-    <script type="text/javascript" src="/assets/js/ion.rangeSlider.min.js"></script>
-    <!-- Isotope (masonry layouts and filtering) -->
-    <script type="text/javascript" src="/assets/js/isotope.pkgd.min.js"></script>
-    <!-- jarallax (parallax effect and video backgrounds) -->
-    <script type="text/javascript" src="/assets/js/jarallax.min.js"></script>
-    <script type="text/javascript" src="/assets/js/jarallax-video.min.js"></script>
-    <script type="text/javascript" src="/assets/js/jarallax-element.min.js"></script>
-    <!-- jQuery Countdown (displays countdown text to a specified date) -->
-    <script type="text/javascript" src="/assets/js/jquery.countdown.min.js"></script>
-    <!-- jQuery smartWizard facilitates steppable wizard content -->
-    <script type="text/javascript" src="/assets/js/jquery.smartWizard.min.js"></script>
-    <!-- Plyr (unified player for Video, Audio, Vimeo and Youtube) -->
-    <script type="text/javascript" src="/assets/js/plyr.polyfilled.min.js"></script>
-    <!-- Prism (displays formatted code boxes) -->
-    <script type="text/javascript" src="/assets/js/prism.js"></script>
-    <!-- ScrollMonitor (manages events for elements scrolling in and out of view) -->
-    <script type="text/javascript" src="/assets/js/scrollMonitor.js"></script>
-    <!-- Smooth scroll (animation to links in-page)-->
-    <script type="text/javascript" src="/assets/js/smooth-scroll.polyfills.min.js"></script>
-    <!-- SVGInjector (replaces img tags with SVG code to allow easy inclusion of SVGs with the benefit of inheriting colors and styles)-->
-    <script type="text/javascript" src="/assets/js/svg-injector.umd.production.js"></script>
-    <!-- TwitterFetcher (displays a feed of tweets from a specified account)-->
-    <script type="text/javascript" src="/assets/js/twitterFetcher_min.js"></script>
-    <!-- Typed text (animated typing effect)-->
-    <script type="text/javascript" src="/assets/js/typed.min.js"></script>
-    <!-- Required theme scripts (Do not remove) -->
-    <script type="text/javascript" src="/assets/js/theme.js"></script>
-    <!-- Removes page load animation when window is finished loading -->
-    <script type="text/javascript">
-      window.addEventListener("load", function () {    document.querySelector('body').classList.add('loaded');  });
-    </script>
-  
-  </body>
-  
-  </html>
-  
+		<!-- Footer -->
+		<%- include ('../partials/footer') %>
+		<script>
+			// Navigation Toggle
+			document
+				.querySelector('.navbar__toggler')
+				.addEventListener('click', () => {
+					document.querySelector('.navbar__main').classList.toggle('hidden');
+				});
+		</script>
+	</body>
+</html>

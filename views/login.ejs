@@ -19,8 +19,8 @@
 
 	<body>
 		<section class="login header">
-			<h3 class="navbar__brand">Eventrite</h3>
 			<section class="login__container">
+				<h3 class="navbar__brand">Eventrite</h3>
 				<h1 class="login__heading">Welcome Back</h1>
 				<p class="login__info">Enter your account details below</p>
 				<%- include ('partials/messages') %>
@@ -45,12 +45,11 @@
 					<button class="btn__primary login__form--submit" type="submit">
 						LOGIN
 					</button>
-
-					<p class="login__form--signup">
-						Don't have an account yet?
-						<a class="text-danger" href="/users/register">Register</a>
-					</p>
 				</form>
+				<p class="login__form--signup">
+					Don't have an account yet?
+					<a class="text-danger" href="/users/register">Register</a>
+				</p>
 			</section>
 		</section>
 	</body>

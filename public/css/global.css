@@ -7,18 +7,18 @@ body {
 	font-size: 1.6rem; /*  set default font-size back to 16px */
 	overflow-x: hidden;
 	box-sizing: border-box;
-	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+	font-family: 'Arial Narrow', Arial, sans-serif;
 	margin: 0;
+	min-height: 100vh;
+	position: relative;
 }
 
 /* fix collapsing margins */
-h1,
-h2,
-h3,
-h4,
-h5,
-p {
+*,
+*::before,
+*::after {
 	margin: 0;
+	padding: 0;
 	box-sizing: border-box;
 }
 
@@ -39,7 +39,7 @@ p {
 	--medium-brown: hsl(28, 10%, 53%);
 	--cream: hsl(27, 66%, 92%);
 	--very-pale-orange: hsl(33, 100%, 98%);
-	--dark-blue: rgb(2, 27, 44);
+	--dark-blue: hsl(204, 91%, 9%);
 
 	/* sizes */
 	--tiny: 2rem;
@@ -57,7 +57,7 @@ p {
 a,
 a:active {
 	text-decoration: none;
-	color: var(--cyan);
+	color: var(--primary-color);
 }
 
 /* Utilities */
@@ -69,8 +69,8 @@ a:active {
 	text-transform: capitalize;
 	cursor: pointer;
 	border: unset;
-	/* color: var(--dark-grey); */
 	background-color: transparent;
+	transition: all 0.2s;
 }
 
 .btn__primary {
@@ -79,8 +79,9 @@ a:active {
 	color: var(--white-color);
 	padding: 1rem 2rem;
 	border-radius: 0.5rem;
+	cursor: pointer;
 	border: 2px solid transparent;
-	transition: all 500ms;
+	transition: all 0.2s;
 }
 
 .btn__primary:hover,
@@ -88,6 +89,19 @@ a:active {
 	color: var(--primary-color);
 	background-color: var(--white-color);
 	border-color: var(--primary-color);
+}
+
+.btn__secondary {
+	color: var(--white-color);
+	background-color: transparent;
+	border: 0.2rem solid var(--primary-color);
+	border-radius: 0.2rem;
+	padding: 1rem var(--tiny);
+	cursor: pointer;
+}
+
+.btn__secondary:hover {
+	color: var(--primary-color);
 }
 
 .btn__tertiary {
@@ -100,10 +114,16 @@ a:active {
 
 .btn__tertiary:hover,
 .btn__tertiary:active {
-	color: var(--medium-brown);
+	color: var(--cyan);
 	border-bottom-color: var(--primary-color);
 }
 
+.btn:active,
+.btn__primary:active,
+.btn__tertiary:active {
+	transform: translateY(1rem);
+}
+
 .hidden {
-	display: none;
+	display: none !important;
 }
