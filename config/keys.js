@@ -1,3 +1,3 @@
 module.exports = {
-  database: "mongodb://localhost/Events",
+  database: "mongodb://0.0.0.0:27017/Events",
 };

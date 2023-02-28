@@ -19,27 +19,27 @@ const EventSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: true
+    required: true,
   },
   date: {
     type: Date,
-    required: true
+    required: true,
   },
   start: {
     type: String,
-    required: true
+    required: true,
   },
   end: {
     type: String,
-    required: true
+    required: true,
   },
   price: {
     type: String,
-    required: true
+    required: true,
   },
   image: {
     type: String,
-    required: true
+    required: true,
   },
   created: {
     type: Date,
@@ -54,11 +54,17 @@ const EventSchema = new mongoose.Schema({
     name: String,
     image: String,
   },
-    comments: [
+  comments: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Comment"
-    }
+      ref: "Comment",
+    },
+  ],
+  likes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Like",
+    },
   ],
 });
 

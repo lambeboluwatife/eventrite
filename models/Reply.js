@@ -6,8 +6,12 @@ const replySchema = mongoose.Schema({
     required: true
   },
   date: {
-    type: Date,
-    default: Date.now,
+    type: String,
+    required: true
+  },
+  time: {
+    type: String,
+    required: true
   },
   author: {
     id: {
