@@ -1,89 +1,117 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<title>Eventrite</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta
-			name="description"
-			content="Host and create events online from Conferences, Hackathons, Conventions, Exhibitions, Seminars, Festivals, Trade Fair, etc."
-		/>
-		<meta
-			name="keywords"
-			content="web app, application, technology, events, conferences, JS, BOOTSTRAP, seminars, application"
-		/>
-		<meta name="author" content="Lambe Boluwatife" />
-		<link rel="stylesheet" href="fontawesome/css/fontawesome.css" />
-		<link rel="stylesheet" href="fontawesome/css/solid.css" />
-		<link rel="stylesheet" href="fontawesome/css/brands.css" />
-		<link rel="stylesheet" href="css/home.css" />
-		<link
-			rel="shortcut icon"
-			href="https://image.shutterstock.com/image-vector/letter-e-logo-icon-design-260nw-251214550.jpg"
-			type="image/x-icon"
-		/>
-		
-		<link rel="stylesheet" href="/css/header.css" />
-		<link rel="stylesheet" href="/css/footer.css" />
 
-	</head>
+  <head>
+    <meta charset="utf-8">
+    <title>Eventrite</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+      name="description"
+      content="Host and create events online from Conferences, Hackathons, Conventions, Exhibitions, Seminars, Festivals, Trade Fair, etc."
+    />
+    <meta
+      name="keywords"
+      content="web app, application, technology, events, conferences, JS, BOOTSTRAP, seminars, application"
+    />
+    <meta name="author" content="Lambe Boluwatife" />
+    <link rel="stylesheet" href="fontawesome/css/fontawesome.css" />
+    <link rel="stylesheet" href="fontawesome/css/solid.css" />
+    <link rel="stylesheet" href="fontawesome/css/brands.css" />
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="shortcut icon" href="https://image.shutterstock.com/image-vector/letter-e-logo-icon-design-260nw-251214550.jpg" type="image/x-icon">
+    <link href="assets/css/loaders/loader-typing.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="assets/css/theme-event.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="preload" as="font" href="assets/fonts/Inter-UI-upright.var.woff2" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="assets/fonts/Inter-UI.var.woff2" type="font/woff2" crossorigin="anonymous">
+    <style>
+      .drop-button {
+          border-radius: 30px;
+        }
+    </style>
+  </head>
 
-	<body>
-		<header class="header navbar__container">
-			<nav class="navbar">
-				<a class="navbar__brand" href="index.html"> Eventrite </a>
-				<% if(!currentUser){ %>
-				<button class="btn__primary navbar__btn">
-					<a href="/users/login" class="navbar__btn--link">Sign In</a>
-				</button>
+  <body>
+    <div class="navbar-container ">
+      <nav class="navbar navbar-expand-lg navbar-dark" data-overlay data-sticky="top">
+        <div class="container">
+          <a class="navbar-brand fade-page" href="/">
+            Eventrite
+          </a>
+          <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target=".navbar-collapse"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <img
+            class="icon navbar-toggler-open"
+            src="/assets/img/icons/interface/menu.svg"
+            alt="menu interface icon"
+            data-inject-svg
+          />
+          <img
+            class="icon navbar-toggler-close"
+            src="/assets/img/icons/interface/cross.svg"
+            alt="cross interface icon"
+            data-inject-svg
+          />
+        </button>
+          <div class="collapse navbar-collapse justify-content-end">
 
-				<% } else { %>
+            <%  if(!currentUser){ %>
+              <div
+                class="collapse navbar-collapse justify-content-end col flex-fill px-0"
+              >
+                <form action="/events/search" method="POST">
+                  <div class="input-group input-group-sm">
+                    <input
+                      type="search"
+                      class="form-control"
+                      placeholder="Search for event"
+                      name="search"
+                      aria-label="Search"
+                      aria-describedby="basic-addon-1"
+                    />
+                  </div>
+                </form>
 
-					<!-- user nav toggle -->
-					<button class="navbar__toggler" type="button">
-						<!-- user image -->
-						<img
-							src="/<%= currentUser.image %>"
-							alt="user image"
-							class="avatar avatar-sm"
-						/>
-						<!-- Username -->
-						<span class="username"><%= currentUser.username %></span>
-						<!-- Arrow down caret -->
-						<img
-							class="icon"
-							src="/assets/icons/caret-down.svg"
-							alt="arrow-caret"
-						/>
-					</button>
-					<!-- Nav Items -->
-					<div class="navbar__main hidden">
-						<a href="/events/host-event" class="user-actions__link">
-							<i class="fa fa-plus mr-2" aria-hidden="true"></i>
-							Add Event
-						</a>
-						<a href="/dashboard" class="user-actions__link">
-							<i class="fa fa-user mr-2" aria-hidden="true"></i>
-							Profile
-						</a>
-						<a href="/users/logout" class="user-actions__link">
-							<i class="fa fa-unlock-alt mr-2" aria-hidden="true"></i>
-							log Out
-						</a>
-					
-				<% } %>
-			</nav>
-			
-		</header>
+                <a href="/users/login" class="btn btn-danger ml-lg-3">Sign In</a>
+              </div>
+            <%  } else { %>
+              <div
+                class="collapse navbar-collapse justify-content-end col flex-fill px-0"
+              >
+                  <div class="dropdown ml-2 show">
+                    <button class="btn btn-danger drop-button dropdown-toggle" data-toggle="dropdown-grid" type="button" aria-expanded="false" aria-haspopup="true">
+                      <img src="/<%= currentUser.image %>" alt="user" class="avatar avatar-sm">
+                      <span><a class="text-light" href="#"><%= currentUser.username %></a></span>
+                      <img class="icon" src="assets/img/icons/interface/arrow-caret.svg" alt="arrow-caret interface icon" data-inject-svg />
+                    </button>
 
-		<script>
-			
-			// Navigation Toggle
-			document.querySelector('.navbar__toggler')
-				.addEventListener('click', () => {
-					document.querySelector('.navbar__main')
-					.classList.toggle('hidden');	
-				});
-		</script>
-	</body>
-</html>
+                    <div class="dropdown-menu row">
+                      <div class="col-auto" data-dropdown-content>
+                        <div class="card card-sm card-body shadow">
+                          <a href="/events/host-event" class="dropdown-item">
+                            <i class="fa fa-plus mr-2" aria-hidden="true"></i>
+                            Add Event
+                          </a>
+                          <a href="/dashboard" class="dropdown-item">
+                            <i class="fa fa-user mr-2" aria-hidden="true"></i>
+                            Profile
+                          </a>
+                          <a href="/users/logout" class="dropdown-item">
+                            <i class="fa fa-unlock-alt mr-2" aria-hidden="true"></i>
+                            log Out
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            <%  } %>
+
+          </div>
+        </div>
+      </nav>
