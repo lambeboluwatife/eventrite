@@ -1,4 +1,5 @@
 const express = require("express");
+const moment = require("moment");
 const router = express.Router({ mergeParams: true });
 const { ensureAuthenticated } = require("../config/auth");
 const Event = require("../models/Event");
@@ -11,16 +12,20 @@ router.post("/", ensureAuthenticated, (req, res) => {
       console.log(err);
       res.redirect("/events");
     } else {
-        const comment = req.body.comment;
-        const author = {
-            id: req.user._id,
-            username: req.user.username,
-            name: req.user.name
-        }
-        const newComment = new Comment({
-            comment,
-            author
-        })
+      const comment = req.body.comment;
+      const date = moment().format("MMM D, YYYY");
+      const time = moment().format("LT");
+      const author = {
+        id: req.user._id,
+        username: req.user.username,
+        name: req.user.name,
+      };
+      const newComment = new Comment({
+        comment,
+        author,
+        date,
+        time,
+      });
       Comment.create(newComment, (err, comment) => {
         if (err) {
           req.flash("error", "Something went wrong");
@@ -73,7 +78,7 @@ router.post("/", ensureAuthenticated, (req, res) => {
 
 // Comment Destroy
 router.delete("/:comment_id", ensureAuthenticated, (req, res) => {
-  Comment.findByIdAndRemove(req.params.comment_id, err => {
+  Comment.findByIdAndRemove(req.params.comment_id, (err) => {
     if (err) {
       res.redirect("back");
     } else {

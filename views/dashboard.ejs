@@ -1,250 +1,394 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<title>Eventrite | User Dashboard</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta
-			name="description"
-			content="Host and create events online from Conferences, Hackathons, Conventions, Exhibitions, Seminars, Festivals, Trade Fair, etc."
-		/>
-		<meta
-			name="keywords"
-			content="web app, application, technology, events, conferences, JS, BOOTSTRAP, seminars, application"
-		/>
-		<meta name="author" content="Lambe Boluwatife" />
-		<link rel="stylesheet" href="/fontawesome/css/fontawesome.css" />
-		<link rel="stylesheet" href="/fontawesome/css/solid.css" />
-		<link rel="stylesheet" href="/fontawesome/css/brands.css" />
-		<link
-			rel="shortcut icon"
-			href="https://image.shutterstock.com/image-vector/letter-e-logo-icon-design-260nw-251214550.jpg"
-			type="image/x-icon"
-		/>
-		<link rel="stylesheet" href="/css/dashboard.css" />
-	</head>
+  <head>
+    <meta charset="utf-8" />
+    <title>Eventrite | User Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Host and create events online from Conferences, Hackathons, Conventions, Exhibitions, Seminars, Festivals, Trade Fair, etc."
+    />
+    <meta
+      name="keywords"
+      content="web app, application, technology, events, conferences, JS, BOOTSTRAP, seminars, application"
+    />
+    <meta name="author" content="Lambe Boluwatife" />
+    <link rel="stylesheet" href="/fontawesome/css/fontawesome.css" />
+    <link rel="stylesheet" href="/fontawesome/css/solid.css" />
+    <link rel="stylesheet" href="/fontawesome/css/brands.css" />
+    <link
+      rel="shortcut icon"
+      href="https://image.shutterstock.com/image-vector/letter-e-logo-icon-design-260nw-251214550.jpg"
+      type="image/x-icon"
+    />
+    <link
+      href="/assets/css/loaders/loader-typing.css"
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+    />
+    <link
+      href="/assets/css/theme-event.css"
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+    />
+    <link
+      rel="preload"
+      as="font"
+      href="/assets/fonts/Inter-UI-upright.var.woff2"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      as="font"
+      href="/assets/fonts/Inter-UI.var.woff2"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+  </head>
 
-	<body>
-		<header class="header navbar__container">
-			<nav class="navbar" data-sticky="top">
-				<a class="navbar__brand" href="/"> Eventrite </a>
-				<div class="navbar__content">
-					
-					<button
-						class="navbar__toggler"
-						type="button"
-						aria-label="Toggle navigation"
-						type="button"
-						aria-expanded="false"
-						aria-haspopup="true"
-					>
-						<img
-							src="/<%= currentUser.image %>"
-							alt="user"
-							class="avatar avatar-sm"
-						/>
-						<span class="username"><%= currentUser.username %></span>
-						<img
-							class="icon"
-							src="/assets/icons/caret-down.svg"
-							alt="arrow-caret interface icon"
-							data-inject-svg
-						/>
-					</button>
-					<div class="navbar__main hidden">
-						<a href="/events/host-event" class="user-actions__link">
-							<i class="fa fa-plus mr-2" aria-hidden="true"></i>
-							Add Event
-						</a>
-						<a href="/users/logout" class="user-actions__link">
-							<i class="fa fa-unlock-alt mr-2" aria-hidden="true"></i>
-							log Out
-						</a>
-					</div>
-				</div>
-			</nav>
-		</header>
+  <body>
+    <div class="navbar-container">
+      <nav class="navbar navbar-expand-lg navbar-dark" data-sticky="top">
+        <div class="container nav">
+          <a class="navbar-brand fade-page text-danger" href="/"> Eventrite </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target=".navbar-collapse"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <img
+              class="icon navbar-toggler-open"
+              src="/assets/img/icons/interface/menu.svg"
+              alt="menu interface icon"
+              data-inject-svg
+            />
+            <img
+              class="icon navbar-toggler-close"
+              src="/assets/img/icons/interface/cross.svg"
+              alt="cross interface icon"
+              data-inject-svg
+            />
+          </button>
+          <div class="collapse navbar-collapse justify-content-end">
+            <div
+              class="collapse navbar-collapse justify-content-end col flex-fill px-0"
+            >
+              <div class="dropdown ml-2 show">
+                <button
+                  class="btn btn-danger drop-button dropdown-toggle mb-2"
+                  data-toggle="dropdown-grid"
+                  type="button"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                >
+                  <img
+                    src="/<%= currentUser.image %>"
+                    alt="user"
+                    class="avatar avatar-sm"
+                  />
+                  <span
+                    ><a class="text-light" href="#"
+                      ><%= currentUser.username %></a
+                    ></span
+                  >
+                  <img
+                    class="icon"
+                    src="/assets/img/icons/interface/arrow-caret.svg"
+                    alt="arrow-caret interface icon"
+                    data-inject-svg
+                  />
+                </button>
 
-		<section class="container">
-			<div class="row dashboard">
-				<div class="col-md-4 dashboard__nav">
-					<div class="content">
-						<div class="contents mb-3 dashboard__item active">
-							<i class="fa fa-user fa-2xs mr-2" aria-hidden="true"></i>
-							Info
-						</div>
-						<div class="contents dashboard__item mb-3">
-							<i class="fa fa-calendar mr-2" aria-hidden="true"></i>
-							Events
-						</div>
-						<div class="contents dashboard__item mb-3">
-							<i class="fa fa-cog mr-2" aria-hidden="true"></i>
-							Settings
-						</div>
-					</div>
-				</div>
-				<div class="col-md-8 dashboard__info">
-					<div class="info">
-						<img
-							src="/<%= currentUser.image %>"
-							alt="user"
-							class="avatar avatar-xlg"
-						/>
-						<h3 class="dashboard__name"><%= currentUser.name %></h3>
-						<h5 class="dashboard__username"><%= currentUser.username %></h5>
-						<h5 class="dashboard__email"><%= currentUser.email %></h5>
-					</div>
+                <div class="dropdown-menu row">
+                  <div class="col-auto" data-dropdown-content>
+                    <div class="card card-sm card-body shadow">
+                      <a href="/events/host-event" class="dropdown-item">
+                        <i class="fa fa-plus mr-2" aria-hidden="true"></i>
+                        Add Event
+                      </a>
+                      <a href="/users/logout" class="dropdown-item">
+                        <i class="fa fa-unlock-alt mr-2" aria-hidden="true"></i>
+                        log Out
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
 
-					<div class="events">
-						<div class="grid grid-4 text-center">
-							<% if (events == "") { %>
-							<h3>No Hosted Event</h3>
-							<% } else { %> <% events.forEach((event) => { %>
-							<div class="event-item">
-								<img
-									class="event__image"
-									src="/<%= event.image %>"
-									alt="Event cover image"
-								/>
-								<div class="event__content">
-										<span class="event__content--date"''><%= event.date.toDateString() %></span>
-										<h5 class="event__content--title"><%= event.name %></h5>
-										<small class="event__content--description"><%= event.description %></small>
-										<a
-											class="btn__tertiary event__content--details details"
-											href="/events/<%= event._id%>"
-											>Details</a
-										>
-										
-										<div>
-											<a href="/events/<%= event._id %>/edit-event">
-												<button class="button btn__primary edit-button">
-													Edit
-												</button>
-											</a>
-											
-												<a href="#myModal"><button class="button btn__secondary delete-button">Delete</button></a>
-											
-										</div>
-								</div>
-							</div>
-							<div id="myModal" class="modal">
-								<div class="modal-content">
-									<span class="close">
-										<a href="#close">×</a>
-									</span>
-									<h2 class="modal__text">Are you sure you want to delete?</h2>
-									<div class="modal__buttons">
-										<form
-											action="/events/<%= event.id %>?_method=DELETE"
-											method="POST"
-										>
-											<button class="confirm-delete btn__primary">Yes</button>
-										</form>
-										<button class="confirm-delete btn__secondary">
-											<a href="#close">No</a>
-										</button>
-									</div>
-								</div>
-							</div>
-							<% }) %> <% } %>
-						</div>
-					</div>
+    <section class="container">
+      <%- include ('./partials/messages') %>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="content">
+            <div class="contents mb-3 active">
+              <i class="fa fa-user fa-2xs mr-2" aria-hidden="true"></i>
+              Info
+            </div>
+            <div class="contents mb-3">
+              <i class="fa fa-calendar mr-2" aria-hidden="true"></i>
+              Events
+            </div>
+            <div class="contents mb-3">
+              <i class="fa fa-cog mr-2" aria-hidden="true"></i>
+              Settings
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="info">
+            <img
+              src="/<%= currentUser.image %>"
+              alt="user"
+              class="avatar avatar-xlg"
+            />
+            <h3><%= currentUser.name %></h3>
+            <h5><%= currentUser.username %></h5>
+            <h5><%= currentUser.email %></h5>
+          </div>
 
-					<div class="settings">
-						<h3>Settings 1</h3>
-						<h3>Settings 2</h3>
-						<h3>Settings 3</h3>
-					</div>
-				</div>
-			</div>
-		</section>
-		<footer class="footer" id="footer">
-			<div class="footer__container">
-				<article class="footer__section">
-					<h4 class="footer__section--heading">how to use</h4>
-					<a href="#" class="footer__section--link">how it works</a>
-					<a href="#" class="footer__section--link">pricing</a>
-					<a href="#" class="footer__section--link">FAQs</a>
-					<a href="#" class="footer__section--link">event registration</a>
-				</article>
-				<article class="footer__section">
-					<h4 class="footer__section--heading">plan events</h4>
-					<a href="#" class="footer__section--link">sell tickets online</a>
-					<a href="#" class="footer__section--link">online RSVP</a>
-					<a href="#" class="footer__section--link">event planning</a>
-					<a href="#" class="footer__section--link">event payment system</a>
-					<a href="#" class="footer__section--link"
-						>non profits & Fundraisers evenst</a
-					>
-				</article>
-				<article class="footer__section">
-					<h4 class="footer__section--heading">find events</h4>
-					<a href="#" class="footer__section--link">virtual events</a>
-					<a href="#" class="footer__section--link">online webinars</a>
-					<a href="#" class="footer__section--link">virtual conferences</a>
-					<a href="#" class="footer__section--link">seminars</a>
-				</article>
-				<article class="footer__section footer__social">
-					<h4 class="footer__section--heading">connect with us</h4>
-					<a href="#" class="footer__section--link">
-						<img
-							class="footer__icon icon"
-							src="/assets/icons/instagram.svg"
-							alt="instagram"
-						/>
-						<span class="footer__social--text">instagram</span>
-					</a>
-					<a href="#" class="footer__section--link">
-						<img
-							class="footer__icon icon"
-							src="/assets/icons/twitter.svg"
-							alt="twitter"
-						/>
-						<span class="footer__social--text">twitter</span>
-					</a>
-					<a href="#" class="footer__section--link">
-						<img
-							class="footer__icon icon"
-							src="/assets/icons/youtube.svg"
-							alt="youtube"
-						/>
-						<span class="footer__social--text">youtube</span>
-					</a>
-					<a href="#" class="footer__section--link">
-						<img
-							class="footer__icon icon"
-							src="/assets/icons/medium.svg"
-							alt="medium"
-						/>
-						<span class="footer__social--text">medium</span>
-					</a>
-					<a href="#" class="footer__section--link">
-						<img
-							class="footer__icon icon"
-							src="/assets/icons/facebook.svg"
-							alt="facebook"
-						/>
-						<span class="footer__social--text">facebook</span>
-					</a>
-				</article>
-			</div>
-			<a href="#" class="btn back-to-top" title="Back To Top">
-				<img
-					class="icon"
-					src="/assets/icons/arrow-up-solid.svg"
-					alt="back to top"
-				/>
-			</a>
-		</footer>
+          <div class="events">
+            <div class="grid grid-4 text-center">
+              <% if (events == "") { %>
+              <h3>No Hosted Event</h3>
+              <% } else { %> <% events.forEach((event) => { %>
+              <div class="event-item">
+                <img
+                  class="item-image"
+                  src="/<%= event.image %>"
+                  alt="Event cover image"
+                />
+                <div class="img-text">
+                  <h5><%= event.name %></h5>
+                  <small class="mt-3"><%= event.description %></small>
+                  <span><%= event.date.toDateString() %></span>
+                  <div>
+                    <a href="/events/<%= event._id %>/edit-event">
+                      <button class="button bg-warning edit-button">
+                        Edit
+                      </button>
+                    </a>
+                    <button class="button bg-danger delete-button">
+                      <a href="#myModal">Delete</a>
+                    </button>
+                  </div>
+                </div>
+                <a
+                  class="bg-danger text-light details"
+                  href="/events/<%= event._id%>"
+                  >Details</a
+                >
+              </div>
+              <div id="myModal" class="modal">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <span class="close">
+                      <a href="#close">×</a>
+                    </span>
+                    <h2>Are you sure you want to delete?</h2>
+                  </div>
+                  <div class="modal-body">
+                    <form
+                      action="/events/<%= event.id %>?_method=DELETE"
+                      method="POST"
+                    >
+                      <button class="confirm-delete">Yes</button>
+                    </form>
+                    <button class="confirm-delete">
+                      <a href="#close">No</a>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <% }) %> <% } %>
+            </div>
+          </div>
 
-		<script src="/js/dashboard.js"></script>
+          <div class="settings">
+            <h3>Settings 1</h3>
+            <h3>Settings 2</h3>
+            <h3>Settings 3</h3>
+          </div>
+        </div>
+      </div>
+    </section>
 
-		<!-- Removes page load animation when window is finished loading -->
-		<script type="text/javascript">
-			window.addEventListener('load', function () {
-				document.querySelector('body').classList.add('loaded');
-			});
-		</script>
-	</body>
+    <footer class="pb-4 bg-primary-3 text-light" id="footer">
+      <div class="container">
+        <div class="row justify-content-center mb-2">
+          <div class="col-auto">
+            <ul class="nav">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <img
+                    class="icon"
+                    src="/assets/img/icons/social/instagram.svg"
+                    alt="instagram social icon"
+                    data-inject-svg
+                  />
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <img
+                    class="icon"
+                    src="/assets/img/icons/social/twitter.svg"
+                    alt="twitter social icon"
+                    data-inject-svg
+                  />
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <img
+                    class="icon"
+                    src="/assets/img/icons/social/youtube.svg"
+                    alt="youtube social icon"
+                    data-inject-svg
+                  />
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <img
+                    class="icon"
+                    src="/assets/img/icons/social/medium.svg"
+                    alt="medium social icon"
+                    data-inject-svg
+                  />
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <img
+                    class="icon"
+                    src="/assets/img/icons/social/facebook.svg"
+                    alt="facebook social icon"
+                    data-inject-svg
+                  />
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <a
+      href="#"
+      class="btn back-to-top btn-primary btn-round"
+      data-smooth-scroll
+      data-aos="fade-up"
+      data-aos-offset="2000"
+      data-aos-mirror="true"
+      data-aos-once="false"
+    >
+      <img
+        class="icon"
+        src="/assets/img/icons/theme/navigation/arrow-up.svg"
+        alt="arrow-up icon"
+        data-inject-svg
+      />
+    </a>
+
+    <script src="/js/dashboard.js"></script>
+
+    <!-- Required vendor scripts (Do not remove) -->
+    <script type="text/javascript" src="/assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/assets/js/bootstrap.js"></script>
+
+    <!-- Optional Vendor Scripts (Remove the plugin script here and comment initializer script out of index.js if site does not use that feature) -->
+
+    <!-- AOS (Animate On Scroll - animates elements into view while scrolling down) -->
+    <script type="text/javascript" src="/assets/js/aos.js"></script>
+    <!-- Clipboard (copies content from browser into OS clipboard) -->
+    <script type="text/javascript" src="/assets/js/clipboard.min.js"></script>
+    <!-- Fancybox (handles image and video lightbox and galleries) -->
+    <script
+      type="text/javascript"
+      src="/assets/js/jquery.fancybox.min.js"
+    ></script>
+    <!-- Flatpickr (calendar/date/time picker UI) -->
+    <script type="text/javascript" src="/assets/js/flatpickr.min.js"></script>
+    <!-- Flickity (handles touch enabled carousels and sliders) -->
+    <script
+      type="text/javascript"
+      src="/assets/js/flickity.pkgd.min.js"
+    ></script>
+    <!-- Ion rangeSlider (flexible and pretty range slider elements) -->
+    <script
+      type="text/javascript"
+      src="/assets/js/ion.rangeSlider.min.js"
+    ></script>
+    <!-- Isotope (masonry layouts and filtering) -->
+    <script
+      type="text/javascript"
+      src="/assets/js/isotope.pkgd.min.js"
+    ></script>
+    <!-- jarallax (parallax effect and video backgrounds) -->
+    <script type="text/javascript" src="/assets/js/jarallax.min.js"></script>
+    <script
+      type="text/javascript"
+      src="/assets/js/jarallax-video.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/assets/js/jarallax-element.min.js"
+    ></script>
+    <!-- jQuery Countdown (displays countdown text to a specified date) -->
+    <script
+      type="text/javascript"
+      src="/assets/js/jquery.countdown.min.js"
+    ></script>
+    <!-- jQuery smartWizard facilitates steppable wizard content -->
+    <script
+      type="text/javascript"
+      src="/assets/js/jquery.smartWizard.min.js"
+    ></script>
+    <!-- Plyr (unified player for Video, Audio, Vimeo and Youtube) -->
+    <script
+      type="text/javascript"
+      src="/assets/js/plyr.polyfilled.min.js"
+    ></script>
+    <!-- Prism (displays formatted code boxes) -->
+    <script type="text/javascript" src="/assets/js/prism.js"></script>
+    <!-- ScrollMonitor (manages events for elements scrolling in and out of view) -->
+    <script type="text/javascript" src="/assets/js/scrollMonitor.js"></script>
+    <!-- Smooth scroll (animation to links in-page)-->
+    <script
+      type="text/javascript"
+      src="/assets/js/smooth-scroll.polyfills.min.js"
+    ></script>
+    <!-- SVGInjector (replaces img tags with SVG code to allow easy inclusion of SVGs with the benefit of inheriting colors and styles)-->
+    <script
+      type="text/javascript"
+      src="/assets/js/svg-injector.umd.production.js"
+    ></script>
+    <!-- TwitterFetcher (displays a feed of tweets from a specified account)-->
+    <script
+      type="text/javascript"
+      src="/assets/js/twitterFetcher_min.js"
+    ></script>
+    <!-- Typed text (animated typing effect)-->
+    <script type="text/javascript" src="/assets/js/typed.min.js"></script>
+    <!-- Required theme scripts (Do not remove) -->
+    <script type="text/javascript" src="/assets/js/theme.js"></script>
+    <!-- Removes page load animation when window is finished loading -->
+    <script type="text/javascript">
+      window.addEventListener("load", function () {
+        document.querySelector("body").classList.add("loaded");
+      });
+    </script>
+  </body>
 </html>

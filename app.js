@@ -21,9 +21,8 @@ mongoose
   .then(() => console.log("MongoDB Connected..."))
   .catch((err) => console.log(err));
 
-
 mongoose.set("useFindAndModify", false);
-app.use(methodOverride("_method"));  
+app.use(methodOverride("_method"));
 
 // EJS
 // app.use(expressLayouts);
@@ -66,10 +65,11 @@ app.use("/users", require("./routes/users"));
 app.use("/events", require("./routes/events"));
 app.use("/events/:id/comments", require("./routes/comments"));
 app.use("/events/:id/comments/:id/replies", require("./routes/replies"));
+app.use("/events/:id/likes", require("./routes/likes"));
 
-app.all('*', (req, res) => {
-  res.status(404).render('404');
-})
+app.all("*", (req, res) => {
+  res.status(404).render("404");
+});
 
 const PORT = process.env.PORT || 4000;
 

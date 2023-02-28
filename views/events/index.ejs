@@ -1,484 +1,514 @@
 <!doctype html>
 <html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <title>Eventrite | Events</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Host and create events online from Conferences, Hackathons, Conventions, Exhibitions, Seminars, Festivals, Trade Fair, etc." />
-  <meta name="keywords" content="web app, application, technology, events, conferences, JS, seminars, application" />
-  <meta name="author" content="Lambe Boluwatife" />
+  <head>
+    <meta charset="utf-8">
+    <title>Eventrite | Events</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+      name="description"
+      content="Host and create events online from Conferences, Hackathons, Conventions, Exhibitions, Seminars, Festivals, Trade Fair, etc."
+    />
+    <meta
+      name="keywords"
+      content="web app, application, technology, events, conferences, JS, BOOTSTRAP, seminars, application"
+    />
+    <meta name="author" content="Lambe Boluwatife" />
+    <link rel="stylesheet" href="/fontawesome/css/fontawesome.css" />
+    <link rel="stylesheet" href="/fontawesome/css/solid.css" />
+    <link rel="stylesheet" href="/fontawesome/css/brands.css" />
+    <link rel="stylesheet" href="/css/events.css">
+    <link href="/assets/css/loaders/loader-typing.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/assets/css/theme-event.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="preload" as="font" href="/assets/fonts/Inter-UI-upright.var.woff2" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="/assets/fonts/Inter-UI.var.woff2" type="font/woff2" crossorigin="anonymous">
+    <link rel="shortcut icon" href="https://image.shutterstock.com/image-vector/letter-e-logo-icon-design-260nw-251214550.jpg" type="image/x-icon">
+    <style>
+      .drop-button {
+          border-radius: 30px;
+        }
+    </style>
+  </head>
 
-  
-  <link rel="stylesheet" href="../css/header.css" />
-  <link rel="stylesheet" href="../css/footer.css" />
-  <link rel="stylesheet" href="../css/events.css" />
-
-  <!-- global stylesheet -->
-  <link rel="stylesheet" href="../css/global.css" />
-
-</head>
-
-<body>
-  <!-- <div class="header navbar__container">
-    <nav class="navbar">
-      <a class="navbar__brand" href="/">
-        Eventrite
-      </a>
-      <div class="navbar__content">
-        <button
-						class="navbar__toggler"
-						type="button"
-						aria-label="Toggle navigation"
-					>
-						<img
-							class="icon navbar__toggler--open"
-							src="assets/img/icons/menu_button.svg"
-							alt="menu"
-						/>
-						<img
-							class="icon navbar__toggler--close hidden"
-							src="assets/img/icons/close_button.svg"
-							alt="close menu"
-						/>
-					</button>
-        <div class="navbar__main hidden">
-
-          <%  if(!currentUser){ %>
-          <div class="collapse navbar-collapse">
-            <a href="/users/login" class="btn btn__tertiary">Sign In</a>
-          </div>
-          <%  } else { %>
-          <div class="collapse navbar-collapse">
-            <div class="dropdown">
-              <button class="btn btn__tertiary">
-                <img src="/<%= currentUser.image %>" alt="user" class="avatar avatar-sm">
-                <span><a class="text-light" href="#"><%= currentUser.username %></a></span>
-                <img class="icon" src="assets/img/icons/interface/arrow-caret.svg" alt="arrow-caret" />
-              </button>
-
-              <div class="dropdown-menu row">
-                <div class="col-auto" data-dropdown-content>
-                  <div class="card card-sm card-body shadow">
-                    <a href="/events/host-event" class="dropdown-item">
-                      <i class="fa fa-plus mr-2" aria-hidden="true"></i>
-                      Add Event
-                    </a>
-                    <a href="/dashboard" class="dropdown-item">
-                      <i class="fa fa-user mr-2" aria-hidden="true"></i>
-                      Profile
-                    </a>
-                    <a href="/users/logout" class="dropdown-item">
-                      <i class="fa fa-unlock-alt mr-2" aria-hidden="true"></i>
-                      log Out
-                    </a>
+  <body>
+    <div class="navbar-container">
+        <nav class="navbar navbar-expand-lg navbar-dark" data-sticky="top">
+          <div class="container nav">
+            <a class="navbar-brand fade-page text-danger" href="/">
+              Eventrite
+            </a>
+            <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target=".navbar-collapse"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <img
+              class="icon navbar-toggler-open"
+              src="/assets/img/icons/interface/menu.svg"
+              alt="menu interface icon"
+              data-inject-svg
+            />
+            <img
+              class="icon navbar-toggler-close"
+              src="/assets/img/icons/interface/cross.svg"
+              alt="cross interface icon"
+              data-inject-svg
+            />
+          </button>
+            <div class="collapse navbar-collapse justify-content-end">
+           
+                <%  if(!currentUser){ %>
+                    <div
+                    class="collapse navbar-collapse justify-content-end col flex-fill px-0"
+                  >
+                    <a href="/users/login" class="btn btn-danger ml-lg-3">Sign In</a>
                   </div>
-                </div>
+                    <%  } else { %>
+                      <div
+                      class="collapse navbar-collapse justify-content-end col flex-fill px-0"
+                    >
+                      <div class="dropdown ml-2 show">
+                        <button class="btn btn-danger drop-button dropdown-toggle" data-toggle="dropdown-grid" type="button" aria-expanded="false" aria-haspopup="true">
+                          <img src="/<%= currentUser.image %>" alt="user" class="avatar avatar-sm">
+                          <span><a class="text-light" href="#"><%= currentUser.username %></a></span>
+                          <img class="icon" src="assets/img/icons/interface/arrow-caret.svg" alt="arrow-caret interface icon" data-inject-svg />
+                        </button>
+    
+                        <div class="dropdown-menu row">
+                          <div class="col-auto" data-dropdown-content>
+                            <div class="card card-sm card-body shadow">
+                              <a href="/events/host-event" class="dropdown-item">
+                                <i class="fa fa-plus mr-2" aria-hidden="true"></i>
+                                Add Event
+                              </a>
+                              <a href="/dashboard" class="dropdown-item">
+                                <i class="fa fa-user mr-2" aria-hidden="true"></i>
+                                Profile
+                              </a>
+                              <a href="/users/logout" class="dropdown-item">
+                                <i class="fa fa-unlock-alt mr-2" aria-hidden="true"></i>
+                                log Out
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <%  } %>
+    
               </div>
+                    </div>
+                  </div>
             </div>
           </div>
-          <%  } %>
-
-        </div>
+        </nav>
       </div>
-  </div>
-</nav> -->
-<!-- </div> -->
-<!-- </div> -->
-  <!-- </div> -->
-<!-- new here -->
-<header class="header navbar__container">
-  <nav class="navbar">
-    <a class="navbar__brand" href="index.html"> Eventrite </a>
-    <% if(!currentUser){ %>
-    <button class="btn__primary navbar__btn">
-      <a href="/users/login" class="navbar__btn--link">Sign In</a>
-    </button>
 
-    <% } else { %>
-
-      <!-- user nav toggle -->
-      <button class="navbar__toggler" type="button">
-        <!-- user image -->
-        <img
-          src="/<%= currentUser.image %>"
-          alt="user image"
-          class="avatar avatar-sm"
-        />
-        <!-- Username -->
-        <span class="username"><%= currentUser.username %></span>
-        <!-- Arrow down caret -->
-        <img
-          class="icon"
-          src="/assets/icons/caret-down.svg"
-          alt="arrow-caret"
-        />
-      </button>
-      <!-- Nav Items -->
-      <div class="navbar__main hidden">
-        <a href="/events/host-event" class="user-actions__link">
-          <i class="fa fa-plus mr-2" aria-hidden="true"></i>
-          Add Event
-        </a>
-        <a href="/dashboard" class="user-actions__link">
-          <i class="fa fa-user mr-2" aria-hidden="true"></i>
-          Profile
-        </a>
-        <a href="/users/logout" class="user-actions__link">
-          <i class="fa fa-unlock-alt mr-2" aria-hidden="true"></i>
-          log Out
-        </a>
-      
-    <% } %>
-  </nav>
-  
-</header>
-  <!-- new end here -->
-  <div class="events container">
-    <div class="events__categories">
-
-      <h3 class="events__heading">Events</h3>
-      <p class="events__filter--label">Select Category:</p>
-      <div class="events__filter--categories courses text-center">
-      
-        <button class="btn btn-danger btn-primary mr-3 mb-4 category">All</button>
-        <button class="btn btn-danger btn-primary mr-3 mb-4 category">Speaker Session</button>
-        <button class="btn btn-primary mr-3 mb-4 category">Networking Session</button>
-        <button class="btn btn-primary mr-3 mb-4 category">Conference</button>
-        <button class="btn btn-primary mr-3 mb-4 category">Seminar</button>
-        <button class="btn btn-primary mr-3 mb-4 category">Workshop</button>
-        <button class="btn btn-primary mr-3 mb-4 category">Sponsorship</button>
-        <button class="btn btn-primary mr-3 mb-4 category">Trade Show</button>
-        <button class="btn btn-primary mr-3 mb-4 category">Award and Competition</button>
-        <button class="btn btn-primary mr-3 mb-4 category">Festival or Party</button>
-        <button class="btn btn-primary mr-3 mb-4 category">Webinars</button>
-        <button class="btn btn-primary mr-3 mb-4 category">Product Launch</button>
-        <button class="btn btn-primary mr-3 category">Corporate Meeting</button>
-
-      </div>
-    </div>
-    <div class="events__display">
-      
-      <div class="show-category grid grid-4">
-        <% const allEvents = events.filter((event) => event.category === "speaker session") %>
-        <% if (allEvents == "") { %>
-        <p class="text-center events__empty">No Event on Speaker Session</p>
-        <% } else { %>
-        <% allEvents.forEach((event) => { %>
-        <div class="event-item">
-          <img class="item-image" src="/<%= event.image %>" alt="Event cover image" />
-          <div class="img-text">
-            <h5><%= event.name %></h5>
-            <small class="mt-3"><%= event.description %></small>
-            <span><%= event.date.toDateString() %></span>
-          </div>
-          <a class="bg-danger text-light details" href="/events/<%= event._id%>">Details</a>
+      <div class="container">
+        <h3>Events</h3>
+        <p class="lead">Select Category:</p>
+        <div class="courses text-center">
+            <button class="btn btn-danger btn-primary mr-3 mb-4 category">Speaker Session</button>
+            <button class="btn btn-primary mr-3 mb-4 category">Networking Session</button>
+            <button class="btn btn-primary mr-3 mb-4 category">Conference</button>
+            <button class="btn btn-primary mr-3 mb-4 category">Seminar</button>
+            <button class="btn btn-primary mr-3 mb-4 category">Workshop</button>
+            <button class="btn btn-primary mr-3 mb-4 category">Sponsorship</button>
+            <button class="btn btn-primary mr-3 mb-4 category">Trade Show</button>
+            <button class="btn btn-primary mr-3 mb-4 category">Award and Competition</button>
+            <button class="btn btn-primary mr-3 mb-4 category">Festival or Party</button>
+            <button class="btn btn-primary mr-3 mb-4 category">Webinars</button>
+            <button class="btn btn-primary mr-3 mb-4 category">Product Launch</button>
+            <button class="btn btn-primary mr-3 category">Corporate Meeting</button>
         </div>
-        <% }) %>
+        <hr class="bg-danger">
+        <div class="events-display">
+            <div class="show-category grid grid-4">
+                <% const allEvents = events.filter((event) => event.category === "speaker session") %>
+                    <% if (allEvents == "") { %>
+                      <h3 class="text-center">No Event on Speaker Session</h3>
+                    <% } else { %>
+                      <% allEvents.forEach((event) => { %>
+                        <div class="event-item">
+                          <img class="item-image"
+                            src="/<%= event.image %>"
+                            alt="Event cover image"
+                          />
+                          <div class="img-text">
+                            <h5><%= event.name %></h5>
+                            <small class="mt-3"><%= event.description %></small>
+                            <span><%= event.date.toDateString() %></span>
+                          </div>
+                            <a class="bg-danger text-light details" href="/events/<%= event._id%>">Details</a>
+                        </div>
+                    <% }) %>
+                <% } %>
+            </div>   
+
+            <div class="show-category grid grid-4">
+                <% const allEvents1 = events.filter((event) => event.category === "networking session") %>
+                <% if (allEvents1 == "") { %>
+                  <h3 class="text-center">No Event on Networking Session</h3>
+                <% } else { %>
+                  <% allEvents1.forEach((event) => { %>
+                    <div class="event-item">
+                      <img class="item-image"
+                        src="/<%= event.image %>"
+                        alt="Event cover image"
+                      />
+                      <div class="img-text">
+                        <h5><%= event.name %></h5>
+                        <small class="mt-3"><%= event.description %></small>
+                        <span><%= event.date.toDateString() %></span>
+                      </div>
+                        <a class="bg-danger text-light details" href="/events/<%= event._id%>">Details</a>
+                    </div>
+                <% }) %>
+            <% } %>
+            </div>
+
+            <div class="show-category grid grid-4">
+                <% const allEvents2 = events.filter((event) => event.category === "conference") %>
+                <% if (allEvents2 == "") { %>
+                  <h3 class="text-center">No Event on Conference</h3>
+                <% } else { %>
+                  <% allEvents2.forEach((event) => { %>
+                    <div class="event-item">
+                      <img class="item-image"
+                        src="/<%= event.image %>"
+                        alt="Event cover image"
+                      />
+                      <div class="img-text">
+                        <h5><%= event.name %></h5>
+                        <small class="mt-3"><%= event.description %></small>
+                        <span><%= event.date.toDateString() %></span>
+                      </div>
+                        <a class="bg-danger text-light details" href="/events/<%= event._id%>">Details</a>
+                    </div>
+                <% }) %>
+            <% } %>
+            </div>
+            
+            <div class="show-category grid grid-4">
+                <% const allEvents3 = events.filter((event) => event.category === "seminar") %>
+                <% if (allEvents3 == "") { %>
+                  <h3 class="text-center">No Event on Seminar</h3>
+                <% } else { %>
+                  <% allEvents3.forEach((event) => { %>
+                    <div class="event-item">
+                      <img class="item-image"
+                        src="/<%= event.image %>"
+                        alt="Event cover image"
+                      />
+                      <div class="img-text">
+                        <h5><%= event.name %></h5>
+                        <small class="mt-3"><%= event.description %></small>
+                        <span><%= event.date.toDateString() %></span>
+                      </div>
+                        <a class="bg-danger text-light details" href="/events/<%= event._id%>">Details</a>
+                    </div>
+                <% }) %>
+            <% } %>
+            </div>
+
+            <div class="show-category grid grid-4">
+                <% const allEvents5 = events.filter((event) => event.category === "workshop") %>
+                <% if (allEvents5 == "") { %>
+                  <h3 class="text-center">No Event on Workshop</h3>
+                <% } else { %>
+                  <% allEvents5.forEach((event) => { %>
+                    <div class="event-item">
+                      <img class="item-image"
+                        src="/<%= event.image %>"
+                        alt="Event cover image"
+                      />
+                      <div class="img-text">
+                        <h5><%= event.name %></h5>
+                        <small class="mt-3"><%= event.description %></small>
+                        <span><%= event.date.toDateString() %></span>
+                      </div>
+                        <a class="bg-danger text-light details" href="/events/<%= event._id%>">Details</a>
+                    </div>
+                <% }) %>
+            <% } %>
+            </div>
+
+            <div class="show-category grid grid-4">
+                <% const allEvents6 = events.filter((event) => event.category === "sponsorship") %>
+                <% if (allEvents6 == "") { %>
+                <h3 class="text-center">No Event on Sponsorship</h3>
+                <% } else { %>
+                <% allEvents6.forEach((event) => { %>
+                    <div class="event-item">
+                    <img class="item-image"
+                        src="/<%= event.image %>"
+                        alt="Event cover image"
+                    />
+                    <div class="img-text">
+                        <h5><%= event.name %></h5>
+                        <small class="mt-3"><%= event.description %></small>
+                        <span><%= event.date.toDateString() %></span>
+                    </div>
+                        <a class="bg-danger text-light details" href="/events/<%= event._id%>">Details</a>
+                    </div>
+                <% }) %>
+                <% } %>
+            </div>
+        </div>
+
+        <div class="show-category grid grid-4">
+            <% const allEvents7 = events.filter((event) => event.category === "trade show") %>
+            <% if (allEvents7 == "") { %>
+              <h3 class="text-center">No Event on Trade Show</h3>
+            <% } else { %>
+              <% allEvents7.forEach((event) => { %>
+                <div class="event-item">
+                  <img class="item-image"
+                    src="/<%= event.image %>"
+                    alt="Event cover image"
+                  />
+                  <div class="img-text">
+                    <h5><%= event.name %></h5>
+                    <small class="mt-3"><%= event.description %></small>
+                    <span><%= event.date.toDateString() %></span>
+                  </div>
+                    <a class="bg-danger text-light details" href="/events/<%= event._id%>">Details</a>
+                </div>
+            <% }) %>
         <% } %>
-      </div>
-
-      <div class="show-category grid grid-4">
-        <% const allEvents1 = events.filter((event) => event.category === "networking session") %>
-        <% if (allEvents1 == "") { %>
-        <p class="text-center events__empty">No Event on Networking Session</p>
-        <% } else { %>
-        <% allEvents1.forEach((event) => { %>
-        <div class="event-item">
-          <img class="item-image" src="/<%= event.image %>" alt="Event cover image" />
-          <div class="img-text">
-            <h5><%= event.name %></h5>
-            <small class="mt-3"><%= event.description %></small>
-            <span><%= event.date.toDateString() %></span>
-          </div>
-          <a class="bg-danger text-light details" href="/events/<%= event._id%>">Details</a>
         </div>
-        <% }) %>
+    
+        <div class="show-category grid grid-4">
+            <% const allEvents8 = events.filter((event) => event.category === "award and competition") %>
+            <% if (allEvents8 == "") { %>
+              <h3 class="text-center">No Event on Award and Competition</h3>
+            <% } else { %>
+              <% allEvents8.forEach((event) => { %>
+                <div class="event-item">
+                  <img class="item-image"
+                    src="/<%= event.image %>"
+                    alt="Event cover image"
+                  />
+                  <div class="img-text">
+                    <h5><%= event.name %></h5>
+                    <small class="mt-3"><%= event.description %></small>
+                    <span><%= event.date.toDateString() %></span>
+                  </div>
+                    <a class="bg-danger text-light details" href="/events/<%= event._id%>">Details</a>
+                </div>
+            <% }) %>
         <% } %>
-      </div>
-
-      <div class="show-category grid grid-4">
-        <% const allEvents2 = events.filter((event) => event.category === "conference") %>
-        <% if (allEvents2 == "") { %>
-        <p class="text-center events__empty">No Event on Conference</p>
-        <% } else { %>
-        <% allEvents2.forEach((event) => { %>
-        <div class="event-item">
-          <img class="item-image" src="/<%= event.image %>" alt="Event cover image" />
-          <div class="img-text">
-            <h5><%= event.name %></h5>
-            <small class="mt-3"><%= event.description %></small>
-            <span><%= event.date.toDateString() %></span>
-          </div>
-          <a class="bg-danger text-light details" href="/events/<%= event._id%>">Details</a>
         </div>
-        <% }) %>
+    
+        <div class="show-category grid grid-4">
+            <% const allEvents9 = events.filter((event) => event.category === "festival or party") %>
+            <% if (allEvents9 == "") { %>
+              <h3 class="text-center">No Event on Festival or Party</h3>
+            <% } else { %>
+              <% allEvents9.forEach((event) => { %>
+                <div class="event-item">
+                  <img class="item-image"
+                    src="/<%= event.image %>"
+                    alt="Event cover image"
+                  />
+                  <div class="img-text">
+                    <h5><%= event.name %></h5>
+                    <small class="mt-3"><%= event.description %></small>
+                    <span><%= event.date.toDateString() %></span>
+                  </div>
+                    <a class="bg-danger text-light details" href="/events/<%= event._id%>">Details</a>
+                </div>
+            <% }) %>
         <% } %>
-      </div>
-
-      <div class="show-category grid grid-4">
-        <% const allEvents3 = events.filter((event) => event.category === "seminar") %>
-        <% if (allEvents3 == "") { %>
-        <p class="text-center events__empty">No Event on Seminar</p>
-        <% } else { %>
-        <% allEvents3.forEach((event) => { %>
-        <div class="event-item">
-          <img class="item-image" src="/<%= event.image %>" alt="Event cover image" />
-          <div class="img-text">
-            <h5><%= event.name %></h5>
-            <small class="mt-3"><%= event.description %></small>
-            <span><%= event.date.toDateString() %></span>
-          </div>
-          <a class="bg-danger text-light details" href="/events/<%= event._id%>">Details</a>
         </div>
-        <% }) %>
+    
+        <div class="show-category grid grid-4">
+            <% const allEvents10 = events.filter((event) => event.category === "webinars") %>
+            <% if (allEvents10 == "") { %>
+              <h3 class="text-center">No Event on Webinars</h3>
+            <% } else { %>
+              <% allEvents10.forEach((event) => { %>
+                <div class="event-item">
+                  <img class="item-image"
+                    src="/<%= event.image %>"
+                    alt="Event cover image"
+                  />
+                  <div class="img-text">
+                    <h5><%= event.name %></h5>
+                    <small class="mt-3"><%= event.description %></small>
+                    <span><%= event.date.toDateString() %></span>
+                  </div>
+                    <a class="bg-danger text-light details" href="/events/<%= event._id%>">Details</a>
+                </div>
+            <% }) %>
         <% } %>
-      </div>
-
-      <div class="show-category grid grid-4">
-        <% const allEvents5 = events.filter((event) => event.category === "workshop") %>
-        <% if (allEvents5 == "") { %>
-        <p class="text-center events__empty">No Event on Workshop</p>
-        <% } else { %>
-        <% allEvents5.forEach((event) => { %>
-        <div class="event-item">
-          <img class="item-image" src="/<%= event.image %>" alt="Event cover image" />
-          <div class="img-text">
-            <h5><%= event.name %></h5>
-            <small class="mt-3"><%= event.description %></small>
-            <span><%= event.date.toDateString() %></span>
-          </div>
-          <a class="bg-danger text-light details" href="/events/<%= event._id%>">Details</a>
         </div>
-        <% }) %>
+    
+        <div class="show-category grid grid-4">
+            <% const allEvents11 = events.filter((event) => event.category === "product launch") %>
+            <% if (allEvents11 == "") { %>
+              <h3 class="text-center">No Event on Product Launch</h3>
+            <% } else { %>
+              <% allEvents11.forEach((event) => { %>
+                <div class="event-item">
+                  <img class="item-image"
+                    src="/<%= event.image %>"
+                    alt="Event cover image"
+                  />
+                  <div class="img-text">
+                    <h5><%= event.name %></h5>
+                    <small class="mt-3"><%= event.description %></small>
+                    <span><%= event.date.toDateString() %></span>
+                  </div>
+                    <a class="bg-danger text-light details" href="/events/<%= event._id%>">Details</a>
+                </div>
+            <% }) %>
         <% } %>
-      </div>
+        </div>
+    
+        <div class="show-category grid grid-4">
+            <% const allEvent = events.filter((event) => event.category === "corporate meeting") %>
+            <% if (allEvent == "") { %>
+              <h3 class="text-center">No Event on Corporate Meeting</h3>
+            <% } else { %>
+              <% allEvent.forEach((event) => { %>
+                <div class="event-item">
+                  <img class="item-image"
+                    src="/<%= event.image %>"
+                    alt="Event cover image"
+                  />
+                  <div class="img-text">
+                    <h5><%= event.name %></h5>
+                    <small class="mt-3"><%= event.description %></small>
+                    <span><%= event.date.toDateString() %></span>
+                  </div>
+                    <a class="bg-danger text-light details" href="/events/<%= event._id%>">Details</a>
+                    </div>
+                <% }) %>
+            <% } %>
+        </div>
+    </div>
 
-      <div class="show-category grid grid-4">
-        <% const allEvents6 = events.filter((event) => event.category === "sponsorship") %>
-        <% if (allEvents6 == "") { %>
-        <p class="text-center events__empty">No Event on Sponsorship</p>
-        <% } else { %>
-        <% allEvents6.forEach((event) => { %>
-        <div class="event-item">
-          <img class="item-image" src="/<%= event.image %>" alt="Event cover image" />
-          <div class="img-text">
-            <h5><%= event.name %></h5>
-            <small class="mt-3"><%= event.description %></small>
-            <span><%= event.date.toDateString() %></span>
+    <footer class="pb-4 bg-primary-3 mt-6 text-light" id="footer">
+        <div class="container">
+          
+          <div class="row justify-content-center mb-2">
+            <div class="col-auto">
+              <ul class="nav">
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <img
+                      class="icon"
+                      src="/assets/img/icons/social/instagram.svg"
+                      alt="instagram social icon"
+                      data-inject-svg
+                    />
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <img
+                      class="icon"
+                      src="/assets/img/icons/social/twitter.svg"
+                      alt="twitter social icon"
+                      data-inject-svg
+                    />
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <img
+                      class="icon"
+                      src="/assets/img/icons/social/youtube.svg"
+                      alt="youtube social icon"
+                      data-inject-svg
+                    />
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <img
+                      class="icon"
+                      src="/assets/img/icons/social/medium.svg"
+                      alt="medium social icon"
+                      data-inject-svg
+                    />
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <img
+                      class="icon"
+                      src="/assets/img/icons/social/facebook.svg"
+                      alt="facebook social icon"
+                      data-inject-svg
+                    />
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
-          <a class="bg-danger text-light details" href="/events/<%= event._id%>">Details</a>
         </div>
-        <% }) %>
-        <% } %>
-      </div>
-    </div>
-
-    <div class="show-category grid grid-4">
-      <% const allEvents7 = events.filter((event) => event.category === "trade show") %>
-      <% if (allEvents7 == "") { %>
-      <p class="text-center events__empty">No Event on Trade Show</p>
-      <% } else { %>
-      <% allEvents7.forEach((event) => { %>
-      <div class="event-item">
-        <img class="item-image" src="/<%= event.image %>" alt="Event cover image" />
-        <div class="img-text">
-          <h5><%= event.name %></h5>
-          <small class="mt-3"><%= event.description %></small>
-          <span><%= event.date.toDateString() %></span>
-        </div>
-        <a class="bg-danger text-light details" href="/events/<%= event._id%>">Details</a>
-      </div>
-      <% }) %>
-      <% } %>
-    </div>
-
-    <div class="show-category grid grid-4">
-      <% const allEvents8 = events.filter((event) => event.category === "award and competition") %>
-      <% if (allEvents8 == "") { %>
-      <p class="text-center events__empty">No Event on Award and Competition</p>
-      <% } else { %>
-      <% allEvents8.forEach((event) => { %>
-      <div class="event-item">
-        <img class="item-image" src="/<%= event.image %>" alt="Event cover image" />
-        <div class="img-text">
-          <h5><%= event.name %></h5>
-          <small class="mt-3"><%= event.description %></small>
-          <span><%= event.date.toDateString() %></span>
-        </div>
-        <a class="bg-danger text-light details" href="/events/<%= event._id%>">Details</a>
-      </div>
-      <% }) %>
-      <% } %>
-    </div>
-
-    <div class="show-category grid grid-4">
-      <% const allEvents9 = events.filter((event) => event.category === "festival or party") %>
-      <% if (allEvents9 == "") { %>
-      <p class="text-center events__empty">No Event on Festival or Party</p>
-      <% } else { %>
-      <% allEvents9.forEach((event) => { %>
-      <div class="event-item">
-        <img class="item-image" src="/<%= event.image %>" alt="Event cover image" />
-        <div class="img-text">
-          <h5><%= event.name %></h5>
-          <small class="mt-3"><%= event.description %></small>
-          <span><%= event.date.toDateString() %></span>
-        </div>
-        <a class="bg-danger text-light details" href="/events/<%= event._id%>">Details</a>
-      </div>
-      <% }) %>
-      <% } %>
-    </div>
-
-    <div class="show-category grid grid-4">
-      <% const allEvents10 = events.filter((event) => event.category === "webinars") %>
-      <% if (allEvents10 == "") { %>
-      <p class="text-center events__empty">No Event on Webinars</p>
-      <% } else { %>
-      <% allEvents10.forEach((event) => { %>
-      <div class="event-item">
-        <img class="item-image" src="/<%= event.image %>" alt="Event cover image" />
-        <div class="img-text">
-          <h5><%= event.name %></h5>
-          <small class="mt-3"><%= event.description %></small>
-          <span><%= event.date.toDateString() %></span>
-        </div>
-        <a class="bg-danger text-light details" href="/events/<%= event._id%>">Details</a>
-      </div>
-      <% }) %>
-      <% } %>
-    </div>
-
-    <div class="show-category grid grid-4">
-      <% const allEvents11 = events.filter((event) => event.category === "product launch") %>
-      <% if (allEvents11 == "") { %>
-      <p class="text-center events__empty">No Event on Product Launch</p>
-      <% } else { %>
-      <% allEvents11.forEach((event) => { %>
-      <div class="event-item">
-        <img class="item-image" src="/<%= event.image %>" alt="Event cover image" />
-        <div class="img-text">
-          <h5><%= event.name %></h5>
-          <small class="mt-3"><%= event.description %></small>
-          <span><%= event.date.toDateString() %></span>
-        </div>
-        <a class="bg-danger text-light details" href="/events/<%= event._id%>">Details</a>
-      </div>
-      <% }) %>
-      <% } %>
-    </div>
-
-    <div class="show-category grid grid-4">
-      <% const allEvent = events.filter((event) => event.category === "corporate meeting") %>
-      <% if (allEvent == "") { %>
-      <p class="text-center events__empty">No Event on Corporate Meeting</p>
-      <% } else { %>
-      <% allEvent.forEach((event) => { %>
-      <div class="event-item">
-        <img class="item-image" src="/<%= event.image %>" alt="Event cover image" />
-        <div class="img-text">
-          <h5><%= event.name %></h5>
-          <small class="mt-3"><%= event.description %></small>
-          <span><%= event.date.toDateString() %></span>
-        </div>
-        <a class="bg-danger text-light details" href="/events/<%= event._id%>">Details</a>
-      </div>
-      <% }) %>
-      <% } %>
-    </div>
-  </div>
-  <footer class="footer" id="footer">
-    <div class="footer__container">
-      <article class="footer__section">
-        <h4 class="footer__section--heading">how to use</h4>
-        <a href="#" class="footer__section--link">how it works</a>
-        <a href="#" class="footer__section--link">pricing</a>
-        <a href="#" class="footer__section--link">FAQs</a>
-        <a href="#" class="footer__section--link">event registration</a>
-      </article>
-      <article class="footer__section">
-        <h4 class="footer__section--heading">plan events</h4>
-        <a href="#" class="footer__section--link">sell tickets online</a>
-        <a href="#" class="footer__section--link">online RSVP</a>
-        <a href="#" class="footer__section--link">event planning</a>
-        <a href="#" class="footer__section--link">event payment system</a>
-        <a href="#" class="footer__section--link"
-          >non profits & Fundraisers evenst</a
-        >
-      </article>
-      <article class="footer__section">
-        <h4 class="footer__section--heading">find events</h4>
-        <a href="#" class="footer__section--link">virtual events</a>
-        <a href="#" class="footer__section--link">online webinars</a>
-        <a href="#" class="footer__section--link">virtual conferences</a>
-        <a href="#" class="footer__section--link">seminars</a>
-      </article>
-      <article class="footer__section footer__social">
-        <h4 class="footer__section--heading">connect with us</h4>
-        <a href="#" class="footer__section--link">
-          <img
-            class="footer__icon icon"
-            src="/assets/icons/instagram.svg"
-            alt="instagram"
-          />
-          <span class="footer__social--text">instagram</span>
-        </a>
-        <a href="#" class="footer__section--link">
-          <img
-            class="footer__icon icon"
-            src="/assets/icons/twitter.svg"
-            alt="twitter"
-          />
-          <span class="footer__social--text">twitter</span>
-        </a>
-        <a href="#" class="footer__section--link">
-          <img
-            class="footer__icon icon"
-            src="/assets/icons/youtube.svg"
-            alt="youtube"
-          />
-          <span class="footer__social--text">youtube</span>
-        </a>
-        <a href="#" class="footer__section--link">
-          <img
-            class="footer__icon icon"
-            src="/assets/icons/medium.svg"
-            alt="medium"
-          />
-          <span class="footer__social--text">medium</span>
-        </a>
-        <a href="#" class="footer__section--link">
-          <img
-            class="footer__icon icon"
-            src="/assets/icons/facebook.svg"
-            alt="facebook"
-          />
-          <span class="footer__social--text">facebook</span>
-        </a>
-      </article>
-    </div>
-    <a href="#" class="btn back-to-top" title="Back To Top">
-      <img
-        class="icon"
-        src="/assets/icons/arrow-up-solid.svg"
-        alt="back to top"
-      />
-    </a>
-  </footer>
-  
-  <!-- TODO add a To-Top button here -->
-  <script src="/js/events.js"></script>
-  
-  <script>
-    // Navigation Toggle
-			document.querySelector('.navbar__toggler')
-				.addEventListener('click', () => {
-					document.querySelector('.navbar__main')
-					.classList.toggle('hidden');	
-				});
-
-  </script>
-</body>
-
-</html>
+      </footer>
+      <a href="#" class="btn back-to-top btn-primary btn-round" data-smooth-scroll data-aos="fade-up" data-aos-offset="2000" data-aos-mirror="true" data-aos-once="false">
+        <img class="icon" src="/assets/img/icons/theme/navigation/arrow-up.svg" alt="arrow-up icon" data-inject-svg />
+      </a>
+      <script src="/js/events.js"></script>
+      <!-- Required vendor scripts (Do not remove) -->
+      <script type="text/javascript" src="/assets/js/jquery.min.js"></script>
+      <script type="text/javascript" src="/assets/js/popper.min.js"></script>
+      <script type="text/javascript" src="/assets/js/bootstrap.js"></script>
+    
+      <!-- Optional Vendor Scripts (Remove the plugin script here and comment initializer script out of index.js if site does not use that feature) -->
+    
+      <!-- AOS (Animate On Scroll - animates elements into view while scrolling down) -->
+      <script type="text/javascript" src="/assets/js/aos.js"></script>
+      <!-- Clipboard (copies content from browser into OS clipboard) -->
+      <script type="text/javascript" src="/assets/js/clipboard.min.js"></script>
+      <!-- Fancybox (handles image and video lightbox and galleries) -->
+      <script type="text/javascript" src="/assets/js/jquery.fancybox.min.js"></script>
+      <!-- Flatpickr (calendar/date/time picker UI) -->
+      <script type="text/javascript" src="/assets/js/flatpickr.min.js"></script>
+      <!-- Flickity (handles touch enabled carousels and sliders) -->
+      <script type="text/javascript" src="/assets/js/flickity.pkgd.min.js"></script>
+      <!-- Ion rangeSlider (flexible and pretty range slider elements) -->
+      <script type="text/javascript" src="/assets/js/ion.rangeSlider.min.js"></script>
+      <!-- Isotope (masonry layouts and filtering) -->
+      <script type="text/javascript" src="/assets/js/isotope.pkgd.min.js"></script>
+      <!-- jarallax (parallax effect and video backgrounds) -->
+      <script type="text/javascript" src="/assets/js/jarallax.min.js"></script>
+      <script type="text/javascript" src="/assets/js/jarallax-video.min.js"></script>
+      <script type="text/javascript" src="/assets/js/jarallax-element.min.js"></script>
+      <!-- jQuery Countdown (displays countdown text to a specified date) -->
+      <script type="text/javascript" src="/assets/js/jquery.countdown.min.js"></script>
+      <!-- jQuery smartWizard facilitates steppable wizard content -->
+      <script type="text/javascript" src="/assets/js/jquery.smartWizard.min.js"></script>
+      <!-- Plyr (unified player for Video, Audio, Vimeo and Youtube) -->
+      <script type="text/javascript" src="/assets/js/plyr.polyfilled.min.js"></script>
+      <!-- Prism (displays formatted code boxes) -->
+      <script type="text/javascript" src="/assets/js/prism.js"></script>
+      <!-- ScrollMonitor (manages events for elements scrolling in and out of view) -->
+      <script type="text/javascript" src="/assets/js/scrollMonitor.js"></script>
+      <!-- Smooth scroll (animation to links in-page)-->
+      <script type="text/javascript" src="/assets/js/smooth-scroll.polyfills.min.js"></script>
+      <!-- SVGInjector (replaces img tags with SVG code to allow easy inclusion of SVGs with the benefit of inheriting colors and styles)-->
+      <script type="text/javascript" src="/assets/js/svg-injector.umd.production.js"></script>
+      <!-- TwitterFetcher (displays a feed of tweets from a specified account)-->
+      <script type="text/javascript" src="/assets/js/twitterFetcher_min.js"></script>
+      <!-- Typed text (animated typing effect)-->
+      <script type="text/javascript" src="/assets/js/typed.min.js"></script>
+      <!-- Required theme scripts (Do not remove) -->
+      <script type="text/javascript" src="/assets/js/theme.js"></script>
+      <!-- Removes page load animation when window is finished loading -->
+      <script type="text/javascript">
+        window.addEventListener("load", function () {    document.querySelector('body').classList.add('loaded');  });
+      </script>
+    
+    </body>
+    
+    </html>
+    
+ 
